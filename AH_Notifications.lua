@@ -8,7 +8,9 @@ frame:SetScript("OnEvent", function(self, event, ...)
     local message = ...
 
     if string.find(message, "Your auction of (.+) sold%.") then
-        local soundPath = "Interface\\AddOns\\AH_Notifications\\Sounds\\iMoneyDialogClose.ogg"
-        PlaySoundFile(soundPath, "Master")
+        PlaySound(891)
+    elseif string.find(message, "Your auction of (.+) has expired%.") then
+        PlaySound(892)
     end
+
 end)
