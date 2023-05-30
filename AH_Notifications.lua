@@ -18,10 +18,12 @@ frame:SetScript("OnEvent", function(self, event, ...)
 
     elseif event == "CHAT_MSG_SYSTEM" then
 
-        if string.find(message, "Your auction of (.+) sold%.") then
+        if string.find(message, "Your auction of (.+) sold%.") or
+        string.find(message, "You won an auction for (.+)") then
             PlaySound(891, "Master")
 
-        elseif string.find(message, "Your auction of (.+) has expired%.") then
+        elseif string.find(message, "Your auction of (.+) has expired%.") or
+        string.find(message, "You have been outbid on (.+)%.") then
             PlaySound(892, "Master")
         end
 

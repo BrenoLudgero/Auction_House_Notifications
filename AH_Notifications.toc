@@ -1,5 +1,5 @@
 ## Interface: 11403
-## Version: 0.3
+## Version: 0.4
 ## Title: Auction House Notifications
 ## Notes: Sound notifications for the Auction House
 ## Author: Breno Ludgero
