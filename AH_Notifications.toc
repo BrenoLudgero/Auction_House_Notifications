@@ -1,0 +1,7 @@
+## Interface: 11403
+## Version: 0.1
+## Title: Auction House Notifications
+## Notes: Sound notifications for the Auction House
+## Author: Breno Ludgero
+
+AH_Notifications.lua
