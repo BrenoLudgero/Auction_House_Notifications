@@ -1,7 +1,13 @@
 ## Interface: 11403
-## Version: 0.4
-## Title: Auction House Notifications
-## Notes: Sound notifications for the Auction House
+## Version: 0.5
+## Title-enUS: Auction House Notifications
+## Title-frFR: Notifications de l'Hôtel des Ventes
+## Title-esES: Notificaciones de Casa de Subastas
+## Title-esMX: Notificaciones de Casa de Subastas
+## Notes-enUS: Sound notifications for the Auction House
+## Notes-frFR: Notifications sonores pour l'Hôtel des Ventes
+## Notes-esES: Notificaciones sonoras para la Casa de Subastas
+## Notes-esMX: Notificaciones sonoras para la Casa de Subastas
 ## Author: Breno Ludgero
 
 AH_Notifications.lua
