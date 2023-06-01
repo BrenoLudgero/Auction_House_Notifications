@@ -1,5 +1,5 @@
 ## Interface: 11403
-## Version: 0.8
+## Version: 0.9
 ## Title: Auction House Notifications
 ## Title-esMX: Notificaciones de Casa de Subastas
 ## Title-esES: Notificaciones de Casa de Subastas
