@@ -23,15 +23,15 @@ failedAuctionMessages = {
 }
 
 
-local greetingMessages = { -- Messages to be shown when the addon loads depending on the client language
-    enUS = "Auction House Notifications loaded successfully!",
-    esMX = "¡Notificaciones de Casa de Subastas se ha cargado correctamente!",
-    esES = "¡Notificaciones de Casa de Subastas se ha cargado correctamente!",
-    ptBR = "Notificações da Casa de Leilões carregado com suscesso!",
-    deDE = "Benachrichtigungen des Auktionshaus erfolgreich geladen!",
-    frFR = "Notifications pour l'Hôtel des Ventes chargé avec succès!",
-    ruRU = "Уведомления аукционного дом онлайн!",
-    koKR = "경매장 알림 성공적으로 로드되었습니다!",
-    zhTW = "拍賣行公告 載入成功！",
-    zhCN = "拍卖行公告加载成功！"
+greetingMessages = { -- Messages to be shown when the addon loads depending on the client language
+    enUS = "|cFFFFFF00Auction House Notifications|r loaded successfully!",
+    esMX = "¡|cFFFFFF00AuctionNotificaciones de Casa de Subastas|r se ha cargado correctamente!",
+    esES = "¡|cFFFFFF00AuctionNotificaciones de Casa de Subastas|r se ha cargado correctamente!",
+    ptBR = "|cFFFFFF00AuctionNotificações da Casa de Leilões|r carregado com suscesso!",
+    deDE = "|cFFFFFF00AuctionBenachrichtigungen des Auktionshaus|r erfolgreich geladen!",
+    frFR = "|cFFFFFF00AuctionNotifications pour l'Hôtel des Ventes|r chargé avec succès!",
+    ruRU = "|cFFFFFF00AuctionУведомления аукционного дом|r онлайн!",
+    koKR = "|cFFFFFF00Auction경매장 알림|r 성공적으로 로드되었습니다!",
+    zhTW = "|cFFFFFF00Auction拍賣行公告|r 載入成功！",
+    zhCN = "|cFFFFFF00Auction拍卖行公告|r 加载成功！"
 }

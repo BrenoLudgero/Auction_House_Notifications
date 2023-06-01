@@ -19,7 +19,7 @@ frame:RegisterEvent("ADDON_LOADED")     -- Starts listening to the in-game ADDON
 
 local function handleAddonLoaded(event, addonName)  -- All ADDON_LOADED events are handled here
 
-    if event == "ADDON_LOADED" and addonName == "Auction_House_Notifications" then  -- If the ADDON_LOADED event was for Auction_House_Notifications:
+    if event == "ADDON_LOADED" and addonName == "AuctionHouseNotifications" then  -- If the ADDON_LOADED event was for Auction_House_Notifications:
         local locale = GetLocale()                                                  -- Checks what is the client language
         local message = greetingMessages[locale]                                    -- Defines the appropriate message from the greetingMessages list in Localization.lua
         print(message)                                                              -- Prints the message
@@ -66,7 +66,7 @@ local function playSounds()  -- Responsible for playing sounds
 end
 
 
-frame:SetScript("OnEvent", function(_, event, ...)  -- Runs the functions below when one of the in-game events registered occur
+frame:SetScript("OnEvent", function(_, event, ...)  -- Runs the functions below when one of the registered in-game events occur
 
     handleAddonLoaded(event, ...)
     handleSystemMessages(event, ...)
