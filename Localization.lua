@@ -24,7 +24,7 @@ failedAuctionMessages = {
 
 
 local greetingMessages = { -- Messages to be shown when the addon loads depending on the client language
-    enUS = "Auction House Notifications loaded successfully!"
+    enUS = "Auction House Notifications loaded successfully!",
     esMX = "¡Notificaciones de Casa de Subastas se ha cargado correctamente!",
     esES = "¡Notificaciones de Casa de Subastas se ha cargado correctamente!",
     ptBR = "Notificações da Casa de Leilões carregado com suscesso!",
