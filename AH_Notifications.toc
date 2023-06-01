@@ -1,5 +1,5 @@
 ## Interface: 11403
-## Version: 0.6
+## Version: 0.7
 ## Title: Auction House Notifications
 ## Title-frFR: Notifications de l'Hôtel des Ventes
 ## Title-esES: Notificaciones de Casa de Subastas
@@ -23,3 +23,4 @@
 ## Author: Breno Ludgero
 
 AH_Notifications.lua
+AH_Messages.lua
