@@ -1,5 +1,6 @@
 ## Interface: 11403
-## Version: 0.9
+## Version: 0.9.1
+
 ## Title: Auction House Notifications
 ## Title-esMX: Notificaciones de Casa de Subastas
 ## Title-esES: Notificaciones de Casa de Subastas
@@ -10,6 +11,7 @@
 ## Title-koKR: 경매장 알림
 ## Title-zhTW: 拍賣行公告
 ## Title-zhCN: 拍卖行公告
+
 ## Notes: Sound alerts for the Auction House
 ## Notes-esMX: Alertas sonoras para la Casa de Subastas
 ## Notes-esES: Alertas sonoras para la Casa de Subastas
@@ -20,7 +22,11 @@
 ## Notes-koKR: 경매장에 대한 소리 경고
 ## Notes-zhTW: 拍賣行的聲音警報
 ## Notes-zhCN: 拍卖行的声音警报
+
 ## Author: Breno Ludgero
 
-AuctionHouseNotifications.lua
+## SavedVariables: preferences
+
 Localization.lua
+AuctionHouseNotifications.lua
+Interface.lua
