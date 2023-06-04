@@ -16,7 +16,7 @@ enableInAH = true                   -- Toggles if the addon will play sounds whe
 showGreeting = true                 -- Toggles if the greeting message will be printed in the chat
 
 
--- Variable frame defined in Interface.lua
+-- Variable "frame" defined in Interface.lua
 frame:RegisterEvent("ADDON_LOADED")         -- Starts listening to the in-game ADDON_LOADED events
 frame:RegisterEvent("AUCTION_HOUSE_SHOW")   -- Starts listening to the in-game AUCTION_HOUSE_SHOW event
 frame:RegisterEvent("AUCTION_HOUSE_CLOSED") -- Starts listening to the in-game AUCTION_HOUSE_CLOSED event
@@ -31,7 +31,6 @@ local function handleAddonLoaded(event, addOnName)  -- All ADDON_LOADED events a
             preferences = {}                           -- Creates a table for user preferences
             preferences.chosenSounds = chosenSounds    -- Saves the default values
             preferences.chosenChannel = chosenChannel
-            preferences.enableAddon = enableAddon
             preferences.enableInAH = enableInAH
             preferences.showGreeting = showGreeting
         end
@@ -41,6 +40,7 @@ local function handleAddonLoaded(event, addOnName)  -- All ADDON_LOADED events a
         if preferences.showGreeting then                              -- If the message should be printed:
             print(greetingMessage ..GetAddOnMetadata("AuctionHouseNotifications", "Version").. ")")  -- Prints the message in the chat and the version number
         end
+
     end
 
     frame:UnregisterEvent("ADDON_LOADED")  -- Stops listening to the ADDON_LOADED events
@@ -92,13 +92,8 @@ local function playSounds()  -- Responsible for playing sounds
             PlaySoundFile(preferences.chosenSounds[1], preferences.chosenChannel)
         end
 
-    elseif failedAuction then                                                      -- If the auction failed,
-        if preferences.enableInAH and ahIsOpen then                                -- and sounds should play when the Auction House is open:
-            PlaySoundFile(preferences.chosenSounds[2], preferences.chosenChannel)  -- Play the chosen sound file on the chosen sound channel for a failed auction
-
-        elseif not ahIsOpen then                                                   -- Or if sounds should not play when the Auction House is open and the AH is closed
-            PlaySoundFile(preferences.chosenSounds[2], preferences.chosenChannel)
-        end
+    elseif failedAuction then                                                      -- If the auction failed:
+        PlaySoundFile(preferences.chosenSounds[2], preferences.chosenChannel)      -- Play the chosen sound file on the chosen sound channel for a failed auction
 
     end
 
@@ -109,8 +104,10 @@ end
 
 
 frame:SetScript("OnEvent", function(_, event, ...)  -- Runs the functions below when one of the registered in-game events occur
+
     handleAddonLoaded(event, ...)
     handleSystemMessages(event, ...)
     handleAuctionHouse(event, ...)
     playSounds()
+
 end)
