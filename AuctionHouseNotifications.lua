@@ -1,19 +1,22 @@
-local ahIsOpen = false              -- Creates a variable to identify if the Auction House frame is open or not
+local ahIsOpen = false              -- Creates a variable to identify if the Auction House window is open or not
 local successfulAuction = false     -- Creates a variable to identify if the auction was successful
 local failedAuction = false         -- Creates a variable to identify if the auction failed
+-- GET RID OF failedAuction
 
-sounds = {                          -- [Structure] Sound category = {file data ID for successful auction, file data ID for failed auction}
+-- [Structure] Sound category = {file data ID for a successful auction, file data ID for a failed auction}
+-- File data IDs and their names: https://wow.tools/dbc/?dbc=filedata&build=6.0.1.18179#page=1
+sounds = {                          -- Creates a table with the sounds that the user can use for alerts
     coins = {567483, 567501},       -- iMoneyDialogOpen, iMoneyDialogClose
     female = {540628, 540560},      -- HumanFemaleCheer01, HumanFemale_err_lootdidntkill06
     fireworks = {567011, 565499},   -- G_FireworkBoomGeneral5, G_BarrelExplodeCustom0
-    impact = {567912, 568128}       -- m2hSwordHitMetalShieldCrit, BlizzardImpact1f
+    impact = {567946, 567821}       -- BullWhipHit2, 2hMaceMetalHitMetalShieldCrit
 }
 
--- User's preferences (defaults)
+-- User's preferences (defaults, variables used below will be the user's preferences contained in SavedValues)
 chosenSounds = sounds.coins         -- The alert sound category to be used
 chosenChannel = "Master"            -- The sound channel that alerts will use
-enableInAH = true                   -- Toggles if the addon will play sounds when the Auction House frame is open
-showGreeting = true                 -- Toggles if the greeting message will be printed in the chat
+enableInAH = false                  -- Toggles if the addon will play successful auction alerts when the Auction House window is open
+showGreeting = true                 -- Toggles if the greeting message will be printed in the chat when the addon loads
 
 
 -- Variable "frame" defined in Interface.lua
@@ -27,30 +30,42 @@ local function handleAddonLoaded(event, addOnName)  -- All ADDON_LOADED events a
 
     if event == "ADDON_LOADED" and addOnName == "AuctionHouseNotifications" then  -- If an addon is loaded and is called AuctionHouseNotifications:
 
-        if preferences == nil then                     -- If user's preferences are absent from SavedVariables (first login)
-            preferences = {}                           -- Creates a table for user preferences
+        if preferences == nil then                     -- If user's preferences are absent from SavedVariables (first login):
+            -- EXTERNAL LOCAL FUNCTION --
+            preferences = {}                           -- Creates an array for user preferences
             preferences.chosenSounds = chosenSounds    -- Saves the default values
             preferences.chosenChannel = chosenChannel
             preferences.enableInAH = enableInAH
             preferences.showGreeting = showGreeting
+            -----------------------------
         end
 
+        -- EXTERNAL GLOBAL FUNCTION Interface.lua --
+        -- LOCAL soundCategoryDropdown AND soundChannelDropdown
+        enableInAHCheckButton:SetChecked(preferences.enableInAH)                             -- Checks or unchecks the checkboxes (Interface.lua) based on user's preference
+        showGreetingCheckButton:SetChecked(preferences.showGreeting)
+        UIDropDownMenu_Initialize(soundCategoryDropdown, soundCategoryDropdown.initialize)   -- Initializes the dropdown (Interface.lua) so the value can be displayed
+        UIDropDownMenu_SetSelectedValue(soundCategoryDropdown, preferences.chosenSounds[1])  -- Changes the display value of the dropdown based on the user's preference
+        UIDropDownMenu_Initialize(soundChannelDropdown, soundChannelDropdown.initialize)
+        UIDropDownMenu_SetSelectedValue(soundChannelDropdown, preferences.chosenChannel)
+        -------------------------------------------------------
+
         local greetingMessage = greetingMessages[locale]  -- Defines the appropriate message from greetingMessages (Localization.lua)
-        
-        if preferences.showGreeting then                              -- If the message should be printed:
-            print(greetingMessage ..GetAddOnMetadata("AuctionHouseNotifications", "Version").. ")")  -- Prints the message in the chat and the version number
+
+        if preferences.showGreeting then                  -- If the message should be printed:
+            print(greetingMessage ..GetAddOnMetadata("AuctionHouseNotifications", "Version").. ")")  -- Prints the message in the chat plus the version number
         end
 
     end
 
-    frame:UnregisterEvent("ADDON_LOADED")  -- Stops listening to the ADDON_LOADED events
-    
+    frame:UnregisterEvent("ADDON_LOADED")  -- Stops listening to ADDON_LOADED events
+
 end
 
 
 local function handleSystemMessages(event, message)  -- All CHAT_MSG_SYSTEM events are handled here
 
-    if event == "CHAT_MSG_SYSTEM" then                          -- If a system message occur:
+    if event == "CHAT_MSG_SYSTEM" then                          -- If a system message is displayed:
         for _, pattern in ipairs(successfulAuctionMessages) do  -- Search for successful auction messages (Localization.lua) in the last CHAT_MSG_SYSTEM event
             if string.find(message, pattern) then               -- If the message matches one of the auction messages:
                 successfulAuction = true                        -- The auction was successful
@@ -72,11 +87,11 @@ end
 
 local function handleAuctionHouse(event, ...)   -- Handles AUCTION_HOUSE_SHOW and AUCTION_HOUSE_CLOSED events
 
-    if event == "AUCTION_HOUSE_SHOW" then       -- If the Auction House frame is opened:
-        ahIsOpen = true                         -- Saves the current frame state as open
+    if event == "AUCTION_HOUSE_SHOW" then       -- If the Auction House window is opened:
+        ahIsOpen = true                         -- Saves the current window state as open
 
-    elseif event == "AUCTION_HOUSE_CLOSED" then -- If the Auction House frame is closed:
-        ahIsOpen = false                        -- Saves the current frame state as closed
+    elseif event == "AUCTION_HOUSE_CLOSED" then -- If the Auction House window is closed:
+        ahIsOpen = false                        -- Saves the current window state as closed
     end
 
 end
@@ -86,14 +101,14 @@ local function playSounds()  -- Responsible for playing sounds
 
     if successfulAuction then                                                      -- If the auction was successful,
         if preferences.enableInAH and ahIsOpen then                                -- and sounds should play when the Auction House is open:
-            PlaySoundFile(preferences.chosenSounds[1], preferences.chosenChannel)  -- Play the chosen sound file on the chosen sound channel for a successful auction
+            PlaySoundFile(preferences.chosenSounds[1], preferences.chosenChannel)  -- Play the chosen sound file data ID for a successful auction on the chosen sound channel
 
         elseif not ahIsOpen then                                                   -- Or if sounds should not play when the Auction House is open and the AH is closed
             PlaySoundFile(preferences.chosenSounds[1], preferences.chosenChannel)
         end
 
     elseif failedAuction then                                                      -- If the auction failed:
-        PlaySoundFile(preferences.chosenSounds[2], preferences.chosenChannel)      -- Play the chosen sound file on the chosen sound channel for a failed auction
+        PlaySoundFile(preferences.chosenSounds[2], preferences.chosenChannel)      -- Play the chosen sound file data ID for a failed auction on the chosen sound channel
 
     end
 
