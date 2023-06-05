@@ -1,4 +1,5 @@
 frame = CreateFrame("FRAME")           -- Attributes CreateFrame() to a global variable for ease of use
+versionNumber = GetAddOnMetadata("AuctionHouseNotifications", "Version")  -- Gets the addon version number from the .toc file and saves it in a global variable
 
 local localizedTitle = titles[locale]  -- Attributes the localized addon title (Localization.lua) to a variable
 
@@ -32,13 +33,13 @@ end
 
 
 
-local function createShowAndHideTooltip(item, tooltip)    -- Responsible for creating, showing and hiding tooltips for the interface's options
+local function createShowAndHideTooltip(item, tooltip)  -- Responsible for creating, showing and hiding tooltips for the interface's options
 
-    item:SetScript("OnEnter", function(self)              -- When the mouse hovers the item (checkbox, dropdown):
+    item:SetScript("OnEnter", function(self)            -- When the mouse hovers the item (checkbox, dropdown):
 
-        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")        -- The position where the tooltip will be shown relative to the mouse pointer
-        GameTooltip:SetText(tooltip)                      -- The parameter "tooltip" will define the text content of the tooltip
-        GameTooltip:Show()                                -- The tooltip is shown
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")      -- The position where the tooltip will be shown relative to the mouse pointer
+        GameTooltip:SetText(tooltip)                    -- The parameter "tooltip" will define the text content of the tooltip
+        GameTooltip:Show()                              -- The tooltip is shown
 
     end)
 
@@ -61,7 +62,7 @@ settingsTitle:SetText(titles[locale])                                           
 -- Subtitle
 local settingsSubtitle = frame:CreateFontString(nil, "Subtitle", "GameFontHighlight")
 settingsSubtitle:SetPoint("TOPLEFT", 15, -35)
-settingsSubtitle:SetText("Created by Breno Ludgero\nVersion " ..GetAddOnMetadata("AuctionHouseNotifications", "Version"))
+settingsSubtitle:SetText("Created by Breno Ludgero\nVersion " ..versionNumber)
 settingsSubtitle:SetJustifyH("LEFT")  -- Justify the string horizontally
 
 
@@ -74,10 +75,15 @@ settingsTitle:SetText("Sound Preferences")
 
 
 -- Enable in Auction House CheckButton
-enableInAHCheckButton = CreateFrame("CheckButton", "EnableInAH", frame, "InterfaceOptionsCheckButtonTemplate")  -- Creates a checkbox inside AHN's options interface
+local enableInAHCheckButton = CreateFrame("CheckButton", "EnableInAH", frame, "InterfaceOptionsCheckButtonTemplate")  -- Creates a checkbox inside AHN's options interface
 enableInAHCheckButton:SetPoint("TOPLEFT", 15, -120)
 enableInAHCheckButton.Text:SetText("Enable in AH")                                                                               -- Assigns a label to the checkbox
 createShowAndHideTooltip(enableInAHCheckButton, "Enable or disable alerts for successful\nauctions when the AH window is open")  -- Creates a tooltip for the checkbox
+enableInAHCheckButton:SetScript("OnClick", function(self)  -- When the checkbutton is clicked:
+
+    preferences.enableInAH = self:GetChecked()  -- Assign the checked state directly to preferences.enableInAH
+
+end)
 
 
 -- Sound Category Text
@@ -87,14 +93,14 @@ soundCategoryText:SetText("Sound Category")
 
 
 -- Sound Category Dropdown
-soundCategoryDropdown = CreateFrame("Frame", nil, frame, "UIDropDownMenuTemplate")  -- Creates a dropdown rectangle inside AHN's options interface
+local soundCategoryDropdown = CreateFrame("Frame", nil, frame, "UIDropDownMenuTemplate")  -- Creates a dropdown rectangle inside AHN's options interface
 soundCategoryDropdown:SetPoint("TOPLEFT", 2, -180)
 
-soundCategoryDropdown.initialize = function(self)                                   -- Binds a menu function to the dropdown
+soundCategoryDropdown.initialize = function(self)  -- Binds a menu function to the dropdown
 
-    local info = UIDropDownMenu_CreateInfo()                                        -- Assings the creation of a dropdown item to a variable
+    local info = UIDropDownMenu_CreateInfo()       -- Assings the creation of a dropdown item to a variable
 
-    local soundCategoryNames = {                                                    -- Creates a table with the sounds (AuctionHouseNotifications.lua) and their respective category names
+    local soundCategoryNames = {                   -- Creates a table with the sounds (AuctionHouseNotifications.lua) and their respective category names
         [sounds.coins] = "Coins",
         [sounds.female] = "Female Human",
         [sounds.fireworks] = "Fireworks",
@@ -129,7 +135,7 @@ soundChannelText:SetText("Sound Channel")
 
 
 -- Sound Channel Dropdown
-soundChannelDropdown = CreateFrame("Frame", nil, frame, "UIDropDownMenuTemplate")
+local soundChannelDropdown = CreateFrame("Frame", nil, frame, "UIDropDownMenuTemplate")
 soundChannelDropdown:SetPoint("TOPLEFT", 175, -180)
 
 soundChannelDropdown.initialize = function(self)
@@ -178,9 +184,22 @@ miscellaneousText:SetText("Miscellaneous")
 showGreetingCheckButton = CreateFrame("CheckButton", "ShowGreetings", frame, "InterfaceOptionsCheckButtonTemplate")
 showGreetingCheckButton:SetPoint("TOPLEFT", 15, -270)
 showGreetingCheckButton.Text:SetText("Show Greeting Message")
-
 showGreetingCheckButton:SetScript("OnClick", function(self)
 
     preferences.showGreeting = self:GetChecked()
 
 end)
+
+
+
+
+function checkPreferencesInInterfaceOptions()  -- Responsible for updating user's preferences on the options interface when the addon loads
+
+    enableInAHCheckButton:SetChecked(preferences.enableInAH)                             -- Checks or unchecks the checkboxes based on user's preference
+    showGreetingCheckButton:SetChecked(preferences.showGreeting)
+    UIDropDownMenu_Initialize(soundCategoryDropdown, soundCategoryDropdown.initialize)   -- Initializes the dropdown so the value can be displayed
+    UIDropDownMenu_SetSelectedValue(soundCategoryDropdown, preferences.chosenSounds[1])  -- Changes the display value of the dropdown based on the user's preference
+    UIDropDownMenu_Initialize(soundChannelDropdown, soundChannelDropdown.initialize)
+    UIDropDownMenu_SetSelectedValue(soundChannelDropdown, preferences.chosenChannel)
+
+end
