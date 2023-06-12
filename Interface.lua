@@ -79,7 +79,8 @@ soundCategoryDropdown.initialize = function(self)  -- Assigns an interface funct
         [sounds.coins] = soundCategoryNames[locale][1],
         [sounds.female] = soundCategoryNames[locale][2],
         [sounds.fireworks] = soundCategoryNames[locale][3],
-        [sounds.impact] = soundCategoryNames[locale][4]
+        [sounds.impact] = soundCategoryNames[locale][4],
+        [sounds.quests] = soundCategoryNames[locale][5]
     }
     for soundKey, soundCategoryName in pairs(soundCategories) do             -- For every sound categories in soundCategories:
         info.text = soundCategoryName                                        -- Assigns the dropdown items their respective name
@@ -119,16 +120,20 @@ soundChannelDropdown.initialize = function(self)
     end
 end
 
+previewSuccessfulButton = createSetAndReziseButtons("PreviewSuccessfulSound", 26, 24, "O", 300, -170)  -- Creates a new button and assigns it to a variable
+previewSuccessfulButton:SetScript("OnClick", function(self)  -- When the button is clicked:
+    PlaySoundFile(preferences.chosenSounds[1], preferences.chosenChannel)  -- Plays the chosen successful sound in the chosen channel
+end)
+previewFailedButton = createSetAndReziseButtons("PreviewFailedSound", 26, 24, "X", 330, -170)
+previewFailedButton:SetScript("OnClick", function(self)
+    PlaySoundFile(preferences.chosenSounds[2], preferences.chosenChannel)  -- Plays the chosen failed sound in the chosen channel
+end)
+previewSoundsText = createAndSetInterfaceText("PreviewSounds", "GameFontHighlight", previewSoundsTexts[locale], 361, -175)
+
 local miscellaneousText = createAndSetInterfaceText("Miscellaneous", "GameFontNormalMed1", miscellaneousTexts[locale], 15, -245)
 local showGreetingCheckButton = createAndSetCheckButtons("ShowGreetings", showGreetingMessageTexts[locale], 25, -270)
 showGreetingCheckButton:SetScript("OnClick", function(self)
     preferences.showGreeting = self:GetChecked()
-end)
-
-local warningText = createAndSetInterfaceText("Miscellaneous", "GameFontHighlight", warningTexts[locale], 15, -320)  -- Creates a new button and assigns it to a variable
-local reloadUIButton = createSetAndReziseButtons("ReloadUIButton", 160, 23, reloadUIButtonTexts[locale], 25, -354)
-reloadUIButton:SetScript("OnClick", function()  -- When the button is clicked:
-    ReloadUI()                                  -- Reloads the UI
 end)
 
 function checkPreferencesInInterfaceOptions()  -- Responsible for updating user's preferences on the options interface when the addon loads

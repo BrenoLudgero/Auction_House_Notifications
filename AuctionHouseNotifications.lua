@@ -8,7 +8,8 @@ sounds = {                         -- Creates a table with the sounds that the u
     coins = {567483, 567501},      -- iMoneyDialogOpen, iMoneyDialogClose
     female = {540628, 540560},     -- HumanFemaleCheer01, HumanFemale_err_lootdidntkill06
     fireworks = {567011, 565499},  -- G_FireworkBoomGeneral5, G_BarrelExplodeCustom0
-    impact = {567946, 567821}      -- BullWhipHit2, 2hMaceMetalHitMetalShieldCrit
+    impact = {567946, 567821},     -- BullWhipHit2, 2hMaceMetalHitMetalShieldCrit
+    quests = {567516, 567459}      -- iQuestUpdate, igQuestFailed
 }
 
 -- User's preferences (defaults, variables used below will come from user's preferences contained in SavedValues)

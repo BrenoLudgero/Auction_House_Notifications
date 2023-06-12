@@ -120,62 +120,85 @@ enUS = {
     "Coins",
     "Female Human",
     "Fireworks",
-    "Impact"
+    "Impact",
+    "Quests"
 },
 esMX = {
     "Monedas",
     "Humano Femenino",
     "Fuegos Artificiales",
-    "Impacto"
+    "Impacto",
+    "Misiones"
 },
 esES = {
     "Monedas",
     "Humano Femenino",
     "Fuegos Artificiales",
-    "Impacto"
+    "Impacto",
+    "Misiones"
 },
 ptBR = {
     "Moedas",
     "Humano Feminino",
     "Fogos de Artifício",
-    "Impacto"
+    "Impacto",
+    "Missões"
 },
 deDE = {
     "Münzen",
     "Weiblicher Mensch",
     "Feuerwerk",
-    "Einschlag"
+    "Einschlag",
+    "Quests"
 },
 frFR = {
     "Pièces",
     "Humain Femme",
     "Feux d'artifice",
-    "Impact"
+    "Impact",
+    "Quêtes"
 },
 ruRU = {
     "Монеты",
     "Женщина",
     "Фейерверк",
-    "Удар"
+    "Удар",
+    "Заданий"
 },
 koKR = {
     "동전",
     "여성 인간",
     "불꽃놀이",
-    "충격"
+    "충격",
+    "퀘스트"
 },
 zhTW = {
     "硬幣",
     "女性人類",
     "煙火",
-    "衝擊"
+    "衝擊",
+    "任務"
 },
 zhCN = {
     "硬币",
     "女性人类",
     "烟花",
-    "冲击"
+    "冲击",
+    "任务"
 }}
+
+previewSoundsTexts = {
+    enUS = "Test Sounds",
+    esMX = "Prueba de Sonidos",
+    esES = "Prueba de Sonidos",
+    ptBR = "Teste de Sons",
+    deDE = "Geräuschtest",
+    frFR = "Test de Sons",
+    ruRU = "Тестовые Звуки",
+    koKR = "테스트 사운드",
+    zhTW = "測試音效",
+    zhCN = "测试音效"
+}
 
 soundChannelTexts = {
     enUS = "Sound Channel",
@@ -299,30 +322,4 @@ showGreetingMessageTexts = {
     koKR = "인사 메시지 표시",
     zhTW = "顯示問候訊息",
     zhCN = "显示问候消息"
-}
-
-warningTexts = {
-    enUS = "|cFFFF0000Note:|r An interface reload is necessary for changes to take effect",
-    esMX = "|cFFFF0000Nota:|r Es necesario recargar la interfaz para que los cambios surtan efecto",
-    esES = "|cFFFF0000Nota:|r Es necesario recargar la interfaz para que los cambios surtan efecto",
-    ptBR = "|cFFFF0000Nota:|r É necessário recarregar a interface para que as alterações tenham efeito",
-    deDE = "|cFFFF0000Notiz:|r Eine Schnittstellenneuladung ist erforderlich damit Änderungen wirksam werden",
-    frFR = "|cFFFF0000Note :|r Un rechargement de l'interface est nécessaire pour que les modifications prennent effet",
-    ruRU = "|cFFFF0000Примечание:|r Для применения изменений необходимо перезагрузить интерфейс",
-    koKR = "|cFFFF0000참고:|r 변경 사항이 적용되려면 인터페이스를 다시 로드해야 합니다",
-    zhTW = "|cFFFF0000注意：|r 需要重新載入介面才能生效",
-    zhCN = "|cFFFF0000注意：|r 需要重新加载界面才能生效"
-}
-
-reloadUIButtonTexts = {
-    enUS = "Reload Interface",
-    esMX = "Recargar Interfaz",
-    esES = "Recargar Interfaz",
-    ptBR = "Recarregar Interface",
-    deDE = "Schnittstelle neu Laden",
-    frFR = "Recharger l'Interface",
-    ruRU = "Перезагрузить Интерфейс",
-    koKR = "인터페이스 다시 로드",
-    zhTW = "重新載入介面",
-    zhCN = "重新加载界面"
 }
