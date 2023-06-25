@@ -1,6 +1,7 @@
 local ahIsOpen = false           -- Creates a variable to identify if the Auction House window is open or not
 local successfulAuction = false  -- Creates a variable to identify if the auction was successful
 local failedAuction = false      -- Creates a variable to identify if the auction failed
+local expiredAuction = false      -- Creates a variable to identify if the auction expired
 
 -- [Structure] Sound category = {file data ID for a successful auction, file data ID for a failed auction}
 -- File data IDs and their names: https://wow.tools/dbc/?dbc=filedata&build=6.0.1.18179#page=1
@@ -48,14 +49,20 @@ end
 local function handleSystemMessages(event, message)  -- All CHAT_MSG_SYSTEM events are handled here
     if event == "CHAT_MSG_SYSTEM" then                          -- If a system message is displayed:
         for _, pattern in ipairs(successfulAuctionMessages) do  -- Searches for successful auction messages (Localization.lua) in the system message
-            if string.find(message, pattern) then               -- If the message matches one of the auction messages:
+            if string.find(message, pattern) then               -- If the message matches one of the messages:
                 successfulAuction = true                        -- The auction was successful
                 break
             end
         end
         for _, pattern in ipairs(failedAuctionMessages) do      -- Searches for failed auction messages (Localization.lua) in the system message
-            if string.find(message, pattern) then               -- If the message matches one of the auction messages:
+            if string.find(message, pattern) then               -- If the message matches one of the messages:
                 failedAuction = true                            -- The auction failed
+                break
+            end
+        end
+        for _, pattern in ipairs(expiredAuctionMessages) do     -- Searches for expired auction messages (Localization.lua) in the system message
+            if string.find(message, pattern) then               -- If the message matches one of the messages:
+                expiredAuction = true                            -- The auction expired
                 break
             end
         end
@@ -73,15 +80,18 @@ end
 local function playSounds()  -- Responsible for playing sounds
     if successfulAuction then                                                      -- If the auction was successful,
         if preferences.enableInAH and ahIsOpen then                                -- and successful auction alerts should play when the Auction House is open:
-            PlaySoundFile(preferences.chosenSounds[1], preferences.chosenChannel)  -- Play the chosen sound file data ID for a successful auction on the chosen sound channel
+            PlaySoundFile(preferences.chosenSounds[1], preferences.chosenChannel)  -- Plays the chosen sound file data ID for a successful auction on the chosen sound channel
         elseif not ahIsOpen then                                                   -- Or if successful auction alerts should not play when the Auction House is open and the AH is closed
             PlaySoundFile(preferences.chosenSounds[1], preferences.chosenChannel)
         end
-    elseif failedAuction then                                                      -- If the auction failed:
-        PlaySoundFile(preferences.chosenSounds[2], preferences.chosenChannel)      -- Play the chosen sound file data ID for a failed auction on the chosen sound channel
+    elseif failedAuction then                                                      -- Or if the auction failed:
+        PlaySoundFile(preferences.chosenSounds[2], preferences.chosenChannel)      -- Plays the chosen sound file data ID for a failed auction on the chosen sound channel
+    elseif expiredAuction then                                                     -- Or if the auction expired:
+        PlaySound(1372, preferences.chosenChannel, true)  -- Plays an unique sound file SoundKitId (polymorphtarget) for an expired auction on the chosen sound channel
     end
     successfulAuction = false  -- Reverts the values to false so the process can be repeated
     failedAuction = false
+    expiredAuction = false
 end
 
 frame:SetScript("OnEvent", function(_, event, ...)  -- Runs the functions below when one of the registered in-game events occur

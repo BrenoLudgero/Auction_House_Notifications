@@ -12,11 +12,11 @@ end
 
 function tableContains(table, val)    -- Responsible for comparing a table and a specific value
     for _, value in ipairs(table) do  -- For the specific value in each element of the table:
-        if value == val then          -- If the value specified as a parameter is found in the table specified as a parameter:
+        if value == val then          -- If the value specified as a parameter was found in the table specified as a parameter:
             return true               -- Returns true
         end
     end
-    return false  -- If the value is not found, returns false
+    return false  -- If the value was not found, returns false
 end
 
 local function createAndSetInterfaceText(variableDescription, font, textValue, xPosition, yPosition)  -- Responsible for creating and positioning a string inside inside AHN's options interface
@@ -69,7 +69,7 @@ enableInAHCheckButton:SetScript("OnClick", function(self)  -- When the checkbutt
     preferences.enableInAH = self:GetChecked()             -- Assign the checked state directly to preferences.enableInAH
 end)
 
-local soundCategoryText = createAndSetInterfaceText("SoundCategory", "GameFontHighlight", soundCategoryTexts[locale], 180, -155)
+local soundCategoryText = createAndSetInterfaceText("SoundCategory", "GameFontHighlight", soundCategoryTexts[locale], 180, -154)
 local soundCategoryDropdown = createSetAndSetDropdowns(12, -148)  -- Creates a new dropdown and assigns it to a variable
 UIDropDownMenu_SetWidth(soundCategoryDropdown, 126)               -- Sets the (visible) width of the dropdown rectangle
 UIDropDownMenu_SetButtonWidth(soundCategoryDropdown, 140)         -- Sets the (clickable) width of the dropdown arrow
@@ -82,10 +82,10 @@ soundCategoryDropdown.initialize = function(self)  -- Assigns an interface funct
         [sounds.impact] = soundCategoryNames[locale][4],
         [sounds.quests] = soundCategoryNames[locale][5]
     }
-    for soundKey, soundCategoryName in pairs(soundCategories) do             -- For every sound categories in soundCategories:
+    for soundKey, soundCategoryName in pairs(soundCategories) do             -- For every sound category in soundCategories:
         info.text = soundCategoryName                                        -- Assigns the dropdown items their respective name
         info.value = soundKey[1]                                             -- Assings the value of the items according to the appropriate sound fom the soundCategoryNames table
-        info.checked = tableContains(preferences.chosenSounds, soundKey[1])  -- Finds the appropriate dropdown item and checks it once the user's preference is found in soundCategoryNames
+        info.checked = tableContains(preferences.chosenSounds, soundKey[1])  -- Finds wich sound category was chosen by the user and checks the appropriate dropdown item
         info.func = function()                                                   -- Assigns a function for when the dropdown items are clicked
             preferences.chosenSounds = soundKey                                  -- Changes the chosen sound in SavedVariables
             UIDropDownMenu_SetSelectedValue(soundCategoryDropdown, soundKey[1])  -- Shows the selected category on the dropdown rectangle
@@ -94,7 +94,7 @@ soundCategoryDropdown.initialize = function(self)  -- Assigns an interface funct
     end
 end
 
-local soundChannelText = createAndSetInterfaceText("SoundChannel", "GameFontHighlight", soundChannelTexts[locale], 180, -198)
+local soundChannelText = createAndSetInterfaceText("SoundChannel", "GameFontHighlight", soundChannelTexts[locale], 180, -196)
 local soundChannelDropdown = createSetAndSetDropdowns(12, -190)
 UIDropDownMenu_SetWidth(soundChannelDropdown, 126)
 UIDropDownMenu_SetButtonWidth(soundChannelDropdown, 140)
@@ -120,7 +120,7 @@ soundChannelDropdown.initialize = function(self)
     end
 end
 
-previewSuccessfulButton = createSetAndReziseButtons("PreviewSuccessfulSound", 26, 24, "O", 300, -170)  -- Creates a new button and assigns it to a variable
+local previewSuccessfulButton = createSetAndReziseButtons("PreviewSuccessfulSound", 26, 24, "O", 300, -170)  -- Creates a new button and assigns it to a variable
 previewSuccessfulButton:SetScript("OnClick", function(self)  -- When the button is clicked:
     PlaySoundFile(preferences.chosenSounds[1], preferences.chosenChannel)  -- Plays the chosen successful sound in the chosen channel
 end)
@@ -128,7 +128,7 @@ previewFailedButton = createSetAndReziseButtons("PreviewFailedSound", 26, 24, "X
 previewFailedButton:SetScript("OnClick", function(self)
     PlaySoundFile(preferences.chosenSounds[2], preferences.chosenChannel)  -- Plays the chosen failed sound in the chosen channel
 end)
-previewSoundsText = createAndSetInterfaceText("PreviewSounds", "GameFontHighlight", previewSoundsTexts[locale], 361, -175)
+local previewSoundsText = createAndSetInterfaceText("PreviewSounds", "GameFontHighlight", previewSoundsTexts[locale], 361, -175)
 
 local miscellaneousText = createAndSetInterfaceText("Miscellaneous", "GameFontNormalMed1", miscellaneousTexts[locale], 15, -245)
 local showGreetingCheckButton = createAndSetCheckButtons("ShowGreetings", showGreetingMessageTexts[locale], 25, -270)

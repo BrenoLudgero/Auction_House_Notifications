@@ -1,6 +1,6 @@
 local versionNumber = GetAddOnMetadata("AuctionHouseNotifications", "Version")  -- Gets the addon version number from the .toc file and saves it in a variable
 
-successfulAuctionMessages = {  -- Patterns to be scanned on CHAT_MSG_SYSTEM
+successfulAuctionMessages = {  -- Patterns to be scanned in CHAT_MSG_SYSTEM events
     "Your auction of (.+) sold%.", "You won an auction for (.+)",                                   -- enUS
     "Has vendido (.+) en la subasta%.", "Has ganado una puja por (.+)", "Tu (.+) se ha vendido%.",  -- esMX, esES
     "Vente de votre (.+) réussie", "Vous avez gagné les enchères pour (.+)",                        -- frFR
@@ -11,19 +11,28 @@ successfulAuctionMessages = {  -- Patterns to be scanned on CHAT_MSG_SYSTEM
     "你拍賣的(.+)已經售出。", "你贏得了(.+)的競標",                                                    -- zhTW
     "你拍卖的(.+)已经售出。", "你赢得了对(.+)的竞标"                                                   -- zhCN
 }
-
-failedAuctionMessages = {  -- Patterns to be scanned on CHAT_MSG_SYSTEM
-    "Your auction of (.+) has expired%.", "You have been outbid on (.+)%.",                                           -- enUS
-    "Tu subasta de (.+) ha caducado%.", "Alguien ha superado tu puja por (.+)%.", "Alguien ha pujado por tu (.+)%.",  -- esMX, esES
-    "Votre vente aux enchères de (.+) est terminée", "Vous n'êtes plus le plus offrant pour (.+)%.",                  -- frFR
-    "O leilão de (.+) expirou%.", "Superaram seu lance em (.+)%.",                                                    -- ptBR
-    "Eure Auktion von (.+) ist abgelaufen%.", "Ihr wurdet bei (.+) überboten%.",                                      -- deDE
-    "Ваш товар (.+) снят с аукциона%.", "(.+) предмет перекуплен%.",                                                  -- ruRU
-    "(.+) 경매가 만료되었습니다%.", "(.+) 다른 플레이어에 의해 상회 입찰되었습니다%.",                                     -- koKR
-    "你拍賣的(.+)已經過期。", "你對(.+)的出價被人超過了。",                                                               -- zhTW
-    "你拍卖的(.+)已经过期。", "你对(.+)的出价被人超过了。"                                                                -- zhCN
+failedAuctionMessages = {
+    "You have been outbid on (.+)%.", 
+    "Alguien ha superado tu puja por (.+)%.", "Alguien ha pujado por tu (.+)%.", 
+    "Vous n'êtes plus le plus offrant pour (.+)%.", 
+    "Superaram seu lance em (.+)%.", 
+    "Ihr wurdet bei (.+) überboten%.", 
+    "(.+) предмет перекуплен%.", 
+    "(.+) 다른 플레이어에 의해 상회 입찰되었습니다%.", 
+    "你對(.+)的出價被人超過了。", 
+    "你对(.+)的出价被人超过了。"
 }
-
+expiredAuctionMessages = {
+    "Your auction of (.+) has expired%.",
+    "Tu subasta de (.+) ha caducado%.",
+    "Votre vente aux enchères de (.+) est terminée",
+    "O leilão de (.+) expirou%.",
+    "Eure Auktion von (.+) ist abgelaufen%.",
+    "Ваш товар (.+) снят с аукциона%.",
+    "(.+) 경매가 만료되었습니다%.",
+    "你拍賣的(.+)已經過期。",
+    "你拍卖的(.+)已经过期。"
+}
 addonTitles = {  -- Localized title to be used in the in-game addon options interface
     enUS = "Auction House Notifications",
     esMX = "Notificaciones de Casa de Subastas",
@@ -36,7 +45,6 @@ addonTitles = {  -- Localized title to be used in the in-game addon options inte
     zhTW = "拍賣行公告",
     zhCN = "拍卖行公告"
 }
-
 greetingMessages = { -- Localized message to be shown in the chat when the addon loads
     enUS = "|cFFFFFF00Auction House Notifications|r loaded successfully! (" ..versionNumber.. ")",
     esMX = "¡|cFFFFFF00Notificaciones de Casa de Subastas|r se ha cargado correctamente! (" ..versionNumber.. ")",
@@ -49,7 +57,7 @@ greetingMessages = { -- Localized message to be shown in the chat when the addon
     zhTW = "|cFFFFFF00拍賣行公告|r 載入成功！(" ..versionNumber.. ")",
     zhCN = "|cFFFFFF00拍卖行公告|r 加载成功！(" ..versionNumber.. ")"
 }
-
+-- \/   Localized options interface text   \/
 subtitleText = {
     enUS = "Created by Breno Ludgero\nVersion " ..versionNumber,
     esMX = "Creado por Breno Ludgero\nVersión " ..versionNumber,
@@ -62,7 +70,6 @@ subtitleText = {
     zhTW = "由Breno Ludgero創建\n版本 " ..versionNumber,
     zhCN = "由Breno Ludgero创建\n版本 " ..versionNumber
 }
-
 soundPreferencesTexts = {
     enUS = "Sound Preferences",
     esMX = "Preferencias de Sonido",
@@ -75,7 +82,6 @@ soundPreferencesTexts = {
     zhTW = "音效偏好設定",
     zhCN = "声音偏好设置"
 }
-
 enableInAHLabels = {
     enUS = "Enable in Auction House",
     esMX = "Habilitar en la Casa de Subastas",
@@ -88,7 +94,6 @@ enableInAHLabels = {
     zhTW = "在拍賣行啟用",
     zhCN = "在拍卖行启用"
 }
-
 enableInAHTooltips = {
     enUS = "Enable or disable alerts for successful auctions\nwhen the auction house window is open",
     esMX = "Habilita o deshabilita las alertas para subastas exitosas\ncuando la ventana de la casa de subastas está abierta",
@@ -101,7 +106,6 @@ enableInAHTooltips = {
     zhTW = "在拍賣行視窗開啟時啟用或停用成功拍賣的警示",
     zhCN = "在拍卖行窗口打开时启用或禁用成功拍卖的警报"
 }
-
 soundCategoryTexts = {
     enUS = "Sound Category",
     esMX = "Categoría de Sonido",
@@ -114,79 +118,78 @@ soundCategoryTexts = {
     zhTW = "音效類別",
     zhCN = "声音类别"
 }
-
 soundCategoryNames = {
-enUS = {
-    "Coins",
-    "Female Human",
-    "Fireworks",
-    "Impact",
-    "Quests"
-},
-esMX = {
-    "Monedas",
-    "Humano Femenino",
-    "Fuegos Artificiales",
-    "Impacto",
-    "Misiones"
-},
-esES = {
-    "Monedas",
-    "Humano Femenino",
-    "Fuegos Artificiales",
-    "Impacto",
-    "Misiones"
-},
-ptBR = {
-    "Moedas",
-    "Humano Feminino",
-    "Fogos de Artifício",
-    "Impacto",
-    "Missões"
-},
-deDE = {
-    "Münzen",
-    "Weiblicher Mensch",
-    "Feuerwerk",
-    "Einschlag",
-    "Quests"
-},
-frFR = {
-    "Pièces",
-    "Humain Femme",
-    "Feux d'artifice",
-    "Impact",
-    "Quêtes"
-},
-ruRU = {
-    "Монеты",
-    "Женщина",
-    "Фейерверк",
-    "Удар",
-    "Заданий"
-},
-koKR = {
-    "동전",
-    "여성 인간",
-    "불꽃놀이",
-    "충격",
-    "퀘스트"
-},
-zhTW = {
-    "硬幣",
-    "女性人類",
-    "煙火",
-    "衝擊",
-    "任務"
-},
-zhCN = {
-    "硬币",
-    "女性人类",
-    "烟花",
-    "冲击",
-    "任务"
-}}
-
+    enUS = {
+        "Coins",
+        "Female Human",
+        "Fireworks",
+        "Impact",
+        "Quests"
+    },
+    esMX = {
+        "Monedas",
+        "Humano Femenino",
+        "Fuegos Artificiales",
+        "Impacto",
+        "Misiones"
+    },
+    esES = {
+        "Monedas",
+        "Humano Femenino",
+        "Fuegos Artificiales",
+        "Impacto",
+        "Misiones"
+    },
+    ptBR = {
+        "Moedas",
+        "Humano Feminino",
+        "Fogos de Artifício",
+        "Impacto",
+        "Missões"
+    },
+    deDE = {
+        "Münzen",
+        "Weiblicher Mensch",
+        "Feuerwerk",
+        "Einschlag",
+        "Quests"
+    },
+    frFR = {
+        "Pièces",
+        "Humain Femme",
+        "Feux d'artifice",
+        "Impact",
+        "Quêtes"
+    },
+    ruRU = {
+        "Монеты",
+        "Женщина",
+        "Фейерверк",
+        "Удар",
+        "Заданий"
+    },
+    koKR = {
+        "동전",
+        "여성 인간",
+        "불꽃놀이",
+        "충격",
+        "퀘스트"
+    },
+    zhTW = {
+        "硬幣",
+        "女性人類",
+        "煙火",
+        "衝擊",
+        "任務"
+    },
+    zhCN = {
+        "硬币",
+        "女性人类",
+        "烟花",
+        "冲击",
+        "任务"
+    }
+}
 previewSoundsTexts = {
     enUS = "Test Sounds",
     esMX = "Prueba de Sonidos",
@@ -199,7 +202,6 @@ previewSoundsTexts = {
     zhTW = "測試音效",
     zhCN = "测试音效"
 }
-
 soundChannelTexts = {
     enUS = "Sound Channel",
     esMX = "Canal de Sonido",
@@ -212,79 +214,78 @@ soundChannelTexts = {
     zhTW = "音效頻道",
     zhCN = "声音通道"
 }
-
 soundChannelNames = {
-enUS = {
-    "Master",
-    "Sound",
-    "Music",
-    "Ambience",
-    "Dialog"
-},
-esMX = {
-    "Principal",
-    "Sonido",
-    "Música",
-    "Ambiente",
-    "Diálogo"
-},
-esES = {
-    "Principal",
-    "Sonido",
-    "Música",
-    "Ambiente",
-    "Diálogo"
-},
-ptBR = {
-    "Principal",
-    "Som",
-    "Música",
-    "Ambiente",
-    "Diálogo"
-},
-deDE = {
-    "Haupt",
-    "Ton",
-    "Musik",
-    "Umgebung",
-    "Dialog"
-},
-frFR = {
-    "Principal",
-    "Son",
-    "Musique",
-    "Ambiance",
-    "Dialogue"
-},
-ruRU = {
-    "Основной",
-    "Звук",
-    "Музыка",
-    "Атмосфера",
-    "Диалог"
-},
-koKR = {
-    "마스터",
-    "효과음",
-    "음악",
-    "환경음",
-    "대화음"
-},
-zhTW = {
-    "主音量",
-    "音效",
-    "音樂",
-    "環境聲音",
-    "對話"
-},
-zhCN = {
-    "主音量",
-    "音效",
-    "音乐",
-    "环境声音",
-    "对话"
-}}
-
+    enUS = {
+        "Master",
+        "Sound",
+        "Music",
+        "Ambience",
+        "Dialog"
+    },
+    esMX = {
+        "Principal",
+        "Sonido",
+        "Música",
+        "Ambiente",
+        "Diálogo"
+    },
+    esES = {
+        "Principal",
+        "Sonido",
+        "Música",
+        "Ambiente",
+        "Diálogo"
+    },
+    ptBR = {
+        "Principal",
+        "Som",
+        "Música",
+        "Ambiente",
+        "Diálogo"
+    },
+    deDE = {
+        "Haupt",
+        "Ton",
+        "Musik",
+        "Umgebung",
+        "Dialog"
+    },
+    frFR = {
+        "Principal",
+        "Son",
+        "Musique",
+        "Ambiance",
+        "Dialogue"
+    },
+    ruRU = {
+        "Основной",
+        "Звук",
+        "Музыка",
+        "Атмосфера",
+        "Диалог"
+    },
+    koKR = {
+        "마스터",
+        "효과음",
+        "음악",
+        "환경음",
+        "대화음"
+    },
+    zhTW = {
+        "主音量",
+        "音效",
+        "音樂",
+        "環境聲音",
+        "對話"
+    },
+    zhCN = {
+        "主音量",
+        "音效",
+        "音乐",
+        "环境声音",
+        "对话"
+    }
+}
 soundChannelTooltips = {
     enUS = "The sound channel to be used by alerts",
     esMX = "El canal de sonido que se utilizará para las alertas",
@@ -297,7 +298,6 @@ soundChannelTooltips = {
     zhTW = "警示所使用的音效頻道",
     zhCN = "用于警报的声音通道"
 }
-
 miscellaneousTexts = {
     enUS = "Miscellaneous",
     esMX = "Misceláneo",
@@ -310,7 +310,6 @@ miscellaneousTexts = {
     zhTW = "其他",
     zhCN = "杂项"
 }
-
 showGreetingMessageTexts = {
     enUS = "Show Greeting Message",
     esMX = "Mostrar Mensaje de Bienvenida",
