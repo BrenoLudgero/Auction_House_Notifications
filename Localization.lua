@@ -1,15 +1,15 @@
-local versionNumber = GetAddOnMetadata("AuctionHouseNotifications", "Version")  -- Gets the addon version number from the .toc file and saves it in a variable
+local versionNumber = GetAddOnMetadata("AuctionHouseNotifications", "Version")  -- Gets the addOn version number from the .toc file and saves it in a variable
 
 successfulAuctionMessages = {  -- Patterns to be scanned in CHAT_MSG_SYSTEM events
-    "Your auction of (.+) sold%.", "You won an auction for (.+)",                                   -- enUS
-    "Has vendido (.+) en la subasta%.", "Has ganado una puja por (.+)", "Tu (.+) se ha vendido%.",  -- esMX, esES
-    "Vente de votre (.+) réussie", "Vous avez gagné les enchères pour (.+)",                        -- frFR
-    "Você vendeu (.+) no leilão%.", "Você ganhou um leilão de (.+)",                                -- ptBR
-    "Versteigerung: (.+) wurde verkauft%.", "Ihr habt eine Auktion gewonnen für: (.+)",             -- deDE
-    "На ваш товар (.+) нашелся покупатель%.", "(.+) предмет куплен. Вы выиграли торги%.",           -- ruRU
-    "경매에 올린 (.+) 판매되었습니다%.", "(.+) 경매에 낙찰되었습니다%.",                                -- koKR
-    "你拍賣的(.+)已經售出。", "你贏得了(.+)的競標",                                                    -- zhTW
-    "你拍卖的(.+)已经售出。", "你赢得了对(.+)的竞标"                                                   -- zhCN
+    "Your auction of (.+) sold%.", "You won an auction for (.+)", "A buyer has been found for your auction of (.+)",  -- enUS
+    "Has vendido (.+) en la subasta%.", "Has ganado una puja por (.+)", "Tu (.+) se ha vendido%.", "Ha aparecido un comprador para tu subasta de (.+)",  -- esMX, esES
+    "Vente de votre (.+) réussie", "Vous avez gagné les enchères pour (.+)", "Un acheteur a été trouvé pour votre enchère (.+)",  -- frFR
+    "Você vendeu (.+) no leilão%.", "Você ganhou um leilão de (.+)", "Há um comprador para o seu leilão de (.+)",  -- ptBR
+    "Versteigerung: (.+) wurde verkauft%.", "Ihr habt eine Auktion gewonnen für: (.+)", "Es wurde ein Käufer für Eure Auktion gefunden: (.+)", -- deDE
+    "На ваш товар (.+) нашелся покупатель%.", "(.+) предмет куплен. Вы выиграли торги%.", "На ваш товар (.+) нашелся покупатель%.",  -- ruRU
+    "경매에 올린 (.+) 판매되었습니다%.", "(.+) 경매에 낙찰되었습니다%.", "경매에 올린 (.+)의 구매자가 나타났습니다%.",  -- koKR
+    "你拍賣的(.+)已經售出。", "你贏得了(.+)的競標",  "一位買家已經購得你拍賣的(.+)",  -- zhTW
+    "你拍卖的(.+)已经售出。", "你赢得了对(.+)的竞标", "你拍卖的(.+)已经售出。"  -- zhCN
 }
 failedAuctionMessages = {
     "You have been outbid on (.+)%.", 
@@ -25,7 +25,7 @@ failedAuctionMessages = {
 expiredAuctionMessages = {
     "Your auction of (.+) has expired%.",
     "Tu subasta de (.+) ha caducado%.",
-    "Votre vente aux enchères de (.+) est terminée",
+    "Votre vente aux enchères (.+) est terminée", "Votre vente aux enchères (.+) est terminée%.",
     "O leilão de (.+) expirou%.",
     "Eure Auktion von (.+) ist abgelaufen%.",
     "Ваш товар (.+) снят с аукциона%.",
@@ -33,31 +33,31 @@ expiredAuctionMessages = {
     "你拍賣的(.+)已經過期。",
     "你拍卖的(.+)已经过期。"
 }
-addonTitles = {  -- Localized title to be used in the in-game addon options interface
+addonTitles = {  -- Localized title to be used in the in-game addOn options interface
     enUS = "Auction House Notifications",
     esMX = "Notificaciones de Casa de Subastas",
     esES = "Notificaciones de Casa de Subastas",
     ptBR = "Notificações da Casa de Leilões",
-    deDE = "Benachrichtigungen des Auktionshaus",
-    frFR = "Notifications pour l'Hôtel des Ventes",
+    deDE = "Auktionshaus-Benachrichtigungen",
+    frFR = "Notifications de l'Hôtel des Ventes",
     ruRU = "Уведомления Aукционного Дом",
     koKR = "경매장 알림",
     zhTW = "拍賣行公告",
     zhCN = "拍卖行公告"
 }
-greetingMessages = { -- Localized message to be shown in the chat when the addon loads
+greetingMessages = { -- Localized message to be shown in the chat when the addOn loads
     enUS = "|cFFFFFF00Auction House Notifications|r loaded successfully! (" ..versionNumber.. ")",
-    esMX = "¡|cFFFFFF00Notificaciones de Casa de Subastas|r se ha cargado correctamente! (" ..versionNumber.. ")",
-    esES = "¡|cFFFFFF00Notificaciones de Casa de Subastas|r se ha cargado correctamente! (" ..versionNumber.. ")",
+    esMX = "|cFFFFFF00Notificaciones de Casa de Subastas|r ¡se ha cargado correctamente! (" ..versionNumber.. ")",
+    esES = "|cFFFFFF00Notificaciones de Casa de Subastas|r ¡se ha cargado correctamente! (" ..versionNumber.. ")",
     ptBR = "|cFFFFFF00Notificações da Casa de Leilões|r carregado com sucesso! (" ..versionNumber.. ")",
-    deDE = "|cFFFFFF00Benachrichtigungen des Auktionshaus|r erfolgreich geladen! (" ..versionNumber.. ")",
-    frFR = "|cFFFFFF00Notifications pour l'Hôtel des Ventes|r chargé avec succès! (" ..versionNumber.. ")",
+    deDE = "|cFFFFFF00Auktionshaus-Benachrichtigungen|r erfolgreich geladen! (" ..versionNumber.. ")",
+    frFR = "|cFFFFFF00Notifications de l'Hôtel des Ventes|r chargé avec succès! (" ..versionNumber.. ")",
     ruRU = "|cFFFFFF00Уведомления Aукционного Дом|r онлайн! (" ..versionNumber.. ")",
     koKR = "|cFFFFFF00경매장 알림|r 성공적으로 로드되었습니다! (" ..versionNumber.. ")",
     zhTW = "|cFFFFFF00拍賣行公告|r 載入成功！(" ..versionNumber.. ")",
     zhCN = "|cFFFFFF00拍卖行公告|r 加载成功！(" ..versionNumber.. ")"
 }
--- \/   Localized options interface text   \/
+-- \/  Localized options interface text  \/
 subtitleText = {
     enUS = "Created by Breno Ludgero\nVersion " ..versionNumber,
     esMX = "Creado por Breno Ludgero\nVersión " ..versionNumber,
@@ -87,8 +87,8 @@ enableInAHLabels = {
     esMX = "Habilitar en la Casa de Subastas",
     esES = "Habilitar en la Casa de Subastas",
     ptBR = "Ativar na Casa de Leilões",
-    deDE = "Im Auktionshaus aktivieren",
-    frFR = "Activer dans la Hôtel des Ventes",
+    deDE = "Aktivieren im Auktionshaus",
+    frFR = "Activer dans l'Hôtel des Ventes",
     ruRU = "Доступно в Aукционном Дом",
     koKR = "경매장에서 사용 가능",
     zhTW = "在拍賣行啟用",
@@ -100,7 +100,7 @@ enableInAHTooltips = {
     esES = "Habilita o deshabilita las alertas para subastas exitosas\ncuando la ventana de la casa de subastas está abierta",
     ptBR = "Ativa ou desativa alertas para leilões bem-sucedidos\nquando a janela da casa de leilões está aberta",
     deDE = "Aktiviert oder deaktiviert Benachrichtigungen für erfolgreiche auktionen\nwenn das Auktionshaus-Fenster geöffnet ist",
-    frFR = "Activer ou désactiver les alertes pour les enchères\nréussies lorsque la fenêtre de l'hôtel des ventes est ouverte",
+    frFR = "Activer ou désactiver les alertes pour les ventes aux enchères réussies\nlorsque la fenêtre de l'hôtel des ventes est ouverte",
     ruRU = "Включение и отключение оповещений об успешных аукционах\nпри открытом окне аукционного дом",
     koKR = "경매장 창이 열려 있을 때 성공적인 경매에 대한 알림을\n사용하거나 사용하지 않도록 설정합니다.",
     zhTW = "在拍賣行視窗開啟時啟用或停用成功拍賣的警示",
@@ -291,7 +291,7 @@ soundChannelTooltips = {
     esMX = "El canal de sonido que se utilizará para las alertas",
     esES = "El canal de sonido que se utilizará para las alertas",
     ptBR = "O canal de som a ser usado pelas notificações",
-    deDE = "Der Soundkanal der von benachrichtigungen verwendet wird",
+    deDE = "Der soundkanal der von benachrichtigungen verwendet wird",
     frFR = "Le canal sonore à utiliser pour les alertes",
     ruRU = "Звуковой канал который будет использоваться оповещениями",
     koKR = "알림에 사용할 음향 채널",

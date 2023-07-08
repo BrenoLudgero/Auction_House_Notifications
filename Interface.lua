@@ -1,12 +1,12 @@
 frame = CreateFrame("FRAME")                -- Attributes CreateFrame() to a global variable for ease of use
 locale = GetLocale()                        -- Checks the user's client language and saves it to a global variable
-local localizedTitle = addonTitles[locale]  -- Attributes the localized addon title (Localization.lua) to a variable
-frame.name = localizedTitle                 -- Defines what localized name will be displayed for the addon
-InterfaceOptions_AddCategory(frame)         -- Displays the addon in Interface Options -> AddOns
+local localizedTitle = addonTitles[locale]  -- Attributes the localized addOn title (Localization.lua) to a variable
+frame.name = localizedTitle                 -- Defines what localized name will be displayed for the addOn
+InterfaceOptions_AddCategory(frame)         -- Displays the addOn in Interface Options -> AddOns
 
 SLASH_AHN1 = "/ahn"                                            -- Creates the chat command /ahn
 SlashCmdList["AHN"] = function()                               -- Assings the chat command instructions to:
-    InterfaceOptionsFrame_Show()                               -- Open the addons interface (mandatory)
+    InterfaceOptionsFrame_Show()                               -- Open the addOns interface (mandatory)
     InterfaceOptionsFrame_OpenToCategory(addonTitles[locale])  -- Open the Auction House Notifications options interface
 end
 
@@ -20,7 +20,7 @@ function tableContains(table, val)    -- Responsible for comparing a table and a
 end
 
 local function createAndSetInterfaceText(variableDescription, font, textValue, xPosition, yPosition)  -- Responsible for creating and positioning a string inside inside AHN's options interface
-    local fontString = frame:CreateFontString(nil, variableDescription, font)  -- Creates a string with the variable description and font specifed in the parameters
+    local fontString = frame:CreateFontString(variableDescription, "ARTWORK", font)  -- Creates a string with the variable description and font specifed in the parameters
     fontString:SetText(textValue)                         -- Defines the string value specified in the parameters
     fontString:SetPoint("TOPLEFT", xPosition, yPosition)  -- Sets the X and Y positions specified in the parameters
     fontString:SetJustifyH("LEFT")                        -- Justify the string horizontally
@@ -136,7 +136,7 @@ showGreetingCheckButton:SetScript("OnClick", function(self)
     preferences.showGreeting = self:GetChecked()
 end)
 
-function checkPreferencesInInterfaceOptions()  -- Responsible for updating user's preferences on the options interface when the addon loads
+function checkPreferencesInInterfaceOptions()  -- Responsible for updating user's preferences on the options interface when the addOn loads
     enableInAHCheckButton:SetChecked(preferences.enableInAH)                             -- Checks or unchecks the checkboxes based on user's preference
     showGreetingCheckButton:SetChecked(preferences.showGreeting)
     UIDropDownMenu_Initialize(soundCategoryDropdown, soundCategoryDropdown.initialize)   -- Initializes the dropdown so the value can be displayed

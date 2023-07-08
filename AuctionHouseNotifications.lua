@@ -5,7 +5,7 @@ local expiredAuction = false      -- Creates a variable to identify if the aucti
 
 -- [Structure] Sound category = {file data ID for a successful auction, file data ID for a failed auction}
 -- File data IDs and their names: https://wow.tools/dbc/?dbc=filedata&build=6.0.1.18179#page=1
-sounds = {                         -- Creates a table with the sounds that the user can use for alerts
+sounds = {                         -- Creates a table with the sounds that the user can choose for alerts
     coins = {567483, 567501},      -- iMoneyDialogOpen, iMoneyDialogClose
     female = {540628, 540560},     -- HumanFemaleCheer01, HumanFemale_err_lootdidntkill06
     fireworks = {567011, 565499},  -- G_FireworkBoomGeneral5, G_BarrelExplodeCustom0
@@ -16,8 +16,8 @@ sounds = {                         -- Creates a table with the sounds that the u
 -- User's preferences (defaults, variables used below will come from user's preferences contained in SavedValues)
 chosenSounds = sounds.coins  -- The alert sound category to be used
 chosenChannel = "Master"     -- The sound channel that alerts will use
-enableInAH = false           -- Toggles if the addon will play successful auction alerts when the Auction House window is open
-showGreeting = true          -- Toggles if the greeting message will be printed in the chat when the addon loads
+enableInAH = false           -- Toggles if the addOn will play successful auction alerts when the Auction House window is open
+showGreeting = true          -- Toggles if the greeting message will be printed in the chat when the addOn loads
 
 -- Variable "frame" defined in Interface.lua
 frame:RegisterEvent("ADDON_LOADED")          -- Starts listening to the in-game ADDON_LOADED events
@@ -34,7 +34,7 @@ local function createSavedVariables()  -- Responsible for creating the preferenc
 end
 
 local function handleAddonLoaded(event, addOnName)  -- All ADDON_LOADED events are handled here
-    if event == "ADDON_LOADED" and addOnName == "AuctionHouseNotifications" then  -- If an addon loads and is called AuctionHouseNotifications:
+    if event == "ADDON_LOADED" and addOnName == "AuctionHouseNotifications" then  -- If an addOn loads and is called AuctionHouseNotifications:
         if preferences == nil then            -- If user's preferences are absent from SavedVariables:
             createSavedVariables()            -- Creates the table for user's preferences
         end
@@ -62,7 +62,7 @@ local function handleSystemMessages(event, message)  -- All CHAT_MSG_SYSTEM even
         end
         for _, pattern in ipairs(expiredAuctionMessages) do     -- Searches for expired auction messages (Localization.lua) in the system message
             if string.find(message, pattern) then               -- If the message matches one of the messages:
-                expiredAuction = true                            -- The auction expired
+                expiredAuction = true                           -- The auction expired
                 break
             end
         end
