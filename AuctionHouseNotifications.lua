@@ -13,31 +13,44 @@ sounds = {                         -- Creates a table with the sounds that the u
     quests = {567516, 567459}      -- iQuestUpdate, igQuestFailed
 }
 
--- User's preferences (defaults, variables used below will come from user's preferences contained in SavedValues)
+-- User's preferences (Defaults. Variables used come from SavedVariables)
 chosenSounds = sounds.coins  -- The alert sound category to be used
 chosenChannel = "Master"     -- The sound channel that alerts will use
 enableInAH = false           -- Toggles if the addOn will play successful auction alerts when the Auction House window is open
 showGreeting = true          -- Toggles if the greeting message will be printed in the chat when the addOn loads
+enableExpired = true         -- Toggles if expired auction alert should play
 
 -- Variable "frame" defined in Interface.lua
-frame:RegisterEvent("ADDON_LOADED")          -- Starts listening to the in-game ADDON_LOADED events
-frame:RegisterEvent("AUCTION_HOUSE_SHOW")    -- Starts listening to the in-game AUCTION_HOUSE_SHOW event
-frame:RegisterEvent("AUCTION_HOUSE_CLOSED")  -- Starts listening to the in-game AUCTION_HOUSE_CLOSED event
-frame:RegisterEvent("CHAT_MSG_SYSTEM")       -- Starts listening to the in-game CHAT_MSG_SYSTEM events
+-- Starts listening to in-game events
+frame:RegisterEvent("ADDON_LOADED")          
+frame:RegisterEvent("AUCTION_HOUSE_SHOW")
+frame:RegisterEvent("AUCTION_HOUSE_CLOSED")
+frame:RegisterEvent("CHAT_MSG_SYSTEM")
 
-local function createSavedVariables()  -- Responsible for creating the preferences table in SavedVariables (first login)
-    preferences = {}                         -- Creates an array for user preferences
-    preferences.chosenSounds = chosenSounds  -- Saves the default values
+-- Creates the preferences table in SavedVariables (first login)
+local function createSavedVariables()
+    preferences = {}
+    preferences.chosenSounds = chosenSounds
     preferences.chosenChannel = chosenChannel
     preferences.enableInAH = enableInAH
     preferences.showGreeting = showGreeting
+    preferences.enableExpired = enableExpired
+end
+
+local function updateSavedVariables()
+    if preferences == nil then               -- If user's preferences are absent from SavedVariables:
+        createSavedVariables()               -- Creates the table for user's preferences
+    end
+    for key, value in pairs(preferences) do  -- Updates SavedVariables
+        if preferences[key] == nil then
+            preferences[key] = value
+        end
+    end
 end
 
 local function handleAddonLoaded(event, addOnName)  -- All ADDON_LOADED events are handled here
     if event == "ADDON_LOADED" and addOnName == "AuctionHouseNotifications" then  -- If an addOn loads and is called AuctionHouseNotifications:
-        if preferences == nil then            -- If user's preferences are absent from SavedVariables:
-            createSavedVariables()            -- Creates the table for user's preferences
-        end
+        updateSavedVariables()
         checkPreferencesInInterfaceOptions()  -- Updates options interface with user's preferences (Interface.lua)
         if preferences.showGreeting then      -- If the greeting message should be printed:
             print(greetingMessages[locale])   -- Prints the localized message in the chat (Interface.lua)
@@ -46,26 +59,19 @@ local function handleAddonLoaded(event, addOnName)  -- All ADDON_LOADED events a
     frame:UnregisterEvent("ADDON_LOADED")  -- Stops listening to ADDON_LOADED events
 end
 
-local function handleSystemMessages(event, message)  -- All CHAT_MSG_SYSTEM events are handled here
-    if event == "CHAT_MSG_SYSTEM" then                          -- If a system message is displayed:
-        for _, pattern in ipairs(successfulAuctionMessages) do  -- Searches for successful auction messages (Localization.lua) in the system message
-            if string.find(message, pattern) then               -- If the message matches one of the messages:
-                successfulAuction = true                        -- The auction was successful
-                break
-            end
+local function searchForMessages(messageList, message)
+    for _, pattern in ipairs(messageList) do  -- Searches for auction messages (Localization.lua)
+        if string.find(message, pattern) then -- If the message matches one of the messages, returns true
+            return true
         end
-        for _, pattern in ipairs(failedAuctionMessages) do      -- Searches for failed auction messages (Localization.lua) in the system message
-            if string.find(message, pattern) then               -- If the message matches one of the messages:
-                failedAuction = true                            -- The auction failed
-                break
-            end
-        end
-        for _, pattern in ipairs(expiredAuctionMessages) do     -- Searches for expired auction messages (Localization.lua) in the system message
-            if string.find(message, pattern) then               -- If the message matches one of the messages:
-                expiredAuction = true                           -- The auction expired
-                break
-            end
-        end
+    end
+end
+
+local function handleSystemMessages(event, message)
+    if event == "CHAT_MSG_SYSTEM" then
+        successfulAuction = searchForMessages(successfulAuctionMessages, message)
+        failedAuction = searchForMessages(failedAuctionMessages, message)
+        expiredAuction = searchForMessages(expiredAuctionMessages, message)
     end
 end
 
@@ -81,15 +87,18 @@ local function playSounds()  -- Responsible for playing sounds
     if successfulAuction then                                                      -- If the auction was successful,
         if preferences.enableInAH and ahIsOpen then                                -- and successful auction alerts should play when the Auction House is open:
             PlaySoundFile(preferences.chosenSounds[1], preferences.chosenChannel)  -- Plays the chosen sound file data ID for a successful auction on the chosen sound channel
-        elseif not ahIsOpen then                                                   -- Or if successful auction alerts should not play when the Auction House is open and the AH is closed
+        elseif not ahIsOpen then                                                   -- Or if it souldn't play when the Auction House is open and the AH is closed
             PlaySoundFile(preferences.chosenSounds[1], preferences.chosenChannel)
         end
     elseif failedAuction then                                                      -- Or if the auction failed:
         PlaySoundFile(preferences.chosenSounds[2], preferences.chosenChannel)      -- Plays the chosen sound file data ID for a failed auction on the chosen sound channel
-    elseif expiredAuction then                                                     -- Or if the auction expired:
-        PlaySound(1372, preferences.chosenChannel, true)  -- Plays an unique sound file SoundKitId (polymorphtarget) for an expired auction on the chosen sound channel
+    elseif preferences.enableExpired and expiredAuction then                       -- Or if the auction expired and expired auction alerts should play:
+        PlaySound(1372, preferences.chosenChannel, true)  -- Plays a unique sound file SoundKitId (polymorphtarget) for an expired auction on the chosen sound channel
     end
-    successfulAuction = false  -- Reverts the values to false so the process can be repeated
+end
+
+local function resetVariables()  -- Reverts the values to false so the sounds can be played again
+    successfulAuction = false
     failedAuction = false
     expiredAuction = false
 end
@@ -99,4 +108,5 @@ frame:SetScript("OnEvent", function(_, event, ...)  -- Runs the functions below 
     handleSystemMessages(event, ...)
     handleAuctionHouse(event, ...)
     playSounds()
+    resetVariables()
 end)
