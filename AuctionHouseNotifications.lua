@@ -1,33 +1,33 @@
-local ahIsOpen = false           -- Creates a variable to identify if the Auction House window is open or not
-local successfulAuction = false  -- Creates a variable to identify if the auction was successful
-local failedAuction = false      -- Creates a variable to identify if the auction failed
-local expiredAuction = false      -- Creates a variable to identify if the auction expired
+local ahIsOpen = false  -- Toggles if the Auction House window is open or not
+-- Saves the current status of last auction update
+local successfulAuction = false
+local failedAuction = false
+local expiredAuction = false
 
 -- [Structure] Sound category = {file data ID for a successful auction, file data ID for a failed auction}
 -- File data IDs and their names: https://wow.tools/dbc/?dbc=filedata&build=6.0.1.18179#page=1
-sounds = {                         -- Creates a table with the sounds that the user can choose for alerts
-    coins = {567483, 567501},      -- iMoneyDialogOpen, iMoneyDialogClose
-    female = {540628, 540560},     -- HumanFemaleCheer01, HumanFemale_err_lootdidntkill06
-    fireworks = {567011, 565499},  -- G_FireworkBoomGeneral5, G_BarrelExplodeCustom0
-    impact = {567946, 567821},     -- BullWhipHit2, 2hMaceMetalHitMetalShieldCrit
-    quests = {567516, 567459}      -- iQuestUpdate, igQuestFailed
+sounds = {                        -- Creates a table with the sounds that the user can choose for alerts
+    coins = {567483, 567501},     -- iMoneyDialogOpen, iMoneyDialogClose
+    female = {540628, 540560},    -- HumanFemaleCheer01, HumanFemale_err_lootdidntkill06
+    fireworks = {567011, 565499}, -- G_FireworkBoomGeneral5, G_BarrelExplodeCustom0
+    impact = {567946, 567821},    -- BullWhipHit2, 2hMaceMetalHitMetalShieldCrit
+    quests = {567516, 567459}     -- iQuestUpdate, igQuestFailed
 }
 
 -- User's preferences (Defaults. Variables used come from SavedVariables)
-chosenSounds = sounds.coins  -- The alert sound category to be used
-chosenChannel = "Master"     -- The sound channel that alerts will use
-enableInAH = false           -- Toggles if the addOn will play successful auction alerts when the Auction House window is open
-showGreeting = true          -- Toggles if the greeting message will be printed in the chat when the addOn loads
-enableExpired = true         -- Toggles if expired auction alert should play
+chosenSounds = sounds.coins -- The alert sound category to be used
+chosenChannel = "Master"    -- The sound channel that alerts will use
+enableInAH = false          -- Toggles if the addOn will play successful auction alerts when the Auction House window is open
+showGreeting = true         -- Toggles if the greeting message will be printed in the chat when the addOn loads
+enableExpired = true        -- Toggles if expired auction alert should play
 
 -- Variable "frame" defined in Interface.lua
--- Starts listening to in-game events
 frame:RegisterEvent("ADDON_LOADED")          
 frame:RegisterEvent("AUCTION_HOUSE_SHOW")
 frame:RegisterEvent("AUCTION_HOUSE_CLOSED")
 frame:RegisterEvent("CHAT_MSG_SYSTEM")
 
--- Creates the preferences table in SavedVariables (first login)
+-- Creates the preferences table in SavedVariables
 local function createSavedVariables()
     preferences = {}
     preferences.chosenSounds = chosenSounds
@@ -38,72 +38,83 @@ local function createSavedVariables()
 end
 
 local function updateSavedVariables()
-    if preferences == nil then               -- If user's preferences are absent from SavedVariables:
-        createSavedVariables()               -- Creates the table for user's preferences
+    -- Creates user preferences table in SavedVariables if absent
+    if preferences == nil then
+        createSavedVariables()
     end
-    for key, value in pairs(preferences) do  -- Updates SavedVariables
+    -- Creates options not found in SavedVariables (new option after update)
+    for key, value in pairs(preferences) do
         if preferences[key] == nil then
             preferences[key] = value
         end
     end
 end
 
-local function handleAddonLoaded(event, addOnName)  -- All ADDON_LOADED events are handled here
-    if event == "ADDON_LOADED" and addOnName == "AuctionHouseNotifications" then  -- If an addOn loads and is called AuctionHouseNotifications:
-        updateSavedVariables()
-        checkPreferencesInInterfaceOptions()  -- Updates options interface with user's preferences (Interface.lua)
-        if preferences.showGreeting then      -- If the greeting message should be printed:
-            print(greetingMessages[locale])   -- Prints the localized message in the chat (Interface.lua)
-        end
+local function showGreetingMessage()
+    if preferences.showGreeting then
+        print(greetingMessages[locale])
     end
-    frame:UnregisterEvent("ADDON_LOADED")  -- Stops listening to ADDON_LOADED events
 end
 
-local function searchForMessages(messageList, message)
-    for _, pattern in ipairs(messageList) do  -- Searches for auction messages (Localization.lua)
-        if string.find(message, pattern) then -- If the message matches one of the messages, returns true
+-- Detects when AuctionHouseNotifications loads then updates SavedVariables and sets interface options
+local function handleAddonLoaded(event, addOnName) 
+    if event == "ADDON_LOADED" and addOnName == "AuctionHouseNotifications" then
+        updateSavedVariables()
+        checkPreferencesInInterfaceOptions()
+        showGreetingMessage()
+    end
+    -- Stops listening to ADDON_LOADED events
+    frame:UnregisterEvent("ADDON_LOADED")
+end
+
+-- Searches for auction messages (Localization.lua)
+local function messageWasFound(messageList, message)
+    for _, pattern in ipairs(messageList) do
+        if string.find(message, pattern) then
             return true
         end
     end
 end
 
+-- Sets the last auction status if CHAT_MSG_SYSTEM matches an auction message
 local function handleSystemMessages(event, message)
     if event == "CHAT_MSG_SYSTEM" then
-        successfulAuction = searchForMessages(successfulAuctionMessages, message)
-        failedAuction = searchForMessages(failedAuctionMessages, message)
-        expiredAuction = searchForMessages(expiredAuctionMessages, message)
+        successfulAuction = messageWasFound(successfulAuctionMessages, message)
+        failedAuction = messageWasFound(failedAuctionMessages, message)
+        expiredAuction = messageWasFound(expiredAuctionMessages, message)
     end
 end
 
-local function handleAuctionHouse(event, ...)  -- Handles AUCTION_HOUSE_SHOW and AUCTION_HOUSE_CLOSED events
-    if event == "AUCTION_HOUSE_SHOW" then        -- If the Auction House window is opened:
-        ahIsOpen = true                          -- Saves the current window state as open
-    elseif event == "AUCTION_HOUSE_CLOSED" then  -- If the Auction House window is closed:
-        ahIsOpen = false                         -- Saves the current window state as closed
+-- Toggles ahIsOpen based on it's current status
+local function handleAuctionHouse(event, ...)
+    if event == "AUCTION_HOUSE_SHOW" then
+        ahIsOpen = true
+    elseif event == "AUCTION_HOUSE_CLOSED" then
+        ahIsOpen = false
     end
 end
 
-local function playSounds()  -- Responsible for playing sounds
-    if successfulAuction then                                                      -- If the auction was successful,
-        if preferences.enableInAH and ahIsOpen then                                -- and successful auction alerts should play when the Auction House is open:
-            PlaySoundFile(preferences.chosenSounds[1], preferences.chosenChannel)  -- Plays the chosen sound file data ID for a successful auction on the chosen sound channel
-        elseif not ahIsOpen then                                                   -- Or if it souldn't play when the Auction House is open and the AH is closed
-            PlaySoundFile(preferences.chosenSounds[1], preferences.chosenChannel)
-        end
-    elseif failedAuction then                                                      -- Or if the auction failed:
-        PlaySoundFile(preferences.chosenSounds[2], preferences.chosenChannel)      -- Plays the chosen sound file data ID for a failed auction on the chosen sound channel
-    elseif preferences.enableExpired and expiredAuction then                       -- Or if the auction expired and expired auction alerts should play:
-        PlaySound(1372, preferences.chosenChannel, true)  -- Plays a unique sound file SoundKitId (polymorphtarget) for an expired auction on the chosen sound channel
+local function playSounds()
+    -- Plays the chosen sound file data ID the chosen sound channel
+    if successfulAuction and (preferences.enableInAH or not ahIsOpen) then
+        PlaySoundFile(preferences.chosenSounds[1], preferences.chosenChannel)
+    elseif failedAuction then
+        PlaySoundFile(preferences.chosenSounds[2], preferences.chosenChannel)
+    -- Plays a unique sound file SoundKitId (polymorphtarget) for an expired auction
+    elseif preferences.enableExpired and expiredAuction then
+        PlaySound(1372, preferences.chosenChannel, true)
     end
 end
 
-local function resetVariables()  -- Reverts the values to false so the sounds can be played again
+-- Reverts the values to false so the sounds can be played again
+local function resetVariables()
     successfulAuction = false
     failedAuction = false
     expiredAuction = false
 end
 
-frame:SetScript("OnEvent", function(_, event, ...)  -- Runs the functions below when one of the registered in-game events occur
+-- Runs the functions below when one of the registered in-game events occur
+frame:SetScript("OnEvent", function(_, event, ...)
     handleAddonLoaded(event, ...)
     handleSystemMessages(event, ...)
     handleAuctionHouse(event, ...)

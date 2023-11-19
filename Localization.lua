@@ -1,6 +1,8 @@
-local versionNumber = GetAddOnMetadata("AuctionHouseNotifications", "Version")  -- Gets the addOn version number from the .toc file and saves it in a variable
+-- Saves the addOn version number from the .toc file
+local versionNumber = GetAddOnMetadata("AuctionHouseNotifications", "Version")
 
-successfulAuctionMessages = {  -- Patterns to be scanned in CHAT_MSG_SYSTEM events
+-- Patterns to be scanned in CHAT_MSG_SYSTEM events
+successfulAuctionMessages = {
     "Your auction of (.+) sold%.", "You won an auction for (.+)", "A buyer has been found for your auction of (.+)",  -- enUS
     "Has vendido (.+) en la subasta%.", "Has ganado una puja por (.+)", "Tu (.+) se ha vendido%.", "Ha aparecido un comprador para tu subasta de (.+)",  -- esMX, esES
     "Vente de votre (.+) réussie", "Vous avez gagné les enchères pour (.+)", "Un acheteur a été trouvé pour votre enchère (.+)",  -- frFR
@@ -36,7 +38,9 @@ expiredAuctionMessages = {
     "你拍賣的(.+)已經過期。",
     "你拍卖的(.+)已经过期。"
 }
-addonTitles = {  -- Localized title to be used in the in-game addOn options interface
+
+-- Localized title to be used in the in-game addOn list
+addonTitles = {
     enUS = "Auction House Notifications",
     esMX = "Notificaciones de Casa de Subastas",
     esES = "Notificaciones de Casa de Subastas",
@@ -49,7 +53,8 @@ addonTitles = {  -- Localized title to be used in the in-game addOn options inte
     zhTW = "拍賣行公告",
     zhCN = "拍卖行公告"
 }
-greetingMessages = { -- Localized message to be shown in the chat when the addOn loads
+-- Localized message to be shown in the chat when the addOn loads
+greetingMessages = {
     enUS = "|cFFFFFF00Auction House Notifications|r loaded successfully! (" ..versionNumber.. ")",
     esMX = "|cFFFFFF00Notificaciones de Casa de Subastas|r ¡se ha cargado correctamente! (" ..versionNumber.. ")",
     esES = "|cFFFFFF00Notificaciones de Casa de Subastas|r ¡se ha cargado correctamente! (" ..versionNumber.. ")",
