@@ -78,10 +78,10 @@ function createDropdownMenu(dropdown, kind, namesTable)
 end
 
 -- Creates and shows tooltips on mouse hover
-function createTooltip(item, tooltip)
+function createTooltip(item, anchor, tooltip)
     item:SetScript("OnEnter", function(self)
         -- Positions the tooltip relative to the item
-        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        GameTooltip:SetOwner(self, anchor)
         GameTooltip:SetText(tooltip)
         GameTooltip:Show()
     end)

@@ -12,12 +12,18 @@ local dropdownColumn1LabelX = 180
 local dropdownColumn2LabelX = 469
 local dropdownRow1LabelY = -154
 local dropdownRow2LabelY = -196
-if locale == "ruRU" then
-    expiredCheckX = 236
+if locale == "ptBR" or locale == "frFR" then
+    expiredCheckX = 325
+    dropdownColumn2X = 310
+    dropdownColumn2LabelX = 479
 elseif locale == "deDE" then
-    expiredCheckX = 275
+    expiredCheckX = 265
     dropdownColumn2X = 330
     dropdownColumn2LabelX = 499
+elseif locale == "ruRU" then
+    expiredCheckX = 236
+    dropdownColumn2X = 335
+    dropdownColumn2LabelX = 504
 end
 
 -------------------------------------  TITLES  ----------------------------------------
@@ -38,7 +44,7 @@ local enableExpiredCheckButton = createButton("CheckButton", "EnableExpired", en
         preferences.enableExpired = self:GetChecked()
     end
 )
-createTooltip(enableInAHCheckButton, enableInAHTooltip)
+createTooltip(enableInAHCheckButton, "ANCHOR_RIGHT", enableInAHTooltip)
 local showGreetingCheckButton = createButton("CheckButton", "ShowGreeting", showGreetingMessage, 27, -331, function(self)
     preferences.showGreeting = self:GetChecked()
     end
@@ -119,7 +125,7 @@ soundChannelDropdown.initialize = function(self)
     }
     createDropdownMenu(self, "soundChannels", soundChannels)
 end
-createTooltip(soundChannelDropdown, soundChannelTooltip)
+createTooltip(soundChannelDropdown, "ANCHOR_TOP", soundChannelTooltip)
 
 -- Checks the interface options based on the user's preferences when the addOn loads (AuctionHouseNotifications.lua)
 function checkInterfaceOptions()
