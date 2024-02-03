@@ -5,9 +5,9 @@ local buttonHeight = 32
 
 -- All "text" comes from Localization.lua
 
--- Creates a string and positions it in the options interface
-function createText(description, font, text, xPosition, yPosition)
-    local fontString = frame:CreateFontString(description, "ARTWORK", font)
+-- Creates a string and places it in the options interface
+function createText(font, text, xPosition, yPosition)
+    local fontString = frame:CreateFontString(nil, "ARTWORK", font)
     fontString:SetText(text)
     fontString:SetPoint("TOPLEFT", xPosition, yPosition)
     fontString:SetJustifyH("LEFT")
@@ -15,12 +15,12 @@ function createText(description, font, text, xPosition, yPosition)
 end
 
 -- Creates a Button or CheckButton and assigns a function to it
-function createButton(kind, description, text, xPosition, yPosition, onClick)
+function createButton(kind, text, xPosition, yPosition, onClick)
     if kind == "CheckButton" then
-        button = CreateFrame(kind, description, frame, "InterfaceOptionsCheckButtonTemplate")
+        button = CreateFrame(kind, nil, frame, "InterfaceOptionsCheckButtonTemplate")
         button.Text:SetText(text)
     elseif kind == "Button" then
-        button = CreateFrame(kind, description, frame, "UIPanelButtonTemplate")
+        button = CreateFrame(kind, nil, frame, "UIPanelButtonTemplate")
         button:SetSize(buttonWidth, buttonHeight)
         button:SetText(text)
     end
@@ -80,7 +80,7 @@ end
 -- Creates and shows tooltips on mouse hover
 function createTooltip(item, anchor, tooltip)
     item:SetScript("OnEnter", function(self)
-        -- Positions the tooltip relative to the item
+        -- Places the tooltip relative to the item
         GameTooltip:SetOwner(self, anchor)
         GameTooltip:SetText(tooltip)
         GameTooltip:Show()

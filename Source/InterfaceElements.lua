@@ -27,51 +27,51 @@ elseif locale == "ruRU" then
 end
 
 -------------------------------------  TITLES  ----------------------------------------
-local titleText = createText("Title", "GameFontNormalLarge", addonTitle, titlesTextX, -15)
-local subtitleText = createText("Subtitle", "GameFontHighlight", subtitle, titlesTextX, -35)
-local soundPreferencesText = createText("SoundPreferences", "GameFontNormalMed1", soundPreferences, titlesTextX, -85)
-local testSoundsText = createText("Test", "GameFontNormalMed1", testSounds, titlesTextX, -235)
-local miscellaneousText = createText("Miscellaneous", "GameFontNormalMed1", miscellaneous, titlesTextX, -306)
+local titleText = createText("GameFontNormalLarge", addonTitle, titlesTextX, -15)
+local subtitleText = createText("GameFontHighlight", subtitle, titlesTextX, -35)
+local soundPreferencesText = createText("GameFontNormalMed1", soundPreferences, titlesTextX, -85)
+local testSoundsText = createText("GameFontNormalMed1", testSounds, titlesTextX, -235)
+local miscellaneousText = createText("GameFontNormalMed1", miscellaneous, titlesTextX, -306)
 
 ----------------------------------  CHECKBUTTONS  -------------------------------------
-local enableInAHCheckButton = createButton("CheckButton", "EnableInAH", enableInAHText, 25, -110,
+local enableInAHCheckButton = createButton("CheckButton", enableInAHText, 25, -110,
     function(self) 
         preferences.enableInAH = self:GetChecked()
     end
 )
-local enableExpiredCheckButton = createButton("CheckButton", "EnableExpired", enableExpired, expiredCheckX, -110, 
+local enableExpiredCheckButton = createButton("CheckButton", enableExpired, expiredCheckX, -110, 
     function(self) 
         preferences.enableExpired = self:GetChecked()
     end
 )
 createTooltip(enableInAHCheckButton, "ANCHOR_RIGHT", enableInAHTooltip)
-local showGreetingCheckButton = createButton("CheckButton", "ShowGreeting", showGreetingMessage, 27, -331, function(self)
+local showGreetingCheckButton = createButton("CheckButton", showGreetingMessage, 27, -331, function(self)
     preferences.showGreeting = self:GetChecked()
     end
 )
 
 -------------------------------------  BUTTONS  ---------------------------------------
-local testSuccessfulButton = createButton("Button", "testSuccessfulSound", successfulText, 26, buttonY, 
+local testSuccessfulButton = createButton("Button", successfulText, 26, buttonY, 
     function(self)
         PlaySoundFile(preferences.chosenSounds.successful, preferences.chosenChannel)
     end
 )
-local testFailedButton = createButton("Button", "testFailedSound", failedText, 169, buttonY, 
+local testFailedButton = createButton("Button", failedText, 169, buttonY, 
     function(self)
         PlaySoundFile(preferences.chosenSounds.failed, preferences.chosenChannel)
     end
 )
-local testExpiredButton = createButton("Button", "testExpiredSound", expiredText, 312, buttonY, 
+local testExpiredButton = createButton("Button", expiredText, 312, buttonY, 
     function(self)
         PlaySound(preferences.chosenSounds.expired, preferences.chosenChannel, true)
     end
 )
 
 ---------------------------------  DROPDOWN LABELS  -----------------------------------
-local successfulSoundLabel = createText("SuccessfulSound", "GameFontHighlight", successfulSoundText, dropdownColumn1LabelX, dropdownRow1LabelY)
-local failedSoundLabel = createText("FailedSound", "GameFontHighlight", failedSoundText, dropdownColumn1LabelX, dropdownRow2LabelY)
-local expiredSoundLabel = createText("ExpiredSound", "GameFontHighlight", expiredSoundText, dropdownColumn2LabelX, dropdownRow1LabelY)
-local soundChannelLabel = createText("SoundChannel", "GameFontHighlight", soundChannelText, dropdownColumn2LabelX, dropdownRow2LabelY)
+local successfulSoundLabel = createText("GameFontHighlight", successfulSoundText, dropdownColumn1LabelX, dropdownRow1LabelY)
+local failedSoundLabel = createText("GameFontHighlight", failedSoundText, dropdownColumn1LabelX, dropdownRow2LabelY)
+local expiredSoundLabel = createText("GameFontHighlight", expiredSoundText, dropdownColumn2LabelX, dropdownRow1LabelY)
+local soundChannelLabel = createText("GameFontHighlight", soundChannelText, dropdownColumn2LabelX, dropdownRow2LabelY)
 
 ------------------------------------  DROPDOWNS  --------------------------------------
 local successfulSoundDropdown = createDropdown(dropdownColumn1X, dropdownRow1Y)
