@@ -1,54 +1,56 @@
-frame:RegisterEvent("ADDON_LOADED")
-frame:RegisterEvent("AUCTION_HOUSE_SHOW")
-frame:RegisterEvent("AUCTION_HOUSE_CLOSED")
+local addonName, ahn = ...
 
-if isMainline then
-    frame:RegisterEvent("AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION")
+ahn.frame:RegisterEvent("ADDON_LOADED")
+ahn.frame:RegisterEvent("AUCTION_HOUSE_SHOW")
+ahn.frame:RegisterEvent("AUCTION_HOUSE_CLOSED")
+
+if ahn.isMainline then
+    ahn.frame:RegisterEvent("AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION")
 else
-    frame:RegisterEvent("CHAT_MSG_SYSTEM")
+    ahn.frame:RegisterEvent("CHAT_MSG_SYSTEM")
 end
 
 local function handleMainlineUpdates(event, updateType)
     if event == "AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION" then
-        auctionSuccessful = (updateType == soldAuction) or (updateType == wonAuction)
-        auctionFailed = (updateType == outbidAuction)
-        auctionExpired = (updateType == expiredAuction)
+        ahn.updateMainlineAuctionStatus(event, updateType)
     end
 end
 
 local function handleClassicUpdates(event, updateType)
     if event == "CHAT_MSG_SYSTEM" then
-        auctionSuccessful = string.find(updateType, soldAuction) or string.find(updateType, wonAuction)
-        auctionFailed = string.find(updateType, outbidAuction)
-        auctionExpired = string.find(updateType, expiredAuction)
+        ahn.updateClassicAuctionStatus(event, updateType)
     end
 end
 
 -- Defines the method to handle auction updates based on the game version
-function handleAuctionUpdates(event, updateType)
-    if isMainline then
+function ahn.handleAuctionUpdates(event, updateType)
+    if ahn.isMainline then
         handleMainlineUpdates(event, updateType)
     else
         handleClassicUpdates(event, updateType)
     end
+    ahn.playSound()
+    ahn.resetAuctionStatus()
 end
 
 -- Toggles ahIsOpen based on its current status
-function handleAuctionHouse(event)
+function ahn.handleAuctionHouse(event)
     if event == "AUCTION_HOUSE_SHOW" then
-        ahIsOpen = true
+        ahn.ahIsOpen = true
     elseif event == "AUCTION_HOUSE_CLOSED" then
-        ahIsOpen = false
+        ahn.ahIsOpen = false
     end
 end
 
--- Once AuctionHouseNotifications loads, updates SavedVariables and checks interface options
-function handleAddonLoaded(event, addOnName) 
-    if event == "ADDON_LOADED" and addOnName == "AuctionHouseNotifications" then
-        createSavedVariables()
-        createNewOptions()
-        checkInterfaceOptions()
-        showGreetingMessage()
-        frame:UnregisterEvent("ADDON_LOADED")
+-- Once AuctionHouseNotifications loads, updates SavedVariables and interface options
+function ahn.handleAddonLoaded(event, addon) 
+    if event == "ADDON_LOADED" and addon == addonName then
+        ahn.createSavedVariables()
+        ahn.createSavedVariables = nil
+        ahn.updateInterfaceOptions()
+        ahn.updateInterfaceOptions = nil
+        ahn.showGreetingMessage()
+        ahn.showGreetingMessage = nil
+        ahn.frame:UnregisterEvent("ADDON_LOADED")
     end
 end

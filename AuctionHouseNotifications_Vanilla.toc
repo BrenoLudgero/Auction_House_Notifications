@@ -1,5 +1,5 @@
 ## Interface: 11501
-## Version: 2.0.2
+## Version: 2.0.3
 
 ## Title: Auction House Notifications
 ## Title-esMX: Notificaciones de Casa de Subastas
@@ -25,12 +25,12 @@
 
 ## Author: Breno Ludgero
 
-## SavedVariables: preferences
+## SavedVariables: AHNPreferences
 
-Source\GlobalVariables.lua
+Source\Initialization.lua
 Source\Localization.lua
 Source\InterfaceFunctions.lua
 Source\InterfaceElements.lua
-Source\Initialization.lua
+Source\AuctionHandler.lua
 Source\EventHandler.lua
 Source\Main.lua

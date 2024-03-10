@@ -1,5 +1,8 @@
-frame.name = addonTitle
-InterfaceOptions_AddCategory(frame) -- Displays the addOn in Options -> AddOns
+local _, ahn = ...
+local L = ahn.L
+
+ahn.frame.name = L.title
+InterfaceOptions_AddCategory(ahn.frame) -- Displays the addOn in Options -> AddOns
 
 local titlesTextX = 15
 local expiredCheckX = 315
@@ -12,132 +15,137 @@ local dropdownColumn1LabelX = 180
 local dropdownColumn2LabelX = 469
 local dropdownRow1LabelY = -154
 local dropdownRow2LabelY = -196
-if locale == "ptBR" or locale == "frFR" then
+if ahn.locale == "ptBR" or ahn.locale == "frFR" then
     expiredCheckX = 325
     dropdownColumn2X = 310
     dropdownColumn2LabelX = 479
-elseif locale == "deDE" then
+elseif ahn.locale == "deDE" then
     expiredCheckX = 265
     dropdownColumn2X = 330
     dropdownColumn2LabelX = 499
-elseif locale == "ruRU" then
+elseif ahn.locale == "ruRU" then
     expiredCheckX = 236
     dropdownColumn2X = 335
     dropdownColumn2LabelX = 504
 end
 
 -------------------------------------  TITLES  ----------------------------------------
-local titleText = createText("GameFontNormalLarge", addonTitle, titlesTextX, -15)
-local subtitleText = createText("GameFontHighlight", subtitle, titlesTextX, -35)
-local soundPreferencesText = createText("GameFontNormalMed1", soundPreferences, titlesTextX, -85)
-local testSoundsText = createText("GameFontNormalMed1", testSounds, titlesTextX, -235)
-local miscellaneousText = createText("GameFontNormalMed1", miscellaneous, titlesTextX, -306)
+local titleText = ahn.createText("GameFontNormalLarge", L.title, titlesTextX, -15)
+local subtitleText = ahn.createText("GameFontHighlight", L.subtitle, titlesTextX, -35)
+local soundPreferencesText = ahn.createText("GameFontNormalMed1", L.soundPreferences, titlesTextX, -85)
+local testSoundsText = ahn.createText("GameFontNormalMed1", L.testSounds, titlesTextX, -235)
+local miscellaneousText = ahn.createText("GameFontNormalMed1", L.miscellaneous, titlesTextX, -306)
 
 ----------------------------------  CHECKBUTTONS  -------------------------------------
-local enableInAHCheckButton = createButton("CheckButton", enableInAHText, 25, -110,
+local enableInAHCheckButton = ahn.createButton("CheckButton", L.enableInAHText, 25, -110,
     function(self) 
-        preferences.enableInAH = self:GetChecked()
+        ahn.setPreference(enableInAH, self:GetChecked())
     end
 )
-local enableExpiredCheckButton = createButton("CheckButton", enableExpired, expiredCheckX, -110, 
+local enableExpiredCheckButton = ahn.createButton("CheckButton", L.enableExpired, expiredCheckX, -110, 
     function(self) 
-        preferences.enableExpired = self:GetChecked()
+        ahn.setPreference(enableExpired, self:GetChecked())
     end
 )
-createTooltip(enableInAHCheckButton, "ANCHOR_RIGHT", enableInAHTooltip)
-local showGreetingCheckButton = createButton("CheckButton", showGreetingMessage, 27, -331, function(self)
-    preferences.showGreeting = self:GetChecked()
+ahn.createTooltip(enableInAHCheckButton, "ANCHOR_RIGHT", L.enableInAHTooltip)
+local showGreetingCheckButton = ahn.createButton("CheckButton", L.showGreetingMessage, 27, -331, function(self)
+    ahn.setPreference(showGreeting, self:GetChecked())
     end
 )
 
 -------------------------------------  BUTTONS  ---------------------------------------
-local testSuccessfulButton = createButton("Button", successfulText, 26, buttonY, 
+local testSuccessfulButton = ahn.createButton("Button", L.successfulText, 26, buttonY, 
     function(self)
-        PlaySoundFile(preferences.chosenSounds.successful, preferences.chosenChannel)
+        PlaySoundFile(AHNPreferences.chosenSounds.successful, AHNPreferences.chosenChannel)
     end
 )
-local testFailedButton = createButton("Button", failedText, 169, buttonY, 
+local testFailedButton = ahn.createButton("Button", L.failedText, 169, buttonY, 
     function(self)
-        PlaySoundFile(preferences.chosenSounds.failed, preferences.chosenChannel)
+        PlaySoundFile(AHNPreferences.chosenSounds.failed, AHNPreferences.chosenChannel)
     end
 )
-local testExpiredButton = createButton("Button", expiredText, 312, buttonY, 
+local testExpiredButton = ahn.createButton("Button", L.expiredText, 312, buttonY, 
     function(self)
-        PlaySound(preferences.chosenSounds.expired, preferences.chosenChannel, true)
+        PlaySound(AHNPreferences.chosenSounds.expired, AHNPreferences.chosenChannel, true)
     end
 )
 
 ---------------------------------  DROPDOWN LABELS  -----------------------------------
-local successfulSoundLabel = createText("GameFontHighlight", successfulSoundText, dropdownColumn1LabelX, dropdownRow1LabelY)
-local failedSoundLabel = createText("GameFontHighlight", failedSoundText, dropdownColumn1LabelX, dropdownRow2LabelY)
-local expiredSoundLabel = createText("GameFontHighlight", expiredSoundText, dropdownColumn2LabelX, dropdownRow1LabelY)
-local soundChannelLabel = createText("GameFontHighlight", soundChannelText, dropdownColumn2LabelX, dropdownRow2LabelY)
+local successfulSoundLabel = ahn.createText("GameFontHighlight", L.successfulSoundText, dropdownColumn1LabelX, dropdownRow1LabelY)
+local failedSoundLabel = ahn.createText("GameFontHighlight", L.failedSoundText, dropdownColumn1LabelX, dropdownRow2LabelY)
+local expiredSoundLabel = ahn.createText("GameFontHighlight", L.expiredSoundText, dropdownColumn2LabelX, dropdownRow1LabelY)
+local soundChannelLabel = ahn.createText("GameFontHighlight", L.soundChannelText, dropdownColumn2LabelX, dropdownRow2LabelY)
 
 ------------------------------------  DROPDOWNS  --------------------------------------
-local successfulSoundDropdown = createDropdown(dropdownColumn1X, dropdownRow1Y)
+local successfulSoundDropdown = ahn.createDropdown(dropdownColumn1X, dropdownRow1Y)
 successfulSoundDropdown.initialize = function(self)
     local info = UIDropDownMenu_CreateInfo()
     local successfulSoundCategories = {
-        [successfulSounds.coins] = soundCategoryNames[1],
-        [successfulSounds.female] = soundCategoryNames[2],
-        [successfulSounds.fireworks] = soundCategoryNames[3],
-        [successfulSounds.impact] = soundCategoryNames[4],
-        [successfulSounds.quests] = soundCategoryNames[5]
+        [ahn.successfulSounds.coins] = L.soundCategoryNames[1],
+        [ahn.successfulSounds.female] = L.soundCategoryNames[2],
+        [ahn.successfulSounds.fireworks] = L.soundCategoryNames[3],
+        [ahn.successfulSounds.impact] = L.soundCategoryNames[4],
+        [ahn.successfulSounds.quests] = L.soundCategoryNames[5]
     }
-    createDropdownMenu(self, "successfulSoundCategories", successfulSoundCategories)
+    ahn.createDropdownMenu(self, "successfulSoundCategories", successfulSoundCategories)
 end
 
-local failedSoundDropdown = createDropdown(dropdownColumn1X, dropdownRow2Y)
+local failedSoundDropdown = ahn.createDropdown(dropdownColumn1X, dropdownRow2Y)
 failedSoundDropdown.initialize = function(self)
     local info = UIDropDownMenu_CreateInfo()
     local failedSoundCategories = {
-        [failedSounds.coins] = soundCategoryNames[1],
-        [failedSounds.female] = soundCategoryNames[2],
-        [failedSounds.fireworks] = soundCategoryNames[3],
-        [failedSounds.impact] = soundCategoryNames[4],
-        [failedSounds.quests] = soundCategoryNames[5]
+        [ahn.failedSounds.coins] = L.soundCategoryNames[1],
+        [ahn.failedSounds.female] = L.soundCategoryNames[2],
+        [ahn.failedSounds.fireworks] = L.soundCategoryNames[3],
+        [ahn.failedSounds.impact] = L.soundCategoryNames[4],
+        [ahn.failedSounds.quests] = L.soundCategoryNames[5]
     }
-    createDropdownMenu(self, "failedSoundCategories", failedSoundCategories)
+    ahn.createDropdownMenu(self, "failedSoundCategories", failedSoundCategories)
 end
 
-local expiredSoundDropdown = createDropdown(dropdownColumn2X, dropdownRow1Y)
+local expiredSoundDropdown = ahn.createDropdown(dropdownColumn2X, dropdownRow1Y)
 expiredSoundDropdown.initialize = function(self)
     local info = UIDropDownMenu_CreateInfo()
     local expiredSoundCategories = {
-        [expiredSounds.sheep] = soundCategoryNames[6],
-        [expiredSounds.thunder] = soundCategoryNames[7],
-        [expiredSounds.what] = soundCategoryNames[8],
-        [expiredSounds.growl] = soundCategoryNames[9],
-        [expiredSounds.chicken] = soundCategoryNames[10]
+        [ahn.expiredSounds.sheep] = L.soundCategoryNames[6],
+        [ahn.expiredSounds.thunder] = L.soundCategoryNames[7],
+        [ahn.expiredSounds.what] = L.soundCategoryNames[8],
+        [ahn.expiredSounds.growl] = L.soundCategoryNames[9],
+        [ahn.expiredSounds.chicken] = L.soundCategoryNames[10]
     }
-    createDropdownMenu(self, "expiredSoundCategories", expiredSoundCategories)
+    ahn.createDropdownMenu(self, "expiredSoundCategories", expiredSoundCategories)
 end
 
-local soundChannelDropdown = createDropdown(dropdownColumn2X, dropdownRow2Y)
+local soundChannelDropdown = ahn.createDropdown(dropdownColumn2X, dropdownRow2Y)
 soundChannelDropdown.initialize = function(self)
     local info = UIDropDownMenu_CreateInfo()
     local soundChannels = {
-        ["Master"] = soundChannelNames[1],
-        ["Sound"] = soundChannelNames[2],
-        ["Music"] = soundChannelNames[3],
-        ["Ambience"] = soundChannelNames[4],
-        ["Dialog"] = soundChannelNames[5]
+        ["Master"] = L.soundChannelNames[1],
+        ["Sound"] = L.soundChannelNames[2],
+        ["Music"] = L.soundChannelNames[3],
+        ["Ambience"] = L.soundChannelNames[4],
+        ["Dialog"] = L.soundChannelNames[5]
     }
-    createDropdownMenu(self, "soundChannels", soundChannels)
+    ahn.createDropdownMenu(self, "soundChannels", soundChannels)
 end
-createTooltip(soundChannelDropdown, "ANCHOR_TOP", soundChannelTooltip)
+ahn.createTooltip(soundChannelDropdown, "ANCHOR_TOP", L.soundChannelTooltip)
 
 -- Checks the interface options based on the user's preferences when the addOn loads (AuctionHouseNotifications.lua)
-function checkInterfaceOptions()
-    enableInAHCheckButton:SetChecked(preferences.enableInAH)
-    enableExpiredCheckButton:SetChecked(preferences.enableExpired)
-    showGreetingCheckButton:SetChecked(preferences.showGreeting)
+function ahn.updateInterfaceOptions()
+    enableInAHCheckButton:SetChecked(AHNPreferences.enableInAH)
+    enableExpiredCheckButton:SetChecked(AHNPreferences.enableExpired)
+    showGreetingCheckButton:SetChecked(AHNPreferences.showGreeting)
     UIDropDownMenu_Initialize(successfulSoundDropdown, successfulSoundDropdown.initialize)
-    UIDropDownMenu_SetSelectedValue(successfulSoundDropdown, preferences.chosenSounds.successful)
+    UIDropDownMenu_SetSelectedValue(successfulSoundDropdown, AHNPreferences.chosenSounds.successful)
     UIDropDownMenu_Initialize(failedSoundDropdown, failedSoundDropdown.initialize)
-    UIDropDownMenu_SetSelectedValue(failedSoundDropdown, preferences.chosenSounds.failed)
+    UIDropDownMenu_SetSelectedValue(failedSoundDropdown, AHNPreferences.chosenSounds.failed)
     UIDropDownMenu_Initialize(expiredSoundDropdown, expiredSoundDropdown.initialize)
-    UIDropDownMenu_SetSelectedValue(expiredSoundDropdown, preferences.chosenSounds.expired)
+    UIDropDownMenu_SetSelectedValue(expiredSoundDropdown, AHNPreferences.chosenSounds.expired)
     UIDropDownMenu_Initialize(soundChannelDropdown, soundChannelDropdown.initialize)
-    UIDropDownMenu_SetSelectedValue(soundChannelDropdown, preferences.chosenChannel)
+    UIDropDownMenu_SetSelectedValue(soundChannelDropdown, AHNPreferences.chosenChannel)
 end
+
+ahn.createText = nil
+ahn.createButton = nil
+ahn.createDropdown = nil
+ahn.createTooltip = nil
