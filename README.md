@@ -10,6 +10,3 @@ An add-on designed to implement audible alerts to Auction House updates while ha
 * Multiple sound categories to choose from
 
 ![Options Interface](2.0.3%20Interface.jpg)
-
-## Contribute
-If you'd like to improve Auction House Notifications by any means, please open an [issue](https://github.com/BrenoLudgero/Auction_House_Notifications/issues "Issues Tab") with a tag related to your improvement (bug fix, feature request, translation, etc..) or leave a comment in one of the two pages linked to the buttons above
