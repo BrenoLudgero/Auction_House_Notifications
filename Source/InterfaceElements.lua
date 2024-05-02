@@ -39,17 +39,17 @@ local miscellaneousText = ahn.createText("GameFontNormalMed1", L.miscellaneous, 
 ----------------------------------  CHECKBUTTONS  -------------------------------------
 local enableInAHCheckButton = ahn.createButton("CheckButton", L.enableInAHText, 25, -110,
     function(self) 
-        ahn.setPreference(enableInAH, self:GetChecked())
+        AHNPreferences.enableInAH = self:GetChecked()
     end
 )
 local enableExpiredCheckButton = ahn.createButton("CheckButton", L.enableExpired, expiredCheckX, -110, 
     function(self) 
-        ahn.setPreference(enableExpired, self:GetChecked())
+        AHNPreferences.enableExpired = self:GetChecked()
     end
 )
 ahn.createTooltip(enableInAHCheckButton, "ANCHOR_RIGHT", L.enableInAHTooltip)
 local showGreetingCheckButton = ahn.createButton("CheckButton", L.showGreetingMessage, 27, -331, function(self)
-    ahn.setPreference(showGreeting, self:GetChecked())
+    AHNPreferences.showGreeting = self:GetChecked()
     end
 )
 
