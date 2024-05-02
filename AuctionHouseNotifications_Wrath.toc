@@ -1,5 +1,5 @@
 ## Interface: 30403
-## Version: 2.0.3
+## Version: 2.0.4
 
 ## Title: Auction House Notifications
 ## Title-esMX: Notificaciones de Casa de Subastas
