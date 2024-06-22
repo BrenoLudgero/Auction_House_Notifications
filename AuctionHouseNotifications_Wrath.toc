@@ -1,4 +1,4 @@
-## Interface: 11502, 40400, 100207
+## Interface: 30403
 ## Version: 2.0.4
 
 ## Title: Auction House Notifications
@@ -7,7 +7,6 @@
 ## Title-ptBR: Notificações da Casa de Leilões
 ## Title-deDE: Auktionshaus-Benachrichtigungen
 ## Title-frFR: Notifications de l'Hôtel des Ventes
-## Title-itIT: Notifiche della Casa d'Aste
 ## Title-ruRU: Уведомления Aукционного Дом
 ## Title-koKR: 경매장 알림
 ## Title-zhTW: 拍賣行通知
@@ -19,7 +18,6 @@
 ## Notes-ptBR: Alertas sonoros para a Casa de Leilões
 ## Notes-deDE: Akustische Alarme für das Auktionshaus
 ## Notes-frFR: Alertes sonores pour l'Hôtel des Ventes
-## Notes-itIT: Avvisi sonori per la Casa d'Aste
 ## Notes-ruRU: Звуковые оповещения для Аукционного Дом
 ## Notes-koKR: 경매장에 대한 소리 경고
 ## Notes-zhTW: 拍賣行的聲音警報
