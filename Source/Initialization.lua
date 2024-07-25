@@ -48,7 +48,7 @@ local defaultPreferences = {
 -- Creates the chat command /ahn that opens the AHN options interface
 SLASH_AUCTIONHOUSENOTIFICATIONS1 = "/ahn"
 SlashCmdList["AUCTIONHOUSENOTIFICATIONS"] = function()
-    Settings.OpenToCategory(ahn.L.title)
+    Settings.OpenToCategory(ahn.frame.name)
 end
 
 local function oldSavedVariablesFound()

@@ -2,7 +2,11 @@ local _, ahn = ...
 local L = ahn.L
 
 ahn.frame.name = L.title
-InterfaceOptions_AddCategory(ahn.frame) -- Displays the addOn in Options -> AddOns
+
+-- Displays the add-on in Options -> AddOns
+local category = Settings.RegisterCanvasLayoutCategory(ahn.frame, ahn.frame.name)
+category.ID = ahn.frame.name
+Settings.RegisterAddOnCategory(category)
 
 local titlesTextX = 15
 local expiredCheckX = 315
