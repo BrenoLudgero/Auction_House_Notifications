@@ -24,11 +24,8 @@ end
 
 -- Defines the method to handle auction updates based on the game version
 function ahn.handleAuctionUpdates(event, updateType)
-    if ahn.isMainline then
-        handleMainlineUpdates(event, updateType)
-    else
-        handleClassicUpdates(event, updateType)
-    end
+    handleMainlineUpdates(event, updateType)
+    handleClassicUpdates(event, updateType)
     ahn.playSound()
     ahn.resetAuctionStatus()
 end
@@ -46,11 +43,8 @@ end
 function ahn.handleAddonLoaded(event, addon) 
     if event == "ADDON_LOADED" and addon == addonName then
         ahn.createSavedVariables()
-        ahn.createSavedVariables = nil
         ahn.updateInterfaceOptions()
-        ahn.updateInterfaceOptions = nil
         ahn.showGreetingMessage()
-        ahn.showGreetingMessage = nil
         ahn.frame:UnregisterEvent("ADDON_LOADED")
     end
 end

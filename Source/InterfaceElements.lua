@@ -144,8 +144,3 @@ function ahn.updateInterfaceOptions()
     UIDropDownMenu_Initialize(soundChannelDropdown, soundChannelDropdown.initialize)
     UIDropDownMenu_SetSelectedValue(soundChannelDropdown, AHNPreferences.chosenChannel)
 end
-
-ahn.createText = nil
-ahn.createButton = nil
-ahn.createDropdown = nil
-ahn.createTooltip = nil
