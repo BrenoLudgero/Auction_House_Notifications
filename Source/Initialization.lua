@@ -2,10 +2,10 @@ local addonName, ahn = ...
 -- ahn: Globals within Auction House Notifications (variables and functions)
 ahn.locale = GetLocale()
 ahn.L = {} -- Localized text
-ahn.L.title = GetAddOnMetadata(addonName, "Title")
+ahn.L.title = C_AddOns.GetAddOnMetadata(addonName, "Title")
 ahn.frame = CreateFrame("Frame")
-ahn.version = GetAddOnMetadata(addonName, "Version")
-ahn.author = GetAddOnMetadata(addonName, "Author")
+ahn.version = C_AddOns.GetAddOnMetadata(addonName, "Version")
+ahn.author = C_AddOns.GetAddOnMetadata(addonName, "Author")
 ahn.locale = GetLocale()
 ahn.isMainline = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
 ahn.ahIsOpen = false
