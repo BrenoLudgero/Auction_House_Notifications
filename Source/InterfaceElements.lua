@@ -8,9 +8,9 @@ local category = Settings.RegisterCanvasLayoutCategory(ahn.frame, ahn.frame.name
 category.ID = ahn.frame.name
 Settings.RegisterAddOnCategory(category)
 
-local titlesTextX = 15
+local titlesTextX = 13
 local expiredCheckX = 315
-local buttonY = -261
+local buttonsY = -271
 local dropdownColumn1X = 11
 local dropdownColumn2X = 300
 local dropdownRow1Y = -148
@@ -37,8 +37,8 @@ end
 local titleText = ahn.createText("GameFontNormalLarge", L.title, titlesTextX, -15)
 local subtitleText = ahn.createText("GameFontHighlight", L.subtitle, titlesTextX, -35)
 local soundPreferencesText = ahn.createText("GameFontNormalMed1", L.soundPreferences, titlesTextX, -85)
-local testSoundsText = ahn.createText("GameFontNormalMed1", L.testSounds, titlesTextX, -235)
-local miscellaneousText = ahn.createText("GameFontNormalMed1", L.miscellaneous, titlesTextX, -306)
+local testSoundsText = ahn.createText("GameFontNormalMed1", L.testSounds, titlesTextX, -245)
+local miscellaneousText = ahn.createText("GameFontNormalMed1", L.miscellaneous, titlesTextX, -331)
 
 ----------------------------------  CHECKBUTTONS  -------------------------------------
 local enableInAHCheckButton = ahn.createButton("CheckButton", L.enableInAHText, 25, -110,
@@ -52,23 +52,23 @@ local enableExpiredCheckButton = ahn.createButton("CheckButton", L.enableExpired
     end
 )
 ahn.createTooltip(enableInAHCheckButton, "ANCHOR_RIGHT", L.enableInAHTooltip)
-local showGreetingCheckButton = ahn.createButton("CheckButton", L.showGreetingMessage, 27, -331, function(self)
+local showGreetingCheckButton = ahn.createButton("CheckButton", L.showGreetingMessage, 27, -356, function(self)
     AHNPreferences.showGreeting = self:GetChecked()
     end
 )
 
 -------------------------------------  BUTTONS  ---------------------------------------
-local testSuccessfulButton = ahn.createButton("Button", L.successfulText, 26, buttonY, 
+local testSuccessfulButton = ahn.createButton("Button", L.successfulText, 26, buttonsY, 
     function(self)
         PlaySoundFile(AHNPreferences.chosenSounds.successful, AHNPreferences.chosenChannel)
     end
 )
-local testFailedButton = ahn.createButton("Button", L.failedText, 169, buttonY, 
+local testFailedButton = ahn.createButton("Button", L.failedText, 169, buttonsY, 
     function(self)
         PlaySoundFile(AHNPreferences.chosenSounds.failed, AHNPreferences.chosenChannel)
     end
 )
-local testExpiredButton = ahn.createButton("Button", L.expiredText, 312, buttonY, 
+local testExpiredButton = ahn.createButton("Button", L.expiredText, 312, buttonsY, 
     function(self)
         PlaySound(AHNPreferences.chosenSounds.expired, AHNPreferences.chosenChannel, true)
     end
