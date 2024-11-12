@@ -19,6 +19,7 @@ end
 
 -- Creates a Button or CheckButton and assigns a function to it
 function ahn.createButton(kind, text, xPosition, yPosition, onClick)
+    local button
     if kind == "CheckButton" then
         button = CreateFrame(kind, nil, ahn.frame, "InterfaceOptionsCheckButtonTemplate")
         button.Text:SetText(text)
