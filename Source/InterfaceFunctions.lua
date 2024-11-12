@@ -12,8 +12,10 @@ local buttonHeight = 32
 function ahn.createText(font, text, xPosition, yPosition)
     local fontString = ahn.frame:CreateFontString(nil, "ARTWORK", font)
     fontString:SetText(text)
-    fontString:SetPoint("TOPLEFT", xPosition, yPosition)
     fontString:SetJustifyH("LEFT")
+    if xPosition and yPosition then
+        fontString:SetPoint("TOPLEFT", xPosition, yPosition)
+    end
     return fontString
 end
 
@@ -22,7 +24,9 @@ function ahn.createButton(kind, text, xPosition, yPosition, onClick)
     local button
     if kind == "CheckButton" then
         button = CreateFrame(kind, nil, ahn.frame, "InterfaceOptionsCheckButtonTemplate")
-        button.Text:SetText(text)
+        local label = ahn.createText("GameFontHighlight", text)
+        label:SetParent(button)
+        label:SetPoint("LEFT", button, "RIGHT", 4, 1)
     elseif kind == "Button" then
         button = CreateFrame(kind, nil, ahn.frame, "UIPanelButtonTemplate")
         button:SetSize(buttonWidth, buttonHeight)
