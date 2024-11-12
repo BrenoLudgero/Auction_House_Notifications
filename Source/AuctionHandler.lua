@@ -23,13 +23,13 @@ else
     expiredAuction = string.gsub(ERR_AUCTION_EXPIRED_S, "%%s", "(.+)")
 end
 
-function ahn.updateMainlineAuctionStatus(event, updateType)
+function ahn.updateMainlineAuctionStatus(updateType)
     auctionSuccessful = (updateType == soldAuction) or (updateType == wonAuction)
     auctionFailed = (updateType == outbidAuction)
     auctionExpired = (updateType == expiredAuction)
 end
 
-function ahn.updateClassicAuctionStatus(event, updateType)
+function ahn.updateClassicAuctionStatus(updateType)
     auctionSuccessful = string.find(updateType, soldAuction) or string.find(updateType, wonAuction)
     auctionFailed = string.find(updateType, outbidAuction)
     auctionExpired = string.find(updateType, expiredAuction)

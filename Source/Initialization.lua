@@ -10,7 +10,7 @@ ahn.locale = GetLocale()
 ahn.isMainline = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
 ahn.ahIsOpen = false
 
--- FileDataIDs: https://wow.tools/dbc/?dbc=filedata&build=6.0.1.18179#page=1
+-- FileDataIDs: https://wago.tools/files?search=sound/
 ahn.successfulSounds = {
     coins = 567483,     -- iMoneyDialogOpen
     female = 540628,    -- HumanFemaleCheer01

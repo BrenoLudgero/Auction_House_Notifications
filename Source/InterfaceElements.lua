@@ -52,8 +52,9 @@ local enableExpiredCheckButton = ahn.createButton("CheckButton", L.enableExpired
     end
 )
 ahn.createTooltip(enableInAHCheckButton, "ANCHOR_RIGHT", L.enableInAHTooltip)
-local showGreetingCheckButton = ahn.createButton("CheckButton", L.showGreetingMessage, 27, -356, function(self)
-    AHNPreferences.showGreeting = self:GetChecked()
+local showGreetingCheckButton = ahn.createButton("CheckButton", L.showGreetingMessage, 27, -356, 
+    function(self)
+        AHNPreferences.showGreeting = self:GetChecked()
     end
 )
 
