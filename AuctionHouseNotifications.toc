@@ -1,4 +1,4 @@
-## Interface: 11505, 40401, 110005
+## Interface: 11505, 40401, 110007
 ## Version: 2.0.5
 ## IconTexture: Interface/ICONS/INV_Gizmo_GoblinBoomBox_01
 
