@@ -241,7 +241,7 @@ elseif ahn.locale == "ruRU" then
     L.soundPreferences = "Настройки Звука"
     L.enableInAHText = "Доступно в Aукционном Дом"
     L.enableInAHTooltip = "Включение и отключение оповещений об успешных аукционах\nпри открытом окне аукционного дом"
-    L.enableExpired = "Включить Оповещения об Аукциона с Истекшим Cроком Действия"
+    L.enableExpired = "Включить оповещения о просроченных аукционах"
     L.successfulSoundText = "Успешный Aукцион"
     L.failedSoundText = "Несостоявшийся Aукцион"
     L.expiredSoundText = "Просроченный Aукцион"

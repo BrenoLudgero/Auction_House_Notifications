@@ -21,9 +21,6 @@ if ahn.locale == "ptBR" or ahn.locale == "frFR" then
 elseif ahn.locale == "deDE" then
     expiredCheckX = 265
     dropdownColumn2X = 352
-elseif ahn.locale == "ruRU" then
-    expiredCheckX = 236
-    dropdownColumn2X = 353
 end
 
 -------------------------------------  TITLES  ----------------------------------------
