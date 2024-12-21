@@ -15,22 +15,15 @@ local dropdownColumn1X = 28
 local dropdownColumn2X = 318
 local dropdownRow1Y = -148
 local dropdownRow2Y = -190
-local dropdownColumn1LabelX = 180
-local dropdownColumn2LabelX = 469
-local dropdownRow1LabelY = -154
-local dropdownRow2LabelY = -196
 if ahn.locale == "ptBR" or ahn.locale == "frFR" then
     expiredCheckX = 325
     dropdownColumn2X = 330
-    dropdownColumn2LabelX = 479
 elseif ahn.locale == "deDE" then
     expiredCheckX = 265
     dropdownColumn2X = 352
-    dropdownColumn2LabelX = 499
 elseif ahn.locale == "ruRU" then
     expiredCheckX = 236
     dropdownColumn2X = 353
-    dropdownColumn2LabelX = 504
 end
 
 -------------------------------------  TITLES  ----------------------------------------
@@ -75,12 +68,6 @@ local testExpiredButton = ahn.createButton("Button", L.expiredText, 312, buttons
     end
 )
 
----------------------------------  DROPDOWN LABELS  -----------------------------------
-local successfulSoundLabel = ahn.createText("GameFontHighlight", L.successfulSoundText, dropdownColumn1LabelX, dropdownRow1LabelY)
-local failedSoundLabel = ahn.createText("GameFontHighlight", L.failedSoundText, dropdownColumn1LabelX, dropdownRow2LabelY)
-local expiredSoundLabel = ahn.createText("GameFontHighlight", L.expiredSoundText, dropdownColumn2LabelX, dropdownRow1LabelY)
-local soundChannelLabel = ahn.createText("GameFontHighlight", L.soundChannelText, dropdownColumn2LabelX, dropdownRow2LabelY)
-
 ------------------------------------  DROPDOWNS  --------------------------------------
 local successfulSoundCategories = {
     [ahn.successfulSounds.coins] = L.soundCategoryNames[1],
@@ -95,6 +82,7 @@ local successfulSoundDropdown = ahn.createDropdown(
     "successfulSounds", 
     successfulSoundCategories
 )
+ahn.createDropdownLabel(successfulSoundDropdown, L.successfulSoundText)
 
 local failedSoundCategories = {
     [ahn.failedSounds.coins] = L.soundCategoryNames[1],
@@ -109,6 +97,7 @@ local failedSoundDropdown = ahn.createDropdown(
     "failedSounds", 
     failedSoundCategories
 )
+ahn.createDropdownLabel(failedSoundDropdown, L.failedSoundText)
 
 local expiredSoundCategories = {
     [ahn.expiredSounds.sheep] = L.soundCategoryNames[6],
@@ -123,6 +112,7 @@ local expiredSoundDropdown = ahn.createDropdown(
     "expiredSounds",
     expiredSoundCategories
 )
+ahn.createDropdownLabel(expiredSoundDropdown, L.expiredSoundText)
 
 local soundChannels = {
     ["Master"] = L.soundChannelNames[1],
@@ -137,6 +127,7 @@ local soundChannelDropdown = ahn.createDropdown(
     "soundChannels", 
     soundChannels
 )
+ahn.createDropdownLabel(soundChannelDropdown, L.soundChannelText)
 ahn.createTooltip(soundChannelDropdown, "ANCHOR_TOP", L.soundChannelTooltip)
 
 -- Checks the interface options based on the user's preferences when the addOn loads
