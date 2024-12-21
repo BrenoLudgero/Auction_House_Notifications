@@ -1,12 +1,12 @@
 local _, ahn = ...
 local L = ahn.L
 
-local dropdownWidth = 126
-local dropdownButtonWidth = 140
+local dropdownWidth = 145
 local buttonWidth = 120
 local buttonHeight = 32
-
--- Every "text" come from Localization.lua
+if ahn.locale == "deDE" then
+    dropdownWidth = 150
+end
 
 -- Creates a string and places it in the options interface
 function ahn.createText(font, text, xPosition, yPosition)
@@ -37,52 +37,56 @@ function ahn.createButton(kind, text, xPosition, yPosition, onClick)
     return button
 end
 
-function ahn.createDropdown(xPosition, yPosition)
-    local dropdown = CreateFrame("Frame", nil, ahn.frame, "UIDropDownMenuTemplate")
+local dropdownActions = {
+    successfulSounds = {
+        getPreference = function() return AHNPreferences.chosenSounds.successful end,
+        savePreference = function(sound) AHNPreferences.chosenSounds.successful = sound end
+    },
+    failedSounds = {
+        getPreference = function() return AHNPreferences.chosenSounds.failed end,
+        savePreference = function(sound) AHNPreferences.chosenSounds.failed = sound end
+    },
+    expiredSounds = {
+        getPreference = function() return AHNPreferences.chosenSounds.expired end,
+        savePreference = function(sound) AHNPreferences.chosenSounds.expired = sound end
+    },
+    soundChannels = {
+        getPreference = function() return AHNPreferences.chosenChannel end,
+        savePreference = function(sound) AHNPreferences.chosenChannel = sound end
+    }
+}
+
+-- Dropdown choice is saved directly to SavedVariables
+local function saveDropdownOption(kind, sound)
+    local actions = dropdownActions[kind]
+    actions.savePreference(sound)
+end
+
+local function createDropdownOptions(dropdown, soundsTable)
+    dropdown:SetupMenu(function(dropdown, rootDescription)
+        for sound, name in pairs(soundsTable) do
+            rootDescription:CreateButton(name, function() 
+                saveDropdownOption(dropdown.kind, sound) 
+                dropdown:SetDefaultText(name)
+            end)
+        end
+    end)
+end
+
+function ahn.createDropdown(xPosition, yPosition, kind, soundsTable)
+    local dropdown = CreateFrame("DropdownButton", nil, ahn.frame, "WowStyle1DropdownTemplate")
+    dropdown.kind = kind
+    dropdown:SetPoint("CENTER")
     dropdown:SetPoint("TOPLEFT", xPosition, yPosition)
-    UIDropDownMenu_SetWidth(dropdown, dropdownWidth) -- Sets the visible width of the dropdown rectangle
-    UIDropDownMenu_SetButtonWidth(dropdown, dropdownButtonWidth) -- Sets the clickable width of the dropdown arrow
+    dropdown:SetWidth(dropdownWidth)
+    createDropdownOptions(dropdown, soundsTable)
     return dropdown
 end
 
-local function checkDropdownOption(kind, info, key)
-    if kind == "successfulSoundCategories" then
-        info.checked = (AHNPreferences.chosenSounds.successful == key)
-    elseif kind == "failedSoundCategories" then
-        info.checked = (AHNPreferences.chosenSounds.failed == key)
-    elseif kind == "expiredSoundCategories" then
-        info.checked = (AHNPreferences.chosenSounds.expired == key)
-    elseif kind == "soundChannels" then
-        info.checked = (AHNPreferences.chosenChannel == key)
-    end
-end
-
--- Dropdown choice is saved directly to SavedVariables
-local function setAndSaveDropdownOption(dropdown, kind, info, key)
-    if kind == "successfulSoundCategories" then
-        AHNPreferences.chosenSounds.successful = key
-    elseif kind == "failedSoundCategories" then
-        AHNPreferences.chosenSounds.failed = key
-    elseif kind == "expiredSoundCategories" then
-        AHNPreferences.chosenSounds.expired = key
-    elseif kind == "soundChannels" then
-        AHNPreferences.chosenChannel = key
-    end
-    UIDropDownMenu_SetSelectedValue(dropdown, key)
-end
-
-function ahn.createDropdownMenu(dropdown, kind, namesTable)
-    local info = UIDropDownMenu_CreateInfo()
-    info.minWidth = dropdownWidth
-    for key, name in pairs(namesTable) do
-        info.text = name
-        info.value = key
-        checkDropdownOption(kind, info, key)
-        info.func = function()
-            setAndSaveDropdownOption(dropdown, kind, info, key)
-        end
-        UIDropDownMenu_AddButton(info)
-    end
+function ahn.setInitialDropdownText(dropdown, soundsTable)
+    local actions = dropdownActions[dropdown.kind]
+    local preference = actions.getPreference()
+    dropdown:SetDefaultText(soundsTable[preference])
 end
 
 -- Creates and shows tooltips on mouse hover

@@ -11,8 +11,8 @@ Settings.RegisterAddOnCategory(category)
 local titlesTextX = 13
 local expiredCheckX = 315
 local buttonsY = -271
-local dropdownColumn1X = 11
-local dropdownColumn2X = 300
+local dropdownColumn1X = 28
+local dropdownColumn2X = 318
 local dropdownRow1Y = -148
 local dropdownRow2Y = -190
 local dropdownColumn1LabelX = 180
@@ -21,15 +21,15 @@ local dropdownRow1LabelY = -154
 local dropdownRow2LabelY = -196
 if ahn.locale == "ptBR" or ahn.locale == "frFR" then
     expiredCheckX = 325
-    dropdownColumn2X = 310
+    dropdownColumn2X = 330
     dropdownColumn2LabelX = 479
 elseif ahn.locale == "deDE" then
     expiredCheckX = 265
-    dropdownColumn2X = 330
+    dropdownColumn2X = 352
     dropdownColumn2LabelX = 499
 elseif ahn.locale == "ruRU" then
     expiredCheckX = 236
-    dropdownColumn2X = 335
+    dropdownColumn2X = 353
     dropdownColumn2LabelX = 504
 end
 
@@ -82,70 +82,70 @@ local expiredSoundLabel = ahn.createText("GameFontHighlight", L.expiredSoundText
 local soundChannelLabel = ahn.createText("GameFontHighlight", L.soundChannelText, dropdownColumn2LabelX, dropdownRow2LabelY)
 
 ------------------------------------  DROPDOWNS  --------------------------------------
-local successfulSoundDropdown = ahn.createDropdown(dropdownColumn1X, dropdownRow1Y)
-successfulSoundDropdown.initialize = function(self)
-    local info = UIDropDownMenu_CreateInfo()
-    local successfulSoundCategories = {
-        [ahn.successfulSounds.coins] = L.soundCategoryNames[1],
-        [ahn.successfulSounds.female] = L.soundCategoryNames[2],
-        [ahn.successfulSounds.fireworks] = L.soundCategoryNames[3],
-        [ahn.successfulSounds.impact] = L.soundCategoryNames[4],
-        [ahn.successfulSounds.quests] = L.soundCategoryNames[5]
-    }
-    ahn.createDropdownMenu(self, "successfulSoundCategories", successfulSoundCategories)
-end
+local successfulSoundCategories = {
+    [ahn.successfulSounds.coins] = L.soundCategoryNames[1],
+    [ahn.successfulSounds.female] = L.soundCategoryNames[2],
+    [ahn.successfulSounds.fireworks] = L.soundCategoryNames[3],
+    [ahn.successfulSounds.impact] = L.soundCategoryNames[4],
+    [ahn.successfulSounds.quests] = L.soundCategoryNames[5]
+}
+local successfulSoundDropdown = ahn.createDropdown(
+    dropdownColumn1X, 
+    dropdownRow1Y, 
+    "successfulSounds", 
+    successfulSoundCategories
+)
 
-local failedSoundDropdown = ahn.createDropdown(dropdownColumn1X, dropdownRow2Y)
-failedSoundDropdown.initialize = function(self)
-    local info = UIDropDownMenu_CreateInfo()
-    local failedSoundCategories = {
-        [ahn.failedSounds.coins] = L.soundCategoryNames[1],
-        [ahn.failedSounds.female] = L.soundCategoryNames[2],
-        [ahn.failedSounds.fireworks] = L.soundCategoryNames[3],
-        [ahn.failedSounds.impact] = L.soundCategoryNames[4],
-        [ahn.failedSounds.quests] = L.soundCategoryNames[5]
-    }
-    ahn.createDropdownMenu(self, "failedSoundCategories", failedSoundCategories)
-end
+local failedSoundCategories = {
+    [ahn.failedSounds.coins] = L.soundCategoryNames[1],
+    [ahn.failedSounds.female] = L.soundCategoryNames[2],
+    [ahn.failedSounds.fireworks] = L.soundCategoryNames[3],
+    [ahn.failedSounds.impact] = L.soundCategoryNames[4],
+    [ahn.failedSounds.quests] = L.soundCategoryNames[5]
+}
+local failedSoundDropdown = ahn.createDropdown(
+    dropdownColumn1X, 
+    dropdownRow2Y, 
+    "failedSounds", 
+    failedSoundCategories
+)
 
-local expiredSoundDropdown = ahn.createDropdown(dropdownColumn2X, dropdownRow1Y)
-expiredSoundDropdown.initialize = function(self)
-    local info = UIDropDownMenu_CreateInfo()
-    local expiredSoundCategories = {
-        [ahn.expiredSounds.sheep] = L.soundCategoryNames[6],
-        [ahn.expiredSounds.thunder] = L.soundCategoryNames[7],
-        [ahn.expiredSounds.what] = L.soundCategoryNames[8],
-        [ahn.expiredSounds.growl] = L.soundCategoryNames[9],
-        [ahn.expiredSounds.chicken] = L.soundCategoryNames[10]
-    }
-    ahn.createDropdownMenu(self, "expiredSoundCategories", expiredSoundCategories)
-end
+local expiredSoundCategories = {
+    [ahn.expiredSounds.sheep] = L.soundCategoryNames[6],
+    [ahn.expiredSounds.thunder] = L.soundCategoryNames[7],
+    [ahn.expiredSounds.what] = L.soundCategoryNames[8],
+    [ahn.expiredSounds.growl] = L.soundCategoryNames[9],
+    [ahn.expiredSounds.chicken] = L.soundCategoryNames[10]
+}
+local expiredSoundDropdown = ahn.createDropdown(
+    dropdownColumn2X, 
+    dropdownRow1Y, 
+    "expiredSounds",
+    expiredSoundCategories
+)
 
-local soundChannelDropdown = ahn.createDropdown(dropdownColumn2X, dropdownRow2Y)
-soundChannelDropdown.initialize = function(self)
-    local info = UIDropDownMenu_CreateInfo()
-    local soundChannels = {
-        ["Master"] = L.soundChannelNames[1],
-        ["Sound"] = L.soundChannelNames[2],
-        ["Music"] = L.soundChannelNames[3],
-        ["Ambience"] = L.soundChannelNames[4],
-        ["Dialog"] = L.soundChannelNames[5]
-    }
-    ahn.createDropdownMenu(self, "soundChannels", soundChannels)
-end
+local soundChannels = {
+    ["Master"] = L.soundChannelNames[1],
+    ["Sound"] = L.soundChannelNames[2],
+    ["Music"] = L.soundChannelNames[3],
+    ["Ambience"] = L.soundChannelNames[4],
+    ["Dialog"] = L.soundChannelNames[5]
+}
+local soundChannelDropdown = ahn.createDropdown(
+    dropdownColumn2X, 
+    dropdownRow2Y, 
+    "soundChannels", 
+    soundChannels
+)
 ahn.createTooltip(soundChannelDropdown, "ANCHOR_TOP", L.soundChannelTooltip)
 
--- Checks the interface options based on the user's preferences when the addOn loads (AuctionHouseNotifications.lua)
+-- Checks the interface options based on the user's preferences when the addOn loads
 function ahn.updateInterfaceOptions()
     enableInAHCheckButton:SetChecked(AHNPreferences.enableInAH)
     enableExpiredCheckButton:SetChecked(AHNPreferences.enableExpired)
     showGreetingCheckButton:SetChecked(AHNPreferences.showGreeting)
-    UIDropDownMenu_Initialize(successfulSoundDropdown, successfulSoundDropdown.initialize)
-    UIDropDownMenu_SetSelectedValue(successfulSoundDropdown, AHNPreferences.chosenSounds.successful)
-    UIDropDownMenu_Initialize(failedSoundDropdown, failedSoundDropdown.initialize)
-    UIDropDownMenu_SetSelectedValue(failedSoundDropdown, AHNPreferences.chosenSounds.failed)
-    UIDropDownMenu_Initialize(expiredSoundDropdown, expiredSoundDropdown.initialize)
-    UIDropDownMenu_SetSelectedValue(expiredSoundDropdown, AHNPreferences.chosenSounds.expired)
-    UIDropDownMenu_Initialize(soundChannelDropdown, soundChannelDropdown.initialize)
-    UIDropDownMenu_SetSelectedValue(soundChannelDropdown, AHNPreferences.chosenChannel)
+    ahn.setInitialDropdownText(successfulSoundDropdown, successfulSoundCategories)
+    ahn.setInitialDropdownText(failedSoundDropdown, failedSoundCategories)
+    ahn.setInitialDropdownText(expiredSoundDropdown, expiredSoundCategories)
+    ahn.setInitialDropdownText(soundChannelDropdown, soundChannels)
 end
