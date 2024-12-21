@@ -19,7 +19,7 @@ if ahn.locale == "ptBR" or ahn.locale == "frFR" then
     expiredCheckX = 325
     dropdownColumn2X = 330
 elseif ahn.locale == "deDE" then
-    expiredCheckX = 265
+    expiredCheckX = 243
     dropdownColumn2X = 352
 end
 
