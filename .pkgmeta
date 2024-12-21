@@ -1,3 +1,4 @@
 ignore:
+  - .github
   - README.md
   - Options_Window.png

@@ -38,3 +38,5 @@ jobs:
       # once cloned, we just run the GitHub Action
       - name: WoW Packager
         uses: BigWigsMods/packager@v2.4.1
+        with:
+          args: -n "{package-name}-{project-version}:{project-version}"
