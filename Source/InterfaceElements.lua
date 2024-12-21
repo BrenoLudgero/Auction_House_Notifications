@@ -71,11 +71,11 @@ local testExpiredButton = ahn.createButton("Button", L.expiredText, 312, buttons
 
 ------------------------------------  DROPDOWNS  --------------------------------------
 local successfulSoundCategories = {
-    [ahn.successfulSounds.coins] = L.soundCategoryNames[1],
-    [ahn.successfulSounds.female] = L.soundCategoryNames[2],
-    [ahn.successfulSounds.fireworks] = L.soundCategoryNames[3],
-    [ahn.successfulSounds.impact] = L.soundCategoryNames[4],
-    [ahn.successfulSounds.quests] = L.soundCategoryNames[5]
+    {ahn.successfulSounds.coins, L.soundCategoryNames[1]},
+    {ahn.successfulSounds.female, L.soundCategoryNames[2]},
+    {ahn.successfulSounds.fireworks, L.soundCategoryNames[3]},
+    {ahn.successfulSounds.impact, L.soundCategoryNames[4]},
+    {ahn.successfulSounds.quests, L.soundCategoryNames[5]}
 }
 local successfulSoundDropdown = ahn.createDropdown(
     dropdownColumn1X, 
@@ -86,11 +86,11 @@ local successfulSoundDropdown = ahn.createDropdown(
 ahn.createDropdownLabel(successfulSoundDropdown, L.successfulSoundText)
 
 local failedSoundCategories = {
-    [ahn.failedSounds.coins] = L.soundCategoryNames[1],
-    [ahn.failedSounds.female] = L.soundCategoryNames[2],
-    [ahn.failedSounds.fireworks] = L.soundCategoryNames[3],
-    [ahn.failedSounds.impact] = L.soundCategoryNames[4],
-    [ahn.failedSounds.quests] = L.soundCategoryNames[5]
+    {ahn.failedSounds.coins, L.soundCategoryNames[1]},
+    {ahn.failedSounds.female, L.soundCategoryNames[2]},
+    {ahn.failedSounds.fireworks, L.soundCategoryNames[3]},
+    {ahn.failedSounds.impact, L.soundCategoryNames[4]},
+    {ahn.failedSounds.quests, L.soundCategoryNames[5]}
 }
 local failedSoundDropdown = ahn.createDropdown(
     dropdownColumn1X, 
@@ -101,11 +101,11 @@ local failedSoundDropdown = ahn.createDropdown(
 ahn.createDropdownLabel(failedSoundDropdown, L.failedSoundText)
 
 local expiredSoundCategories = {
-    [ahn.expiredSounds.sheep] = L.soundCategoryNames[6],
-    [ahn.expiredSounds.thunder] = L.soundCategoryNames[7],
-    [ahn.expiredSounds.what] = L.soundCategoryNames[8],
-    [ahn.expiredSounds.growl] = L.soundCategoryNames[9],
-    [ahn.expiredSounds.chicken] = L.soundCategoryNames[10]
+    {ahn.expiredSounds.sheep, L.soundCategoryNames[6]},
+    {ahn.expiredSounds.thunder, L.soundCategoryNames[7]},
+    {ahn.expiredSounds.what, L.soundCategoryNames[8]},
+    {ahn.expiredSounds.growl, L.soundCategoryNames[9]},
+    {ahn.expiredSounds.chicken, L.soundCategoryNames[10]}
 }
 local expiredSoundDropdown = ahn.createDropdown(
     dropdownColumn2X, 
@@ -116,11 +116,11 @@ local expiredSoundDropdown = ahn.createDropdown(
 ahn.createDropdownLabel(expiredSoundDropdown, L.expiredSoundText)
 
 local soundChannels = {
-    ["Master"] = L.soundChannelNames[1],
-    ["Sound"] = L.soundChannelNames[2],
-    ["Music"] = L.soundChannelNames[3],
-    ["Ambience"] = L.soundChannelNames[4],
-    ["Dialog"] = L.soundChannelNames[5]
+    {"Master", L.soundChannelNames[1]},
+    {"Sound", L.soundChannelNames[2]},
+    {"Music", L.soundChannelNames[3]},
+    {"Ambience", L.soundChannelNames[4]},
+    {"Dialog", L.soundChannelNames[5]}
 }
 local soundChannelDropdown = ahn.createDropdown(
     dropdownColumn2X, 

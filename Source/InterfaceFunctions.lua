@@ -64,9 +64,11 @@ end
 
 local function createDropdownOptions(dropdown, soundsTable)
     dropdown:SetupMenu(function(dropdown, rootDescription)
-        for sound, name in pairs(soundsTable) do
-            rootDescription:CreateButton(name, function() 
-                saveDropdownOption(dropdown.kind, sound) 
+        for _, item in ipairs(soundsTable) do
+            local sound = item[1]
+            local name = item[2]
+            rootDescription:CreateButton(name, function()
+                saveDropdownOption(dropdown.kind, sound)
                 dropdown:SetDefaultText(name)
             end)
         end
@@ -93,7 +95,14 @@ end
 function ahn.setInitialDropdownText(dropdown, soundsTable)
     local actions = dropdownActions[dropdown.kind]
     local preference = actions.getPreference()
-    dropdown:SetDefaultText(soundsTable[preference])
+    for _, item in ipairs(soundsTable) do
+        local sound = item[1]
+        local name = item[2]
+        if sound == preference then
+            dropdown:SetDefaultText(name)
+            return
+        end
+    end
 end
 
 -- Creates and shows tooltips on mouse hover
