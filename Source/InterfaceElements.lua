@@ -39,12 +39,14 @@ local enableInAHCheckButton = ahn.createButton("CheckButton", L.enableInAHText, 
         AHNPreferences.enableInAH = self:GetChecked()
     end
 )
+ahn.createTooltip(enableInAHCheckButton, "ANCHOR_RIGHT", L.enableInAHTooltip)
+
 local enableExpiredCheckButton = ahn.createButton("CheckButton", L.enableExpired, expiredCheckX, -110, 
     function(self) 
         AHNPreferences.enableExpired = self:GetChecked()
     end
 )
-ahn.createTooltip(enableInAHCheckButton, "ANCHOR_RIGHT", L.enableInAHTooltip)
+
 local showGreetingCheckButton = ahn.createButton("CheckButton", L.showGreetingMessage, 27, -356, 
     function(self)
         AHNPreferences.showGreeting = self:GetChecked()
@@ -57,11 +59,13 @@ local testSuccessfulButton = ahn.createButton("Button", L.successfulText, 26, bu
         PlaySoundFile(AHNPreferences.chosenSounds.successful, AHNPreferences.chosenChannel)
     end
 )
+
 local testFailedButton = ahn.createButton("Button", L.failedText, 169, buttonsY, 
     function(self)
         PlaySoundFile(AHNPreferences.chosenSounds.failed, AHNPreferences.chosenChannel)
     end
 )
+
 local testExpiredButton = ahn.createButton("Button", L.expiredText, 312, buttonsY, 
     function(self)
         PlaySound(AHNPreferences.chosenSounds.expired, AHNPreferences.chosenChannel, true)

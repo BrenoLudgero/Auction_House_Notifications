@@ -6,10 +6,10 @@ local auctionFailed = false
 local auctionExpired = false
 
 -- Type of auction update (updated in Main.lua)
-local soldAuction = nil
-local wonAuction = nil
-local outbidAuction = nil
-local expiredAuction = nil
+local soldAuction
+local wonAuction
+local outbidAuction
+local expiredAuction
 
 if ahn.isMainline then
     soldAuction = Enum.AuctionHouseNotification.AuctionSold
