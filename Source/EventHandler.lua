@@ -8,14 +8,16 @@ if ahn.isVanilla then
     ahn.frame:RegisterEvent("CHAT_MSG_SYSTEM")
 else
     ahn.frame:RegisterEvent("AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION")
+    ahn.frame:RegisterEvent("AUCTION_HOUSE_PURCHASE_COMPLETED")
 end
 
 -- Defines the method to handle auction updates based on the game version
 function ahn.handleAuctionUpdates(event, updateType)
     if event == "CHAT_MSG_SYSTEM" then
         ahn.updateVanillaAuctionStatus(updateType)
-    elseif event == "AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION" then
-        ahn.updateOthersAuctionStatus(updateType)
+    elseif event == "AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION"
+    or event == "AUCTION_HOUSE_PURCHASE_COMPLETED" then
+        ahn.updateOthersAuctionStatus(event, updateType)
     end
     ahn.playSound()
     ahn.resetAuctionStatus()
