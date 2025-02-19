@@ -11,28 +11,28 @@ local wonAuction
 local outbidAuction
 local expiredAuction
 
-if ahn.isMainline then
-    soldAuction = Enum.AuctionHouseNotification.AuctionSold
-    wonAuction = Enum.AuctionHouseNotification.AuctionWon
-    outbidAuction = Enum.AuctionHouseNotification.AuctionOutbid
-    expiredAuction = Enum.AuctionHouseNotification.AuctionExpired
-else
+if ahn.isVanilla then
     soldAuction = string.gsub(ERR_AUCTION_SOLD_S, "%%s", "(.+)")
     wonAuction = string.gsub(ERR_AUCTION_WON_S, "%%s", "(.+)")
     outbidAuction = string.gsub(ERR_AUCTION_OUTBID_S, "%%s", "(.+)")
     expiredAuction = string.gsub(ERR_AUCTION_EXPIRED_S, "%%s", "(.+)")
+else
+    soldAuction = Enum.AuctionHouseNotification.AuctionSold
+    wonAuction = Enum.AuctionHouseNotification.AuctionWon
+    outbidAuction = Enum.AuctionHouseNotification.AuctionOutbid
+    expiredAuction = Enum.AuctionHouseNotification.AuctionExpired
 end
 
-function ahn.updateMainlineAuctionStatus(updateType)
-    auctionSuccessful = (updateType == soldAuction) or (updateType == wonAuction)
-    auctionFailed = (updateType == outbidAuction)
-    auctionExpired = (updateType == expiredAuction)
-end
-
-function ahn.updateClassicAuctionStatus(updateType)
+function ahn.updateVanillaAuctionStatus(updateType)
     auctionSuccessful = string.find(updateType, soldAuction) or string.find(updateType, wonAuction)
     auctionFailed = string.find(updateType, outbidAuction)
     auctionExpired = string.find(updateType, expiredAuction)
+end
+
+function ahn.updateOthersAuctionStatus(updateType)
+    auctionSuccessful = (updateType == soldAuction) or (updateType == wonAuction)
+    auctionFailed = (updateType == outbidAuction)
+    auctionExpired = (updateType == expiredAuction)
 end
 
 -- Plays the chosen FileDataID in the chosen sound channel
