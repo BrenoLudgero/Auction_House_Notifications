@@ -51,22 +51,9 @@ SlashCmdList["AUCTIONHOUSENOTIFICATIONS"] = function()
     Settings.OpenToCategory(ahn.frame.name)
 end
 
-local function oldSavedVariablesFound()
-    for key in pairs(defaultPreferences) do
-        if preferences and preferences[key] then
-            return true
-        end
-    end
-    return false
-end
-
--- Detects if the old SavedVariables exist ("preferences") and renames it to AHNPreferences (2.0.2 -> 2.0.3)
--- Or creates a new table to store the user's preferences in SavedVariables
+-- Creates a new table to store the user's preferences in SavedVariables
 function ahn.createSavedVariables()
-    if not AHNPreferences and oldSavedVariablesFound() then
-        AHNPreferences = preferences
-        preferences = nil
-    elseif not AHNPreferences then
+    if not AHNPreferences then
         AHNPreferences = defaultPreferences
     end
 end
