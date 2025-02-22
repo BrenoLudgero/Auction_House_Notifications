@@ -30,7 +30,7 @@ if ahn.locale == "enUS" then
     L.soundChannelText = "Sound Channel"
     L.soundChannelNames = {
         "Master",
-        "Sound",
+        "Effects",
         "Music",
         "Ambience",
         "Dialog"
@@ -69,7 +69,7 @@ elseif ahn.locale == "esMX" or ahn.locale == "esES" then
     L.soundChannelText = "Canal de Sonido"
     L.soundChannelNames = {
         "Principal",
-        "Sonido",
+        "Efectos",
         "Música",
         "Ambiente",
         "Diálogo"
@@ -108,7 +108,7 @@ elseif ahn.locale == "ptBR" then
     L.soundChannelText = "Canal de Som"
     L.soundChannelNames = {
         "Principal",
-        "Som",
+        "Efeitos",
         "Música",
         "Ambiente",
         "Diálogo"
@@ -147,7 +147,7 @@ elseif ahn.locale == "deDE" then
     L.soundChannelText = "Soundkanal"
     L.soundChannelNames = {
         "Haupt",
-        "Ton",
+        "Effekte",
         "Musik",
         "Umgebung",
         "Dialog"
@@ -186,7 +186,7 @@ elseif ahn.locale == "frFR" then
     L.soundChannelText = "Canal Sonore"
     L.soundChannelNames = {
         "Principal",
-        "Son",
+        "Effets",
         "Musique",
         "Ambiance",
         "Dialogue"
@@ -225,7 +225,7 @@ elseif ahn.locale == "itIT" then
     L.soundChannelText = "Canale Sonoro"
     L.soundChannelNames = {
         "Principale",
-        "Suono",
+        "Effetti",
         "Musica",
         "Ambiente",
         "Dialogo"
@@ -264,7 +264,7 @@ elseif ahn.locale == "ruRU" then
     L.soundChannelText = "Звуковой Канал"
     L.soundChannelNames = {
         "Основной",
-        "Звук",
+        "Эффекты",
         "Музыка",
         "Атмосфера",
         "Диалог"
@@ -303,7 +303,7 @@ elseif ahn.locale == "koKR" then
     L.soundChannelText = "음향 채널"
     L.soundChannelNames = {
         "마스터",
-        "효과음",
+        "효과",
         "음악",
         "환경음",
         "대화음"
@@ -342,7 +342,7 @@ elseif ahn.locale == "zhTW" then
     L.soundChannelText = "音效頻道"
     L.soundChannelNames = {
         "主音量",
-        "音效",
+        "效果",
         "音樂",
         "環境聲音",
         "對話"
@@ -381,7 +381,7 @@ elseif ahn.locale == "zhCN" then
     L.soundChannelText = "声音通道"
     L.soundChannelNames = {
         "主音量",
-        "音效",
+        "效果",
         "音乐",
         "环境声音",
         "对话"
