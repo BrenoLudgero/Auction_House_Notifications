@@ -86,7 +86,7 @@ function ahn.createDropdown(xPosition, yPosition, kind, soundsTable)
 end
 
 function ahn.createDropdownLabel(dropdown, text)
-    local label = ahn.createText("GameFontHighlight", L.successfulSoundText)
+    local label = ahn.createText("GameFontHighlight", text)
     label:SetPoint("TOPLEFT", dropdown, "TOPRIGHT")
     label:SetPoint("BOTTOMLEFT", dropdown, "BOTTOMRIGHT")
     label:AdjustPointsOffset(10, 0)
