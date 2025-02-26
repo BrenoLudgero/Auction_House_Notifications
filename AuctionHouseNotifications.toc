@@ -1,4 +1,4 @@
-## Interface: 11506, 40402, 110007
+## Interface: 11506, 40402, 110100
 ## Version: @project-version@
 ## IconTexture: Interface/ICONS/INV_Gizmo_GoblinBoomBox_01
 
@@ -16,6 +16,18 @@
 ## Title-koKR: 경매장 알림
 ## Title-zhTW: 拍賣行通知
 ## Title-zhCN: 拍卖行通知
+
+## Category-enUS: Auctions
+## Category-deDE: Auktionen
+## Category-esES: Subastas
+## Category-esMX: Subastas
+## Category-frFR: Ventes
+## Category-itIT: Aste
+## Category-koKR: 경매
+## Category-ptBR: Leilões
+## Category-ruRU: Лоты
+## Category-zhCN: 拍卖
+## Category-zhTW: 拍賣
 
 ## Notes: Sound alerts for the Auction House
 ## Notes-esMX: Alertas sonoras para la Casa de Subastas
