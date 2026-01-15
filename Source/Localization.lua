@@ -276,7 +276,7 @@ elseif ahn.locale == "ruRU" then
 
 elseif ahn.locale == "koKR" then
     L.greetingMessage = "|cFFFFFF00"..L.title.."|r 성공적으로 로드되었습니다! ("..ahn.version..")"
-    L.subtitle = ""..ahn.author.."에 의해 작성됨\n버전 "..ahn.version
+    L.subtitle = ahn.author.."에 의해 생성됨\n버전 "..ahn.version
     L.soundPreferences = "소리 설정"
     L.enableInAHText = "경매장에서 사용 가능"
     L.enableInAHTooltip = "경매장 창이 열려 있을 때 성공적인 경매에 대한 알림을\n사용하거나 사용하지 않도록 설정합니다."
