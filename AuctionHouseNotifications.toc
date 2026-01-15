@@ -17,7 +17,7 @@
 ## Title-zhTW: 拍賣行通知
 ## Title-zhCN: 拍卖行通知
 
-## Category-enUS: Auctions
+## Category: Auctions
 ## Category-deDE: Auktionen
 ## Category-esES: Subastas
 ## Category-esMX: Subastas
@@ -25,7 +25,7 @@
 ## Category-itIT: Aste
 ## Category-koKR: 경매
 ## Category-ptBR: Leilões
-## Category-ruRU: Лоты
+## Category-ruRU: Аукционы
 ## Category-zhCN: 拍卖
 ## Category-zhTW: 拍賣
 
