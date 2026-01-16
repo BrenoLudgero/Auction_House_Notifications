@@ -7,7 +7,8 @@ ahn.frame = CreateFrame("Frame")
 ahn.version = C_AddOns.GetAddOnMetadata(addonName, "Version")
 ahn.author = C_AddOns.GetAddOnMetadata(addonName, "Author")
 ahn.locale = GetLocale()
-ahn.isVanilla = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
+ahn.isVanilla = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC 
+ahn.isBurningCrusade = WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 ahn.ahIsOpen = false
 
 -- FileDataIDs: https://wago.tools/files?search=sound/

@@ -4,7 +4,7 @@ ahn.frame:RegisterEvent("ADDON_LOADED")
 ahn.frame:RegisterEvent("AUCTION_HOUSE_SHOW")
 ahn.frame:RegisterEvent("AUCTION_HOUSE_CLOSED")
 
-if ahn.isVanilla then
+if ahn.isVanilla or ahn.isBurningCrusade then
     ahn.frame:RegisterEvent("CHAT_MSG_SYSTEM")
 else
     ahn.frame:RegisterEvent("AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION")

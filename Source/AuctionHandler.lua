@@ -11,7 +11,7 @@ local wonAuction
 local outbidAuction
 local expiredAuction
 
-if ahn.isVanilla then
+if ahn.isVanilla or ahn.isBurningCrusade then
     soldAuction = string.gsub(ERR_AUCTION_SOLD_S, "%%s", "(.+)")
     wonAuction = string.gsub(ERR_AUCTION_WON_S, "%%s", "(.+)")
     outbidAuction = string.gsub(ERR_AUCTION_OUTBID_S, "%%s", "(.+)")
