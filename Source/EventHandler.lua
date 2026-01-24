@@ -36,6 +36,8 @@ end
 function ahn.handleAddonLoaded(event, addon) 
     if event == "ADDON_LOADED" and addon == addonName then
         ahn.createSavedVariables()
+        ahn.initializeInterface()
+        ahn.createChatCommand()
         ahn.updateInterfaceOptions()
         ahn.showGreetingMessage()
         ahn.frame:UnregisterEvent("ADDON_LOADED")

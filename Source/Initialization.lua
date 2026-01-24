@@ -46,10 +46,19 @@ local defaultPreferences = {
     enableExpired = true
 }
 
+-- Displays the add-on in Options -> AddOns
+function ahn.initializeInterface()
+    ahn.frame.name = ahn.L.title
+    ahn.category = Settings.RegisterCanvasLayoutCategory(ahn.frame, ahn.frame.name)
+    Settings.RegisterAddOnCategory(ahn.category)
+end
+
 -- Creates the chat command /ahn that opens the AHN options interface
-SLASH_AUCTIONHOUSENOTIFICATIONS1 = "/ahn"
-SlashCmdList["AUCTIONHOUSENOTIFICATIONS"] = function()
-    Settings.OpenToCategory(ahn.frame.name)
+function ahn.createChatCommand()
+    SLASH_AUCTIONHOUSENOTIFICATIONS1 = "/ahn"
+    SlashCmdList["AUCTIONHOUSENOTIFICATIONS"] = function()
+        Settings.OpenToCategory(ahn.category:GetID())
+    end
 end
 
 -- Creates a new table to store the user's preferences in SavedVariables
