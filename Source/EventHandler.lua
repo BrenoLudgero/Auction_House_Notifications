@@ -17,7 +17,7 @@ function ahn.handleAuctionUpdates(event, updateType)
         ahn.updateVanillaAuctionStatus(updateType)
     elseif event == "AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION"
     or event == "AUCTION_HOUSE_PURCHASE_COMPLETED" then
-        ahn.updateOthersAuctionStatus(event, updateType)
+        ahn.updateNonVanillaAuctionStatus(event, updateType)
     end
     ahn.playSound()
     ahn.resetAuctionStatus()

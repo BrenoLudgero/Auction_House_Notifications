@@ -29,7 +29,7 @@ function ahn.updateVanillaAuctionStatus(updateType)
     auctionExpired = string.find(updateType, expiredAuction)
 end
 
-function ahn.updateOthersAuctionStatus(event, updateType)
+function ahn.updateNonVanillaAuctionStatus(event, updateType)
     auctionSuccessful = 
         (event == "AUCTION_HOUSE_PURCHASE_COMPLETED") 
         or (updateType == soldAuction) 
