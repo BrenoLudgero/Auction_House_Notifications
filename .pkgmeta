@@ -2,4 +2,3 @@ ignore:
   - .github
   - README.md
   - release.sh
-  - Options_Window.png

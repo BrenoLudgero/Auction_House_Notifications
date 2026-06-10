@@ -9,4 +9,4 @@ An add-on designed to implement audible alerts to Auction House updates while ha
 * Option to test sound changes on the fly
 * Multiple sound categories to choose from
 
-![Options Interface](Options_Window.png)
+![Options Interface](.github/images/Options_Window.png)
