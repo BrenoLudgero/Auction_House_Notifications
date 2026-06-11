@@ -2,6 +2,7 @@ local _, ahn = ...
 local L = ahn.L
 
 local customSoundsPath = "Interface\\AddOns\\AuctionHouseNotifications\\Custom Sounds\\"
+local activeSounds = {} -- Tracks sounds being played by type (successful, failed, expired)
 
 -- FileDataIDs: https://wago.tools/files?search=sound/
 ahn.successfulSounds = {
@@ -57,28 +58,36 @@ local function addSupportedCustomSoundsAsOptions()
     end
 end
 
-function ahn.playOverlappingSound(sound)
-    PlaySoundFile(sound, AHNPreferences.chosenChannel)
+local function stopCategorySound(auctionType)
+    local activeChannel = activeSounds[auctionType]
+    if activeChannel then
+        StopSound(activeChannel)
+        activeSounds[auctionType] = nil
+    end
 end
 
-function ahn.playNonOverlappingSound(sound)
-    local forceNoDuplicates = true
-    PlaySound(sound, AHNPreferences.chosenChannel, forceNoDuplicates)
+-- Allows for one of each auctionType sound to be played at the same time with no overlap
+function ahn.playSound(sound, auctionType)
+    stopCategorySound(auctionType)
+    local willPlay, soundHandle
+    -- FileDataIDs below 100,000 are soundKits and won't be played by PlaySoundFile
+    if type(sound) == "number" and sound < 100000 then
+        willPlay, soundHandle = PlaySound(sound, AHNPreferences.chosenChannel)
+    else
+        willPlay, soundHandle = PlaySoundFile(sound, AHNPreferences.chosenChannel)
+    end
+    if willPlay then
+        activeSounds[auctionType] = soundHandle
+    end
 end
 
--- IMPLEMENT CUSTOM NON-OVERLAPING MECHANISM
 function ahn.playAppropriateAuctionSound(auctionType)
     if auctionType == "successful" and (AHNPreferences.enableInAH or not ahn.ahIsOpen) then
-        ahn.playOverlappingSound(AHNPreferences.chosenSounds.successful)
+        ahn.playSound(AHNPreferences.chosenSounds.successful, auctionType)
     elseif auctionType == "failed" then
-        ahn.playOverlappingSound(AHNPreferences.chosenSounds.failed)
+        ahn.playSound(AHNPreferences.chosenSounds.failed, auctionType)
     elseif auctionType == "expired" and AHNPreferences.enableExpired then
-        local sound = AHNPreferences.chosenSounds.expired
-        if type(sound) == "string" then -- Custom sound
-            ahn.playOverlappingSound(sound)
-        else
-            ahn.playNonOverlappingSound(sound)
-        end
+        ahn.playSound(AHNPreferences.chosenSounds.expired, auctionType)
     end
 end
 

@@ -44,23 +44,16 @@ local showGreetingCheckButton = ahn.createButton("CheckButton", L.showGreetingMe
 )
 
 -------------------------------------  BUTTONS  ---------------------------------------
-local testSuccessfulButton = ahn.createButton("Button", L.successfulText, 26, buttonsY, 
-    function(self) ahn.playOverlappingSound(AHNPreferences.chosenSounds.successful) end
+local testSuccessfulButton = ahn.createButton("Button", L.successfulText, 26, buttonsY,
+    function(self) ahn.playSound(AHNPreferences.chosenSounds.successful, "successful") end
 )
 
-local testFailedButton = ahn.createButton("Button", L.failedText, 169, buttonsY, 
-    function(self) ahn.playOverlappingSound(AHNPreferences.chosenSounds.failed) end
+local testFailedButton = ahn.createButton("Button", L.failedText, 169, buttonsY,
+    function(self) ahn.playSound(AHNPreferences.chosenSounds.failed, "failed") end
 )
 
-local testExpiredButton = ahn.createButton("Button", L.expiredText, 312, buttonsY, 
-    function(self)
-        local sound = AHNPreferences.chosenSounds.expired
-        if type(sound) == "string" then -- Custom sound
-            ahn.playOverlappingSound(sound)
-        else
-            ahn.playNonOverlappingSound(sound)
-        end
-    end
+local testExpiredButton = ahn.createButton("Button", L.expiredText, 312, buttonsY,
+    function(self) ahn.playSound(AHNPreferences.chosenSounds.expired, "expired") end
 )
 
 ------------------------------------  DROPDOWNS  --------------------------------------
