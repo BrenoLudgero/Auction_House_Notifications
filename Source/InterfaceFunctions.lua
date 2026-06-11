@@ -103,6 +103,10 @@ function ahn.setInitialDropdownText(dropdown, soundsTable)
             return
         end
     end
+    if dropdown.kind ~= "soundChannels" then
+        actions.savePreference(soundsTable[1][1])
+        dropdown:SetDefaultText(soundsTable[1][2])
+    end
 end
 
 -- Creates and shows tooltips on mouse hover

@@ -1,5 +1,6 @@
 local _, ahn = ...
 local L = ahn.L
+local customSoundsPath = "Interface\\AddOns\\AuctionHouseNotifications\\Custom Sounds\\"
 
 local titlesTextX = 13
 local expiredCheckX = 315
@@ -58,11 +59,16 @@ local testFailedButton = ahn.createButton("Button", L.failedText, 169, buttonsY,
 
 local testExpiredButton = ahn.createButton("Button", L.expiredText, 312, buttonsY, 
     function(self)
-        PlaySound(AHNPreferences.chosenSounds.expired, AHNPreferences.chosenChannel, true)
+        local sound = AHNPreferences.chosenSounds.expired
+        if type(sound) == "string" then -- Custom sound
+            PlaySoundFile(sound, AHNPreferences.chosenChannel)
+        else
+            PlaySound(sound, AHNPreferences.chosenChannel, true)
+        end
     end
 )
 
-------------------------------------  DROPDOWNS  --------------------------------------
+------------------------------------  SOUNDS  --------------------------------------
 local successfulSoundCategories = {
     {ahn.successfulSounds.coins, L.soundCategoryNames[1]},
     {ahn.successfulSounds.female, L.soundCategoryNames[2]},
@@ -70,13 +76,6 @@ local successfulSoundCategories = {
     {ahn.successfulSounds.impact, L.soundCategoryNames[4]},
     {ahn.successfulSounds.quests, L.soundCategoryNames[5]}
 }
-local successfulSoundDropdown = ahn.createDropdown(
-    dropdownColumn1X, 
-    dropdownRow1Y, 
-    "successfulSounds", 
-    successfulSoundCategories
-)
-ahn.createDropdownLabel(successfulSoundDropdown, L.successfulSoundText)
 
 local failedSoundCategories = {
     {ahn.failedSounds.coins, L.soundCategoryNames[1]},
@@ -85,13 +84,6 @@ local failedSoundCategories = {
     {ahn.failedSounds.impact, L.soundCategoryNames[4]},
     {ahn.failedSounds.quests, L.soundCategoryNames[5]}
 }
-local failedSoundDropdown = ahn.createDropdown(
-    dropdownColumn1X, 
-    dropdownRow2Y, 
-    "failedSounds", 
-    failedSoundCategories
-)
-ahn.createDropdownLabel(failedSoundDropdown, L.failedSoundText)
 
 local expiredSoundCategories = {
     {ahn.expiredSounds.sheep, L.soundCategoryNames[6]},
@@ -100,6 +92,32 @@ local expiredSoundCategories = {
     {ahn.expiredSounds.growl, L.soundCategoryNames[9]},
     {ahn.expiredSounds.chicken, L.soundCategoryNames[10]}
 }
+
+for _, filename in ipairs(ahn.customSounds or {}) do
+    local displayName = filename:match("(.+)%..+$") or filename
+    local entry = {customSoundsPath .. filename, displayName}
+    table.insert(successfulSoundCategories, entry)
+    table.insert(failedSoundCategories, entry)
+    table.insert(expiredSoundCategories, entry)
+end
+
+------------------------------------  DROPDOWNS  --------------------------------------
+local successfulSoundDropdown = ahn.createDropdown(
+    dropdownColumn1X, 
+    dropdownRow1Y, 
+    "successfulSounds", 
+    successfulSoundCategories
+)
+ahn.createDropdownLabel(successfulSoundDropdown, L.successfulSoundText)
+
+local failedSoundDropdown = ahn.createDropdown(
+    dropdownColumn1X, 
+    dropdownRow2Y, 
+    "failedSounds", 
+    failedSoundCategories
+)
+ahn.createDropdownLabel(failedSoundDropdown, L.failedSoundText)
+
 local expiredSoundDropdown = ahn.createDropdown(
     dropdownColumn2X, 
     dropdownRow1Y, 

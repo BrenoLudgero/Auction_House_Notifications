@@ -38,15 +38,19 @@ function ahn.updateNonVanillaAuctionStatus(event, updateType)
     auctionExpired = (updateType == expiredAuction)
 end
 
--- Plays the chosen FileDataID in the chosen sound channel
--- PlaySoundFile plays overlaping sounds and PlaySound doesn't (when 'true')
+-- PlaySoundFile plays overlapping sounds; PlaySound with 'true' does not, unless it's a custom sound.
 function ahn.playSound()
     if auctionSuccessful and (AHNPreferences.enableInAH or not ahn.ahIsOpen) then
         PlaySoundFile(AHNPreferences.chosenSounds.successful, AHNPreferences.chosenChannel)
     elseif auctionFailed then
         PlaySoundFile(AHNPreferences.chosenSounds.failed, AHNPreferences.chosenChannel)
     elseif AHNPreferences.enableExpired and auctionExpired then
-        PlaySound(AHNPreferences.chosenSounds.expired, AHNPreferences.chosenChannel, true)
+        local sound = AHNPreferences.chosenSounds.expired
+        if type(sound) == "string" then -- Custom sound
+            PlaySoundFile(sound, AHNPreferences.chosenChannel)
+        else
+            PlaySound(sound, AHNPreferences.chosenChannel, true)
+        end
     end
 end
 

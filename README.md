@@ -4,9 +4,9 @@
 An add-on designed to implement audible alerts to Auction House updates while having minimal impact in hardware resources
 
 ## Main Features
-* Works with all client languages
-* Fully localized options interface
+* Fully localized
 * Option to test sound changes on the fly
-* Multiple sound categories to choose from
+* Multiple in-game sounds to choose from
+* Ability to add custom sounds
 
 ![Options Interface](.github/images/Options_Window.png)
