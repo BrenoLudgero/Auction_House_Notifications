@@ -1,11 +1,6 @@
 local _, ahn = ...
 
--- Saves the status of the last auction update
-local auctionSuccessful = false
-local auctionFailed = false
-local auctionExpired = false
-
--- Type of auction update (updated in Main.lua)
+-- Type of auction event
 local soldAuction
 local wonAuction
 local outbidAuction
@@ -23,40 +18,24 @@ else
     expiredAuction = Enum.AuctionHouseNotification.AuctionExpired
 end
 
-function ahn.updateVanillaAuctionStatus(updateType)
-    auctionSuccessful = string.find(updateType, soldAuction) or string.find(updateType, wonAuction)
-    auctionFailed = string.find(updateType, outbidAuction)
-    auctionExpired = string.find(updateType, expiredAuction)
-end
-
-function ahn.updateNonVanillaAuctionStatus(event, updateType)
-    auctionSuccessful = 
-        (event == "AUCTION_HOUSE_PURCHASE_COMPLETED") 
-        or (updateType == soldAuction) 
-        or (updateType == wonAuction)
-    auctionFailed = (updateType == outbidAuction)
-    auctionExpired = (updateType == expiredAuction)
-end
-
--- PlaySoundFile plays overlapping sounds; PlaySound with 'true' does not, unless it's a custom sound.
-function ahn.playSound()
-    if auctionSuccessful and (AHNPreferences.enableInAH or not ahn.ahIsOpen) then
-        PlaySoundFile(AHNPreferences.chosenSounds.successful, AHNPreferences.chosenChannel)
-    elseif auctionFailed then
-        PlaySoundFile(AHNPreferences.chosenSounds.failed, AHNPreferences.chosenChannel)
-    elseif AHNPreferences.enableExpired and auctionExpired then
-        local sound = AHNPreferences.chosenSounds.expired
-        if type(sound) == "string" then -- Custom sound
-            PlaySoundFile(sound, AHNPreferences.chosenChannel)
-        else
-            PlaySound(sound, AHNPreferences.chosenChannel, true)
-        end
+function ahn.determineVanillaAuctionType(auctionType)
+    if string.find(auctionType, soldAuction) 
+    or string.find(auctionType, wonAuction) then
+        return "successful"
+    elseif string.find(auctionType, outbidAuction) then
+        return "failed"
+    elseif string.find(auctionType, expiredAuction) then
+        return "expired"
     end
 end
 
--- Reverts the values to false so the sounds can be played again
-function ahn.resetAuctionStatus()
-    auctionSuccessful = false
-    auctionFailed = false
-    auctionExpired = false
+function ahn.determineNonVanillaAuctionType(auctionType)
+    if auctionType == soldAuction 
+    or auctionType == wonAuction then
+        return "successful"
+    elseif auctionType == outbidAuction then
+        return "failed"
+    elseif auctionType == expiredAuction then
+        return "expired"
+    end
 end

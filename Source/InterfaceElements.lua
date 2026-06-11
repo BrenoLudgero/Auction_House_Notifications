@@ -1,6 +1,5 @@
 local _, ahn = ...
 local L = ahn.L
-local customSoundsPath = "Interface\\AddOns\\AuctionHouseNotifications\\Custom Sounds\\"
 
 local titlesTextX = 13
 local expiredCheckX = 315
@@ -46,67 +45,30 @@ local showGreetingCheckButton = ahn.createButton("CheckButton", L.showGreetingMe
 
 -------------------------------------  BUTTONS  ---------------------------------------
 local testSuccessfulButton = ahn.createButton("Button", L.successfulText, 26, buttonsY, 
-    function(self)
-        PlaySoundFile(AHNPreferences.chosenSounds.successful, AHNPreferences.chosenChannel)
-    end
+    function(self) ahn.playOverlappingSound(AHNPreferences.chosenSounds.successful) end
 )
 
 local testFailedButton = ahn.createButton("Button", L.failedText, 169, buttonsY, 
-    function(self)
-        PlaySoundFile(AHNPreferences.chosenSounds.failed, AHNPreferences.chosenChannel)
-    end
+    function(self) ahn.playOverlappingSound(AHNPreferences.chosenSounds.failed) end
 )
 
 local testExpiredButton = ahn.createButton("Button", L.expiredText, 312, buttonsY, 
     function(self)
         local sound = AHNPreferences.chosenSounds.expired
         if type(sound) == "string" then -- Custom sound
-            PlaySoundFile(sound, AHNPreferences.chosenChannel)
+            ahn.playOverlappingSound(sound)
         else
-            PlaySound(sound, AHNPreferences.chosenChannel, true)
+            ahn.playNonOverlappingSound(sound)
         end
     end
 )
-
-------------------------------------  SOUNDS  --------------------------------------
-local successfulSoundCategories = {
-    {ahn.successfulSounds.coins, L.soundCategoryNames[1]},
-    {ahn.successfulSounds.female, L.soundCategoryNames[2]},
-    {ahn.successfulSounds.fireworks, L.soundCategoryNames[3]},
-    {ahn.successfulSounds.impact, L.soundCategoryNames[4]},
-    {ahn.successfulSounds.quests, L.soundCategoryNames[5]}
-}
-
-local failedSoundCategories = {
-    {ahn.failedSounds.coins, L.soundCategoryNames[1]},
-    {ahn.failedSounds.female, L.soundCategoryNames[2]},
-    {ahn.failedSounds.fireworks, L.soundCategoryNames[3]},
-    {ahn.failedSounds.impact, L.soundCategoryNames[4]},
-    {ahn.failedSounds.quests, L.soundCategoryNames[5]}
-}
-
-local expiredSoundCategories = {
-    {ahn.expiredSounds.sheep, L.soundCategoryNames[6]},
-    {ahn.expiredSounds.thunder, L.soundCategoryNames[7]},
-    {ahn.expiredSounds.what, L.soundCategoryNames[8]},
-    {ahn.expiredSounds.growl, L.soundCategoryNames[9]},
-    {ahn.expiredSounds.chicken, L.soundCategoryNames[10]}
-}
-
-for _, filename in ipairs(ahn.customSounds or {}) do
-    local displayName = filename:match("(.+)%..+$") or filename
-    local entry = {customSoundsPath .. filename, displayName}
-    table.insert(successfulSoundCategories, entry)
-    table.insert(failedSoundCategories, entry)
-    table.insert(expiredSoundCategories, entry)
-end
 
 ------------------------------------  DROPDOWNS  --------------------------------------
 local successfulSoundDropdown = ahn.createDropdown(
     dropdownColumn1X, 
     dropdownRow1Y, 
     "successfulSounds", 
-    successfulSoundCategories
+    ahn.successfulSounds
 )
 ahn.createDropdownLabel(successfulSoundDropdown, L.successfulSoundText)
 
@@ -114,7 +76,7 @@ local failedSoundDropdown = ahn.createDropdown(
     dropdownColumn1X, 
     dropdownRow2Y, 
     "failedSounds", 
-    failedSoundCategories
+    ahn.failedSounds
 )
 ahn.createDropdownLabel(failedSoundDropdown, L.failedSoundText)
 
@@ -122,24 +84,17 @@ local expiredSoundDropdown = ahn.createDropdown(
     dropdownColumn2X, 
     dropdownRow1Y, 
     "expiredSounds",
-    expiredSoundCategories
+    ahn.expiredSounds
 )
 ahn.createDropdownLabel(expiredSoundDropdown, L.expiredSoundText)
 
-local soundChannels = {
-    {"Master", L.soundChannelNames[1]},
-    {"Sound", L.soundChannelNames[2]},
-    {"Music", L.soundChannelNames[3]},
-    {"Ambience", L.soundChannelNames[4]},
-    {"Dialog", L.soundChannelNames[5]}
-}
 local soundChannelDropdown = ahn.createDropdown(
     dropdownColumn2X, 
     dropdownRow2Y, 
     "soundChannels", 
-    soundChannels
+    ahn.soundChannels
 )
-ahn.createDropdownLabel(soundChannelDropdown, L.soundChannelText)
+ahn.createDropdownLabel(soundChannelDropdown, L.soundChannel)
 ahn.createTooltip(soundChannelDropdown, "ANCHOR_TOP", L.soundChannelTooltip)
 
 -- Checks the interface options based on the user's preferences when the addOn loads
@@ -147,8 +102,8 @@ function ahn.updateInterfaceOptions()
     enableInAHCheckButton:SetChecked(AHNPreferences.enableInAH)
     enableExpiredCheckButton:SetChecked(AHNPreferences.enableExpired)
     showGreetingCheckButton:SetChecked(AHNPreferences.showGreeting)
-    ahn.setInitialDropdownText(successfulSoundDropdown, successfulSoundCategories)
-    ahn.setInitialDropdownText(failedSoundDropdown, failedSoundCategories)
-    ahn.setInitialDropdownText(expiredSoundDropdown, expiredSoundCategories)
-    ahn.setInitialDropdownText(soundChannelDropdown, soundChannels)
+    ahn.setInitialDropdownText(successfulSoundDropdown, ahn.successfulSounds)
+    ahn.setInitialDropdownText(failedSoundDropdown, ahn.failedSounds)
+    ahn.setInitialDropdownText(expiredSoundDropdown, ahn.expiredSounds)
+    ahn.setInitialDropdownText(soundChannelDropdown, ahn.soundChannels)
 end

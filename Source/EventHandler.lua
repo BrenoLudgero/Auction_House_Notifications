@@ -11,20 +11,21 @@ else
     ahn.frame:RegisterEvent("AUCTION_HOUSE_PURCHASE_COMPLETED")
 end
 
--- Defines the method to handle auction updates based on the game version
-function ahn.handleAuctionUpdates(event, updateType)
+-- Defines the method to handle auction events based on the game version
+function ahn.handleAuctionUpdates(event, type)
+    local auctionType
     if event == "CHAT_MSG_SYSTEM" then
-        ahn.updateVanillaAuctionStatus(updateType)
-    elseif event == "AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION"
-    or event == "AUCTION_HOUSE_PURCHASE_COMPLETED" then
-        ahn.updateNonVanillaAuctionStatus(event, updateType)
+        auctionType = ahn.determineVanillaAuctionType(type)
+    elseif event == "AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION" then
+        auctionType = ahn.determineNonVanillaAuctionType(type)
+    elseif event == "AUCTION_HOUSE_PURCHASE_COMPLETED" then
+        auctionType = Enum.AuctionHouseNotification.AuctionWon
     end
-    ahn.playSound()
-    ahn.resetAuctionStatus()
+    ahn.playAppropriateAuctionSound(auctionType)
 end
 
 -- Toggles ahIsOpen based on its current status
-function ahn.handleAuctionHouse(event)
+function ahn.handleAuctionHouseStatus(event)
     if event == "AUCTION_HOUSE_SHOW" then
         ahn.ahIsOpen = true
     elseif event == "AUCTION_HOUSE_CLOSED" then

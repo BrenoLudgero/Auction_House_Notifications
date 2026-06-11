@@ -48,6 +48,7 @@
 Source\Initialization.lua
 Source\Localization.lua
 Custom Sounds\_List.lua
+Source\SoundHandler.lua
 Source\InterfaceFunctions.lua
 Source\InterfaceElements.lua
 Source\AuctionHandler.lua

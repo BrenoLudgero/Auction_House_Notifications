@@ -65,11 +65,9 @@ end
 local function createDropdownOptions(dropdown, soundsTable)
     dropdown:SetupMenu(function(dropdown, rootDescription)
         for _, item in ipairs(soundsTable) do
-            local sound = item[1]
-            local name = item[2]
-            rootDescription:CreateButton(name, function()
-                saveDropdownOption(dropdown.kind, sound)
-                dropdown:SetDefaultText(name)
+            rootDescription:CreateButton(item.label, function()
+                saveDropdownOption(dropdown.kind, item.value)
+                dropdown:SetDefaultText(item.label)
             end)
         end
     end)
@@ -96,16 +94,15 @@ function ahn.setInitialDropdownText(dropdown, soundsTable)
     local actions = dropdownActions[dropdown.kind]
     local preference = actions.getPreference()
     for _, item in ipairs(soundsTable) do
-        local sound = item[1]
-        local name = item[2]
-        if sound == preference then
-            dropdown:SetDefaultText(name)
+        if item.value == preference then
+            dropdown:SetDefaultText(item.label)
             return
         end
     end
     if dropdown.kind ~= "soundChannels" then
-        actions.savePreference(soundsTable[1][1])
-        dropdown:SetDefaultText(soundsTable[1][2])
+        local defaultSound = soundsTable[1]
+        actions.savePreference(defaultSound.value)
+        dropdown:SetDefaultText(defaultSound.label)
     end
 end
 

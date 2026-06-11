@@ -14,31 +14,26 @@ if ahn.locale == "enUS" then
     L.successfulText = "Success"
     L.failedText = "Failure"
     L.expiredText = "Expiration"
-    L.soundCategoryNames = {
-        "Coins",
-        "Female Human",
-        "Fireworks",
-        "Impact",
-        "Quests",
-        "Sheep",
-        "Thunder",
-        "What?",
-        "Growl",
-        "Chicken"
-    }
+    L.soundCategoryCoins = "Coins"
+    L.soundCategoryFemale = "Female Human"
+    L.soundCategoryFireworks = "Fireworks"
+    L.soundCategoryImpact = "Impact"
+    L.soundCategoryQuests = "Quests"
+    L.soundCategorySheep = "Sheep"
+    L.soundCategoryThunder = "Thunder"
+    L.soundCategoryWhat = "What?"
+    L.soundCategoryGrowl = "Growl"
+    L.soundCategoryChicken = "Chicken"
     L.testSounds = "Test Sounds"
-    L.soundChannelText = "Sound Channel"
-    L.soundChannelNames = {
-        "Master",
-        "Effects",
-        "Music",
-        "Ambience",
-        "Dialog"
-    }
+    L.soundChannel = "Sound Channel"
+    L.soundChannelMaster = "Master"
+    L.soundChannelEffects = "Effects"
+    L.soundChannelMusic = "Music"
+    L.soundChannelAmbience = "Ambience"
+    L.soundChannelDialog = "Dialog"
     L.soundChannelTooltip = "The sound channel to be used by alerts"
     L.miscellaneous = "Miscellaneous"
     L.showGreetingMessage = "Show Greeting Message"
-    return
 
 elseif ahn.locale == "esMX" or ahn.locale == "esES" then
     L.greetingMessage = "|cFFFFFF00"..L.title.."|r ¡se ha cargado correctamente! ("..ahn.version..")"
@@ -53,31 +48,26 @@ elseif ahn.locale == "esMX" or ahn.locale == "esES" then
     L.successfulText = "Éxito"
     L.failedText = "Fracaso"
     L.expiredText = "Expiración"
-    L.soundCategoryNames = {
-        "Monedas",
-        "Humana",
-        "Fuegos Artificiales",
-        "Impacto",
-        "Misiones",
-        "Ovejas",
-        "Trueno",
-        "¿Qué?",
-        "Gruñido",
-        "Pollo"
-    }
+    L.soundCategoryCoins = "Monedas"
+    L.soundCategoryFemale = "Humana"
+    L.soundCategoryFireworks = "Fuegos Artificiales"
+    L.soundCategoryImpact = "Impacto"
+    L.soundCategoryQuests = "Misiones"
+    L.soundCategorySheep = "Ovejas"
+    L.soundCategoryThunder = "Trueno"
+    L.soundCategoryWhat = "¿Qué?"
+    L.soundCategoryGrowl = "Gruñido"
+    L.soundCategoryChicken = "Pollo"
     L.testSounds = "Prueba de Sonidos"
-    L.soundChannelText = "Canal de Sonido"
-    L.soundChannelNames = {
-        "Principal",
-        "Efectos",
-        "Música",
-        "Ambiente",
-        "Diálogo"
-    }
+    L.soundChannel = "Canal de Sonido"
+    L.soundChannelMaster = "Principal"
+    L.soundChannelEffects = "Efectos"
+    L.soundChannelMusic = "Música"
+    L.soundChannelAmbience = "Ambiente"
+    L.soundChannelDialog = "Diálogo"
     L.soundChannelTooltip = "El canal de sonido que se utilizará para las alertas"
     L.miscellaneous = "Misceláneo"
     L.showGreetingMessage = "Mostrar Mensaje de Bienvenida"
-    return
 
 elseif ahn.locale == "ptBR" then
     L.greetingMessage = "|cFFFFFF00"..L.title.."|r carregado com sucesso! ("..ahn.version..")"
@@ -92,31 +82,26 @@ elseif ahn.locale == "ptBR" then
     L.successfulText = "Sucesso"
     L.failedText = "Fracasso"
     L.expiredText = "Vencimento"
-    L.soundCategoryNames = {
-        "Moedas",
-        "Humana",
-        "Fogos de Artifício",
-        "Impacto",
-        "Missões",
-        "Ovelhas",
-        "Trovão",
-        "O quê?",
-        "Rosnado",
-        "Galinha"
-    }
+    L.soundCategoryCoins = "Moedas"
+    L.soundCategoryFemale = "Humana"
+    L.soundCategoryFireworks = "Fogos de Artifício"
+    L.soundCategoryImpact = "Impacto"
+    L.soundCategoryQuests = "Missões"
+    L.soundCategorySheep = "Ovelhas"
+    L.soundCategoryThunder = "Trovão"
+    L.soundCategoryWhat = "O quê?"
+    L.soundCategoryGrowl = "Rosnado"
+    L.soundCategoryChicken = "Galinha"
     L.testSounds = "Teste de Sons"
-    L.soundChannelText = "Canal de Som"
-    L.soundChannelNames = {
-        "Principal",
-        "Efeitos",
-        "Música",
-        "Ambiente",
-        "Diálogo"
-    }
+    L.soundChannel = "Canal de Som"
+    L.soundChannelMaster = "Principal"
+    L.soundChannelEffects = "Efeitos"
+    L.soundChannelMusic = "Música"
+    L.soundChannelAmbience = "Ambiente"
+    L.soundChannelDialog = "Diálogo"
     L.soundChannelTooltip = "O canal de som a ser usado pelas notificações"
     L.miscellaneous = "Diversos"
     L.showGreetingMessage = "Mostrar Mensagem de Saudação"
-    return
 
 elseif ahn.locale == "deDE" then
     L.greetingMessage = "|cFFFFFF00"..L.title.."|r erfolgreich geladen! ("..ahn.version..")"
@@ -131,31 +116,26 @@ elseif ahn.locale == "deDE" then
     L.successfulText = "Erfolgreich"
     L.failedText = "Fehlgeschlagen"
     L.expiredText = "Abgelaufen"
-    L.soundCategoryNames = {
-        "Münzen",
-        "Weiblicher Mensch",
-        "Feuerwerk",
-        "Einschlag",
-        "Quests",
-        "Schafe",
-        "Donner",
-        "Was?",
-        "Knurren",
-        "Huhn"
-    }
+    L.soundCategoryCoins = "Münzen"
+    L.soundCategoryFemale = "Weiblicher Mensch"
+    L.soundCategoryFireworks = "Feuerwerk"
+    L.soundCategoryImpact = "Einschlag"
+    L.soundCategoryQuests = "Quests"
+    L.soundCategorySheep = "Schafe"
+    L.soundCategoryThunder = "Donner"
+    L.soundCategoryWhat = "Was?"
+    L.soundCategoryGrowl = "Knurren"
+    L.soundCategoryChicken = "Huhn"
     L.testSounds = "Geräuschtest"
-    L.soundChannelText = "Soundkanal"
-    L.soundChannelNames = {
-        "Haupt",
-        "Effekte",
-        "Musik",
-        "Umgebung",
-        "Dialog"
-    }
+    L.soundChannel = "Soundkanal"
+    L.soundChannelMaster = "Haupt"
+    L.soundChannelEffects = "Effekte"
+    L.soundChannelMusic = "Musik"
+    L.soundChannelAmbience = "Umgebung"
+    L.soundChannelDialog = "Dialog"
     L.soundChannelTooltip = "Der Soundkanal, der von Benachrichtigungen verwendet wird"
     L.miscellaneous = "Sonstiges"
     L.showGreetingMessage = "Begrüßungsnachricht Anzeigen"
-    return
 
 elseif ahn.locale == "frFR" then
     L.greetingMessage = "|cFFFFFF00"..L.title.."|r chargé avec succès! ("..ahn.version..")"
@@ -170,31 +150,26 @@ elseif ahn.locale == "frFR" then
     L.successfulText = "Succès"
     L.failedText = "Infructueuse"
     L.expiredText = "Expiration"
-    L.soundCategoryNames = {
-        "Pièces",
-        "Humain Femme",
-        "Feux d'artifice",
-        "Impact",
-        "Quêtes",
-        "Moutons",
-        "Tonnerre",
-        "Quoi?",
-        "Grogner",
-        "Poulet"
-    }
+    L.soundCategoryCoins = "Pièces"
+    L.soundCategoryFemale = "Humain Femme"
+    L.soundCategoryFireworks = "Feux d'artifice"
+    L.soundCategoryImpact = "Impact"
+    L.soundCategoryQuests = "Quêtes"
+    L.soundCategorySheep = "Moutons"
+    L.soundCategoryThunder = "Tonnerre"
+    L.soundCategoryWhat = "Quoi?"
+    L.soundCategoryGrowl = "Grogner"
+    L.soundCategoryChicken = "Poulet"
     L.testSounds = "Test de Sons"
-    L.soundChannelText = "Canal Sonore"
-    L.soundChannelNames = {
-        "Principal",
-        "Effets",
-        "Musique",
-        "Ambiance",
-        "Dialogue"
-    }
+    L.soundChannel = "Canal Sonore"
+    L.soundChannelMaster = "Principal"
+    L.soundChannelEffects = "Effets"
+    L.soundChannelMusic = "Musique"
+    L.soundChannelAmbience = "Ambiance"
+    L.soundChannelDialog = "Dialogue"
     L.soundChannelTooltip = "Le canal sonore à utiliser pour les alertes"
     L.miscellaneous = "Divers"
     L.showGreetingMessage = "Afficher le Message de Bienvenue"
-    return
 
 elseif ahn.locale == "itIT" then
     L.greetingMessage = "|cFFFFFF00"..L.title.."|r sono state aperte con successo! ("..ahn.version..")"
@@ -209,31 +184,26 @@ elseif ahn.locale == "itIT" then
     L.successfulText = "Successo"
     L.failedText = "Fallimento"
     L.expiredText = "Scadenza"
-    L.soundCategoryNames = {
-        "Monete",
-        "Umana",
-        "Fuochi d'artificio",
-        "Impatto",
-        "Missioni",
-        "Pecora",
-        "Tuono",
-        "Cosa?",
-        "Ringhio",
-        "Pollo"
-    }
+    L.soundCategoryCoins = "Monete"
+    L.soundCategoryFemale = "Umana"
+    L.soundCategoryFireworks = "Fuochi d'artificio"
+    L.soundCategoryImpact = "Impatto"
+    L.soundCategoryQuests = "Missioni"
+    L.soundCategorySheep = "Pecora"
+    L.soundCategoryThunder = "Tuono"
+    L.soundCategoryWhat = "Cosa?"
+    L.soundCategoryGrowl = "Ringhio"
+    L.soundCategoryChicken = "Pollo"
     L.testSounds = "Suoni di Prova"
-    L.soundChannelText = "Canale Sonoro"
-    L.soundChannelNames = {
-        "Principale",
-        "Effetti",
-        "Musica",
-        "Ambiente",
-        "Dialogo"
-    }
+    L.soundChannel = "Canale Sonoro"
+    L.soundChannelMaster = "Principale"
+    L.soundChannelEffects = "Effetti"
+    L.soundChannelMusic = "Musica"
+    L.soundChannelAmbience = "Ambiente"
+    L.soundChannelDialog = "Dialogo"
     L.soundChannelTooltip = "Il canale sonoro da utilizzare per gli avvisi"
     L.miscellaneous = "Varie"
     L.showGreetingMessage = "Mostra Messaggio di Saluto"
-    return
 
 elseif ahn.locale == "ruRU" then
     L.greetingMessage = "|cFFFFFF00"..L.title.."|r онлайн! ("..ahn.version..")"
@@ -248,31 +218,26 @@ elseif ahn.locale == "ruRU" then
     L.successfulText = "Успешный"
     L.failedText = "Несостоявшийся"
     L.expiredText = "Просроченный"
-    L.soundCategoryNames = {
-        "Монеты",
-        "Женщина",
-        "Фейерверк",
-        "Удар",
-        "Заданий",
-        "Овцы",
-        "Гром",
-        "Что?",
-        "Рычание",
-        "Курица"
-    }
+    L.soundCategoryCoins = "Монеты"
+    L.soundCategoryFemale = "Женщина"
+    L.soundCategoryFireworks = "Фейерверк"
+    L.soundCategoryImpact = "Удар"
+    L.soundCategoryQuests = "Заданий"
+    L.soundCategorySheep = "Овцы"
+    L.soundCategoryThunder = "Гром"
+    L.soundCategoryWhat = "Что?"
+    L.soundCategoryGrowl = "Рычание"
+    L.soundCategoryChicken = "Курица"
     L.testSounds = "Тестовые Звуки"
-    L.soundChannelText = "Звуковой Канал"
-    L.soundChannelNames = {
-        "Основной",
-        "Эффекты",
-        "Музыка",
-        "Атмосфера",
-        "Диалог"
-    }
+    L.soundChannel = "Звуковой Канал"
+    L.soundChannelMaster = "Основной"
+    L.soundChannelEffects = "Эффекты"
+    L.soundChannelMusic = "Музыка"
+    L.soundChannelAmbience = "Атмосфера"
+    L.soundChannelDialog = "Диалог"
     L.soundChannelTooltip = "Звуковой канал который будет использоваться оповещениями"
     L.miscellaneous = "Разное"
     L.showGreetingMessage = "Показать Приветственное Сообщение"
-    return
 
 elseif ahn.locale == "koKR" then
     L.greetingMessage = "|cFFFFFF00"..L.title.."|r 성공적으로 로드되었습니다! ("..ahn.version..")"
@@ -287,31 +252,26 @@ elseif ahn.locale == "koKR" then
     L.successfulText = "성공"
     L.failedText = "실패"
     L.expiredText = "만료"
-    L.soundCategoryNames = {
-        "동전",
-        "여성 인간",
-        "불꽃놀이",
-        "충격",
-        "퀘스트",
-        "양",
-        "천둥",
-        "뭐라고?",
-        "으르렁거림",
-        "치킨"
-    }
+    L.soundCategoryCoins = "동전"
+    L.soundCategorFemaley = "여성 인간"
+    L.soundCategoFireworksry = "불꽃놀이"
+    L.soundCateImpactgory = "충격"
+    L.soundCateQuestsgory = "퀘스트"
+    L.soundCateSheepgory = "양"
+    L.soundCateThundergory = "천둥"
+    L.soundCateWhatgory = "뭐라고?"
+    L.soundCateGrowlgory = "으르렁거림"
+    L.soundCateChickengory = "치킨"
     L.testSounds = "테스트 사운드"
-    L.soundChannelText = "음향 채널"
-    L.soundChannelNames = {
-        "마스터",
-        "효과",
-        "음악",
-        "환경음",
-        "대화음"
-    }
+    L.soundChannel = "음향 채널"
+    L.soundChannelMaster = "마스터"
+    L.soundChannelEffects = "효과"
+    L.soundChannelMusic = "음악"
+    L.soundChannelAmbience = "환경음"
+    L.soundChannelDialog = "대화음"
     L.soundChannelTooltip = "알림에 사용할 음향 채널"
     L.miscellaneous = "기타"
     L.showGreetingMessage = "인사 메시지 표시"
-    return
 
 elseif ahn.locale == "zhTW" then
     L.greetingMessage = "|cFFFFFF00"..L.title.."|r 載入成功！("..ahn.version..")"
@@ -326,31 +286,26 @@ elseif ahn.locale == "zhTW" then
     L.successfulText = "成功"
     L.failedText = "失敗"
     L.expiredText = "已過期"
-    L.soundCategoryNames = {
-        "硬幣",
-        "女性人類",
-        "煙火",
-        "衝擊",
-        "任務",
-        "綿羊",
-        "雷霆",
-        "什麼？",
-        "吼叫声",
-        "雞"
-    }
+    L.soundCategoryCoins = "硬幣"
+    L.soundCategorFemaley = "女性人類"
+    L.soundCategoFireworksry = "煙火"
+    L.soundCateImpactgory = "衝擊"
+    L.soundCateQuestsgory = "任務"
+    L.soundCateSheepgory = "綿羊"
+    L.soundCateThundergory = "雷霆"
+    L.soundCateWhatgory = "什麼？"
+    L.soundCateGrowlgory = "吼叫声"
+    L.soundCateChickengory = "雞"
     L.testSounds = "測試音效"
-    L.soundChannelText = "音效頻道"
-    L.soundChannelNames = {
-        "主音量",
-        "效果",
-        "音樂",
-        "環境聲音",
-        "對話"
-    }
+    L.soundChannel = "音效頻道"
+    L.soundChannelMaster = "主音量"
+    L.soundChannelEffects = "效果"
+    L.soundChannelMusic = "音樂"
+    L.soundChannelAmbience = "環境聲音"
+    L.soundChannelDialog = "對話"
     L.soundChannelTooltip = "警示所使用的音效頻道"
     L.miscellaneous = "其他"
     L.showGreetingMessage = "顯示問候訊息"
-    return
 
 elseif ahn.locale == "zhCN" then
     L.greetingMessage = "|cFFFFFF00"..L.title.."|r加载成功！("..ahn.version..")"
@@ -365,27 +320,23 @@ elseif ahn.locale == "zhCN" then
     L.successfulText = "成功"
     L.failedText = "失败"
     L.expiredText = "已过期"
-    L.soundCategoryNames = {
-        "硬币",
-        "女性人类",
-        "烟花",
-        "冲击",
-        "任务",
-        "绵羊",
-        "雷霆",
-        "什么？",
-        "吼叫声",
-        "鸡"
-    }
+    L.soundCategoryCoins = "硬币"
+    L.soundCategorFemaley = "女性人类"
+    L.soundCategoFireworksry = "烟花"
+    L.soundCateImpactgory = "冲击"
+    L.soundCateQuestsgory = "任务"
+    L.soundCateSheepgory = "绵羊"
+    L.soundCateThundergory = "雷霆"
+    L.soundCateWhatgory = "什么？"
+    L.soundCateGrowlgory = "吼叫声"
+    L.soundCateChickengory = "鸡"
     L.testSounds = "测试音效"
-    L.soundChannelText = "声音通道"
-    L.soundChannelNames = {
-        "主音量",
-        "效果",
-        "音乐",
-        "环境声音",
-        "对话"
-    }
+    L.soundChannel = "声音通道"
+    L.soundChannelMaster = "主音量"
+    L.soundChannelEffects = "效果"
+    L.soundChannelMusic = "音乐"
+    L.soundChannelAmbience = "环境声音"
+    L.soundChannelDialog = "对话"
     L.soundChannelTooltip = "用于警报的声音通道"
     L.miscellaneous = "杂项"
     L.showGreetingMessage = "显示问候消息"
