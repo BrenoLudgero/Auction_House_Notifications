@@ -45,8 +45,8 @@
 
 ## SavedVariables: AHNPreferences
 
-Source\Initialization.lua
 Source\Localization.lua
+Source\Initialization.lua
 Custom Sounds\_List.lua
 Source\SoundHandler.lua
 Source\InterfaceFunctions.lua

@@ -102,6 +102,9 @@ function ahn.playSound(sound, auctionType)
 end
 
 function ahn.playAppropriateAuctionSound(auctionType)
+    if not AHNPreferences["playSounds"] then
+        return
+    end
     if auctionType == "successful" and (AHNPreferences.enableInAH or not ahn.ahIsOpen) then
         ahn.playSound(AHNPreferences.chosenSounds.successful, auctionType)
     elseif auctionType == "failed" then

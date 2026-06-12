@@ -120,7 +120,12 @@ function ahn.createTooltip(item, anchor, tooltip)
 end
 
 function ahn.showGreetingMessage()
-    if AHNPreferences.showGreeting then
-        print(L.greetingMessage)
+    if not AHNPreferences.showGreeting then
+        return
+    end
+    if AHNPreferences["playSounds"] then
+        print(L.enabledMessage)
+    else
+        print(L.disabledMessage)
     end
 end

@@ -3,11 +3,11 @@ local L = ahn.L
 
 local titlesTextX = 13
 local expiredCheckX = 315
-local buttonsY = -271
+local buttonsY = -296
 local dropdownColumn1X = 28
 local dropdownColumn2X = 318
-local dropdownRow1Y = -148
-local dropdownRow2Y = -190
+local dropdownRow1Y = -173
+local dropdownRow2Y = -215
 if ahn.locale == "ptBR" or ahn.locale == "frFR" then
     expiredCheckX = 325
     dropdownColumn2X = 330
@@ -20,24 +20,30 @@ end
 local titleText = ahn.createText("GameFontNormalLarge", L.title, titlesTextX, -15)
 local subtitleText = ahn.createText("GameFontHighlight", L.subtitle, titlesTextX, -35)
 local soundPreferencesText = ahn.createText("GameFontNormalMed1", L.soundPreferences, titlesTextX, -85)
-local testSoundsText = ahn.createText("GameFontNormalMed1", L.testSounds, titlesTextX, -245)
-local miscellaneousText = ahn.createText("GameFontNormalMed1", L.miscellaneous, titlesTextX, -331)
+local testSoundsText = ahn.createText("GameFontNormalMed1", L.testSounds, titlesTextX, -270)
+local miscellaneousText = ahn.createText("GameFontNormalMed1", L.miscellaneous, titlesTextX, -356)
 
 ----------------------------------  CHECKBUTTONS  -------------------------------------
-local enableInAHCheckButton = ahn.createButton("CheckButton", L.enableInAHText, 25, -110,
-    function(self) 
+local playSoundsCheckButton = ahn.createButton("CheckButton", L.playSounds, 25, -110,
+    function(self)
+        AHNPreferences.playSounds = self:GetChecked()
+    end
+)
+
+local enableInAHCheckButton = ahn.createButton("CheckButton", L.enableInAHText, 25, -135,
+    function(self)
         AHNPreferences.enableInAH = self:GetChecked()
     end
 )
 ahn.createTooltip(enableInAHCheckButton, "ANCHOR_RIGHT", L.enableInAHTooltip)
 
-local enableExpiredCheckButton = ahn.createButton("CheckButton", L.enableExpired, expiredCheckX, -110, 
-    function(self) 
+local enableExpiredCheckButton = ahn.createButton("CheckButton", L.enableExpired, expiredCheckX, -135,
+    function(self)
         AHNPreferences.enableExpired = self:GetChecked()
     end
 )
 
-local showGreetingCheckButton = ahn.createButton("CheckButton", L.showGreetingMessage, 27, -356, 
+local showGreetingCheckButton = ahn.createButton("CheckButton", L.showGreetingMessage, 27, -381,
     function(self)
         AHNPreferences.showGreeting = self:GetChecked()
     end
@@ -92,6 +98,7 @@ ahn.createTooltip(soundChannelDropdown, "ANCHOR_TOP", L.soundChannelTooltip)
 
 -- Checks the interface options based on the user's preferences when the addOn loads
 function ahn.updateInterfaceOptions()
+    playSoundsCheckButton:SetChecked(AHNPreferences.playSounds)
     enableInAHCheckButton:SetChecked(AHNPreferences.enableInAH)
     enableExpiredCheckButton:SetChecked(AHNPreferences.enableExpired)
     showGreetingCheckButton:SetChecked(AHNPreferences.showGreeting)

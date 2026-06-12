@@ -19,7 +19,7 @@ function ahn.handleAuctionUpdates(event, type)
     elseif event == "AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION" then
         auctionType = ahn.determineNonVanillaAuctionType(type)
     elseif event == "AUCTION_HOUSE_PURCHASE_COMPLETED" then
-        auctionType = Enum.AuctionHouseNotification.AuctionWon
+        auctionType = "successful"
     end
     ahn.playAppropriateAuctionSound(auctionType)
 end
