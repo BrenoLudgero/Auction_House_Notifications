@@ -37,6 +37,23 @@ ahn.soundChannels = {
     { value = "Dialog",   label = L.soundChannelDialog }
 }
 
+local function isCustomSoundFormatSupported(fileName)
+    local fileExtension = fileName:match("^.+%.(.+)$")
+    if not fileExtension then
+        return false
+    end
+    fileExtension = fileExtension:lower()
+    return fileExtension == "mp3" or fileExtension == "ogg"
+end
+
+local function isCustomSoundFilePresent(filePath)
+    local willPlay, soundHandle = PlaySoundFile(filePath, "Master")
+    if soundHandle then 
+        StopSound(soundHandle) 
+    end
+    return willPlay
+end
+
 local function removeExtensionFromFileName(fileName)
     return fileName:match("(.+)%..+$") or fileName
 end
@@ -47,14 +64,17 @@ local function addCustomSoundAsOption(soundEntry)
     table.insert(ahn.expiredSounds, soundEntry)
 end
 
--- IGNORE FILES WITH UNSUPPORTED EXTENSIONS
 local function addSupportedCustomSoundsAsOptions()
     for _, fileName in ipairs(ahn.customSounds or {}) do
-        local customSound = {
-            value = customSoundsPath..fileName, 
-            label = removeExtensionFromFileName(fileName)
-        }
-        addCustomSoundAsOption(customSound)
+        local filePath = customSoundsPath..fileName
+        if isCustomSoundFormatSupported(fileName) 
+        and isCustomSoundFilePresent(filePath) then
+            local customSound = {
+                value = filePath, 
+                label = removeExtensionFromFileName(fileName)
+            }
+            addCustomSoundAsOption(customSound)
+        end
     end
 end
 
