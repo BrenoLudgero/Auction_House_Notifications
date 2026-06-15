@@ -43,7 +43,7 @@
 
 ## Author: Breno Ludgero
 
-## SavedVariables: AHNPreferences
+## SavedVariables: AHNPreferences AHNSavedData
 
 Source\Localization.lua
 Source\Initialization.lua
@@ -52,5 +52,6 @@ Source\SoundHandler.lua
 Source\InterfaceFunctions.lua
 Source\InterfaceElements.lua
 Source\AuctionHandler.lua
+Source\AuctionTracker.lua
 Source\EventHandler.lua
 Source\Main.lua

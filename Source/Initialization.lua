@@ -1,9 +1,8 @@
 local addonName, ahn = ...
 -- ahn: Globals within Auction House Notifications (variables and functions)
 local L = ahn.L
+
 ahn.frame = CreateFrame("Frame")
-ahn.isVanilla = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC 
-ahn.isBurningCrusade = WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 ahn.ahIsOpen = false
 
 local defaultPreferences = {
@@ -16,8 +15,15 @@ local defaultPreferences = {
     enableInAH = false,
     showGreeting = true,
     enableExpired = true,
+    enableCrossCharacterExpired = true,
     playSounds = true,
 }
+
+function ahn.isVanilla()
+    local isVanilla = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
+    local isBurningCrusade = WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+    return isVanilla or isBurningCrusade
+end
 
 -- Displays the add-on in Options -> AddOns
 function ahn.initializeInterface()
@@ -58,10 +64,17 @@ local function createNewSavedVariablesFields()
     end
 end
 
--- Creates or updates the user's preferences in SavedVariables
+-- Creates or updates the user's preferences and ensures
+-- the auction tracking data structure exists in SavedVariables
 function ahn.createSavedVariables()
     if not AHNPreferences then
         AHNPreferences = defaultPreferences
     end
     createNewSavedVariablesFields()
+    if not AHNSavedData then 
+        AHNSavedData = {} 
+    end
+    if not AHNSavedData.trackedAuctions then 
+        AHNSavedData.trackedAuctions = {} 
+    end
 end

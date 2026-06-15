@@ -15,7 +15,7 @@ if locale == "enUS" then
     L.playSounds = "Play Sounds"
     L.enableInAHText = "Enable in Auction House"
     L.enableInAHTooltip = "Enable or disable alerts for successful auctions\nwhen the auction house window is open"
-    L.enableExpired = "Enable Expired Auction Alerts"
+    L.enableExpired = "Enable Own Expired Alerts"
     L.successfulSoundText = "Successful Auction"
     L.failedSoundText = "Failed Auction"
     L.expiredSoundText = "Expired Auction"
@@ -42,6 +42,10 @@ if locale == "enUS" then
     L.soundChannelTooltip = "The sound channel to be used by alerts"
     L.miscellaneous = "Miscellaneous"
     L.showGreetingMessage = "Show Sound State On Login"
+    L.enableCrossCharacterExpired = "Enable Expired Alerts For Alts"
+    L.crossCharacterExpiredTooltip = "Track auctions posted by your other characters and receive a notification when they expire"
+    L.crossCharacterExpiredSingle = "%s's auction for %s reached its expiration time."
+    L.crossCharacterExpiredMultiple = "%s had %d auctions for %s reach their expiration time."
 
 elseif locale == "esMX" or locale == "esES" then
     L.enabledMessage = "|cFFFFFF00"..L.title.."|r están |c000FFF00Habilitadas|r."
@@ -51,7 +55,7 @@ elseif locale == "esMX" or locale == "esES" then
     L.playSounds = "Reproducir Sonidos"
     L.enableInAHText = "Habilitar en la Casa de Subastas"
     L.enableInAHTooltip = "Habilita o deshabilita las alertas para subastas exitosas\ncuando la ventana de la casa de subastas está abierta"
-    L.enableExpired = "Activar Alertas de Subastas Expiradas"
+    L.enableExpired = "Activar Alertas de Expiración Propias"
     L.successfulSoundText = " Subasta Exitosa"
     L.failedSoundText = "Subasta Fallida"
     L.expiredSoundText = "Subasta Expirada"
@@ -78,6 +82,10 @@ elseif locale == "esMX" or locale == "esES" then
     L.soundChannelTooltip = "El canal de sonido que se utilizará para las alertas"
     L.miscellaneous = "Misceláneo"
     L.showGreetingMessage = "Mostrar Estado de Sonido al Iniciar Sesión"
+    L.enableCrossCharacterExpired = "Activar Alertas de Expiración Para Alternos"
+    L.crossCharacterExpiredTooltip = "Rastrea las subastas publicadas por tus otros personajes y recibe una notificación cuando expiren"
+    L.crossCharacterExpiredSingle = "La subasta de %s para %s alcanzó su tiempo de expiración."
+    L.crossCharacterExpiredMultiple = "%s tuvo %d subastas para %s que alcanzaron su tiempo de expiración."
 
 elseif locale == "ptBR" then
     L.enabledMessage = "|cFFFFFF00"..L.title.."|r estão |c000FFF00Ativadas|r."
@@ -87,7 +95,7 @@ elseif locale == "ptBR" then
     L.playSounds = "Reproduzir Sons"
     L.enableInAHText = "Ativar na Casa de Leilões"
     L.enableInAHTooltip = "Ativa ou desativa alertas para leilões bem-sucedidos\nquando a janela da casa de leilões está aberta"
-    L.enableExpired = "Ativar Alertas de Leilões Vencidos"
+    L.enableExpired = "Ativar Alertas de Vencimento Próprios"
     L.successfulSoundText = "Leilão Bem-Sucedido"
     L.failedSoundText = "Leilão Mal-Sucedido"
     L.expiredSoundText = "Leilão Vencido"
@@ -114,6 +122,10 @@ elseif locale == "ptBR" then
     L.soundChannelTooltip = "O canal de som a ser usado pelas notificações"
     L.miscellaneous = "Diversos"
     L.showGreetingMessage = "Mostrar Estado de Som ao Logar"
+    L.enableCrossCharacterExpired = "Ativar Alertas de Vencimento Para Alternativos"
+    L.crossCharacterExpiredTooltip = "Rastreia leilões publicados pelos seus outros personagens e recebe uma notificação quando expirarem"
+    L.crossCharacterExpiredSingle = "O leilão de %s para %s atingiu seu tempo de expiração."
+    L.crossCharacterExpiredMultiple = "%s teve %d leilões para %s atingirem seu tempo de expiração."
 
 elseif locale == "deDE" then
     L.enabledMessage = "|cFFFFFF00"..L.title.."|r sind |c000FFF00Aktiviert|r."
@@ -123,7 +135,7 @@ elseif locale == "deDE" then
     L.playSounds = "Töne Abspielen"
     L.enableInAHText = "Aktivieren im Auktionshaus"
     L.enableInAHTooltip = "Aktiviert oder deaktiviert Benachrichtigungen für erfolgreiche Auktionen\nwenn das Auktionshaus-Fenster geöffnet ist"
-    L.enableExpired = "Benachrichtigungen Über Abgelaufene Auktionen Aktivieren"
+    L.enableExpired = "Eigene Ablaufbenachrichtigungen Aktivieren"
     L.successfulSoundText = "Erfolgreiche Auktion"
     L.failedSoundText = "Fehlgeschlagene Auktion"
     L.expiredSoundText = "Abgelaufene Auktion"
@@ -150,6 +162,10 @@ elseif locale == "deDE" then
     L.soundChannelTooltip = "Der Soundkanal, der von Benachrichtigungen verwendet wird"
     L.miscellaneous = "Sonstiges"
     L.showGreetingMessage = "Klangzustand beim Einloggen Anzeigen"
+    L.enableCrossCharacterExpired = "Ablaufbenachrichtigungen für Alts Aktivieren"
+    L.crossCharacterExpiredTooltip = "Verfolgt Auktionen deiner anderen Charaktere und benachrichtigt dich, wenn sie ablaufen"
+    L.crossCharacterExpiredSingle = "Die Auktion von %s für %s hat ihre Ablaufzeit erreicht."
+    L.crossCharacterExpiredMultiple = "%s hatte %d Auktionen für %s, die ihre Ablaufzeit erreicht haben."
 
 elseif locale == "frFR" then
     L.enabledMessage = "|cFFFFFF00"..L.title.."|r sont |c000FFF00Activées|r."
@@ -159,7 +175,7 @@ elseif locale == "frFR" then
     L.playSounds = "Jouer les Sons"
     L.enableInAHText = "Activer dans l'Hôtel des Ventes"
     L.enableInAHTooltip = "Activer ou désactiver les alertes pour les ventes aux enchères réussies\nlorsque la fenêtre de l'hôtel des ventes est ouverte"
-    L.enableExpired = "Activer les Alertes d'Enchères Expirées"
+    L.enableExpired = "Activer ses Propres Alertes d'Expiration"
     L.successfulSoundText = "Enchère Réussie"
     L.failedSoundText = "Enchère Infructueuse"
     L.expiredSoundText = "Enchère Expirée"
@@ -186,6 +202,10 @@ elseif locale == "frFR" then
     L.soundChannelTooltip = "Le canal sonore à utiliser pour les alertes"
     L.miscellaneous = "Divers"
     L.showGreetingMessage = "Afficher l'État du Son à la Connexion"
+    L.enableCrossCharacterExpired = "Activer les Alertes d'Expiration pour les Alts"
+    L.crossCharacterExpiredTooltip = "Suit les enchères publiées par vos autres personnages et vous avertit lorsqu'elles expirent"
+    L.crossCharacterExpiredSingle = "L'enchère de %s pour %s a atteint son délai d'expiration."
+    L.crossCharacterExpiredMultiple = "%s avait %d enchères pour %s ayant atteint leur délai d'expiration."
 
 elseif locale == "itIT" then
     L.enabledMessage = "|cFFFFFF00"..L.title.."|r sono |c000FFF00Abilitate|r."
@@ -195,7 +215,7 @@ elseif locale == "itIT" then
     L.playSounds = "Riproduci Suoni"
     L.enableInAHText = "Attivare nella Casa d'Aste"
     L.enableInAHTooltip = "Abilitare o disabilitare gli avvisi per le aste andate a buon fine\nquando la finestra della casa d'aste è aperta"
-    L.enableExpired = "Abilitare gli Avvisi di Aste Scadute"
+    L.enableExpired = "Attivare i Propri Avvisi di Scadenza"
     L.successfulSoundText = "Asta di Successo"
     L.failedSoundText = "Asta Fallita"
     L.expiredSoundText = "Asta Scaduta"
@@ -222,6 +242,10 @@ elseif locale == "itIT" then
     L.soundChannelTooltip = "Il canale sonoro da utilizzare per gli avvisi"
     L.miscellaneous = "Varie"
     L.showGreetingMessage = "Mostra Stato Audio all'Accesso"
+    L.enableCrossCharacterExpired = "Attivare gli Avvisi di Scadenza per gli Alter"
+    L.crossCharacterExpiredTooltip = "Tiene traccia delle aste pubblicate dai tuoi altri personaggi e ti avvisa quando scadono"
+    L.crossCharacterExpiredSingle = "L'asta di %s per %s ha raggiunto il suo tempo di scadenza."
+    L.crossCharacterExpiredMultiple = "%s aveva %d aste per %s che hanno raggiunto il loro tempo di scadenza."
 
 elseif locale == "ruRU" then
     L.enabledMessage = "|cFFFFFF00"..L.title.."|r |c000FFF00Включены|r."
@@ -231,7 +255,7 @@ elseif locale == "ruRU" then
     L.playSounds = "Воспроизвести Звуки"
     L.enableInAHText = "Доступно в Aукционном Дом"
     L.enableInAHTooltip = "Включение и отключение оповещений об успешных аукционах\nпри открытом окне аукционного дом"
-    L.enableExpired = "Включить оповещения о просроченных аукционах"
+    L.enableExpired = "Включить собственные оповещения об истечении"
     L.successfulSoundText = "Успешный Aукцион"
     L.failedSoundText = "Несостоявшийся Aукцион"
     L.expiredSoundText = "Просроченный Aукцион"
@@ -258,6 +282,10 @@ elseif locale == "ruRU" then
     L.soundChannelTooltip = "Звуковой канал который будет использоваться оповещениями"
     L.miscellaneous = "Разное"
     L.showGreetingMessage = "Показать Состояние Звука при Входе"
+    L.enableCrossCharacterExpired = "Включить оповещения об истечении для альтов"
+    L.crossCharacterExpiredTooltip = "Отслеживает аукционы ваших других персонажей и уведомляет вас, когда они истекают"
+    L.crossCharacterExpiredSingle = "Аукцион %s для %s достиг времени истечения."
+    L.crossCharacterExpiredMultiple = "У %s истекло %d аукцион(ов) для %s."
 
 elseif locale == "koKR" then
     L.enabledMessage = "|cFFFFFF00"..L.title.."|r 이(가) |c000FFF00활성화|r 되었습니다."
@@ -267,7 +295,7 @@ elseif locale == "koKR" then
     L.playSounds = "소리 재생"
     L.enableInAHText = "경매장에서 사용 가능"
     L.enableInAHTooltip = "경매장 창이 열려 있을 때 성공적인 경매에 대한 알림을\n사용하거나 사용하지 않도록 설정합니다."
-    L.enableExpired = "만료된 경매 알림 사용"
+    L.enableExpired = "자신의 만료 알림 활성화"
     L.successfulSoundText = "성공적인 경매"
     L.failedSoundText = "실패한 경매"
     L.expiredSoundText = "만료된 경매"
@@ -294,6 +322,10 @@ elseif locale == "koKR" then
     L.soundChannelTooltip = "알림에 사용할 음향 채널"
     L.miscellaneous = "기타"
     L.showGreetingMessage = "로그인 시 사운드 상태 표시"
+    L.enableCrossCharacterExpired = "대체 캐릭터 만료 알림 활성화"
+    L.crossCharacterExpiredTooltip = "다른 캐릭터가 등록한 경매를 추적하고 만료 시 알림을 받습니다"
+    L.crossCharacterExpiredSingle = "%s의 %s 경매가 만료 시간에 도달했습니다."
+    L.crossCharacterExpiredMultiple = "%s의 경매 %d개(%s)가 만료 시간에 도달했습니다."
 
 elseif locale == "zhTW" then
     L.enabledMessage = "|cFFFFFF00"..L.title.."|r 已 |c000FFF00啟用|r。"
@@ -303,7 +335,7 @@ elseif locale == "zhTW" then
     L.playSounds = "播放音效"
     L.enableInAHText = "在拍賣行啟用"
     L.enableInAHTooltip = "在拍賣行視窗開啟時\n啟用或停用成功拍賣的警示"
-    L.enableExpired = "啟用過期的競價提醒"
+    L.enableExpired = "啟用自身到期提醒"
     L.successfulSoundText = "成功拍賣"
     L.failedSoundText = "拍賣失敗"
     L.expiredSoundText = "已過期的拍賣"
@@ -330,6 +362,10 @@ elseif locale == "zhTW" then
     L.soundChannelTooltip = "警示所使用的音效頻道"
     L.miscellaneous = "其他"
     L.showGreetingMessage = "登入時顯示音效狀態"
+    L.enableCrossCharacterExpired = "啟用其他角色到期提醒"
+    L.crossCharacterExpiredTooltip = "追蹤您其他角色發布的拍賣，並在到期時接收通知"
+    L.crossCharacterExpiredSingle = "%s 的 %s 拍賣已達到到期時間。"
+    L.crossCharacterExpiredMultiple = "%s 有 %d 個 %s 拍賣已達到到期時間。"
 
 elseif locale == "zhCN" then
     L.enabledMessage = "|cFFFFFF00"..L.title.."|r 已 |c000FFF00启用|r。"
@@ -339,7 +375,7 @@ elseif locale == "zhCN" then
     L.playSounds = "播放声音"
     L.enableInAHText = "在拍卖行启用"
     L.enableInAHTooltip = "在拍卖行窗口打开时\n启用或禁用成功拍卖的警报"
-    L.enableExpired = "启用过期的竞价提醒"
+    L.enableExpired = "启用自身到期提醒"
     L.successfulSoundText = "成功拍卖"
     L.failedSoundText = "拍卖失败"
     L.expiredSoundText = "已过期的拍卖"
@@ -366,4 +402,8 @@ elseif locale == "zhCN" then
     L.soundChannelTooltip = "用于警报的声音通道"
     L.miscellaneous = "杂项"
     L.showGreetingMessage = "登录时显示声音状态"
+    L.enableCrossCharacterExpired = "启用其他角色到期提醒"
+    L.crossCharacterExpiredTooltip = "追踪您其他角色发布的拍卖，并在到期时接收通知"
+    L.crossCharacterExpiredSingle = "%s 的 %s 拍卖已到期。"
+    L.crossCharacterExpiredMultiple = "%s 有 %d 个 %s 拍卖已到期。"
 end

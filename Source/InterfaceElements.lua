@@ -37,11 +37,18 @@ local enableInAHCheckButton = ahn.createButton("CheckButton", L.enableInAHText, 
 )
 ahn.createTooltip(enableInAHCheckButton, "ANCHOR_RIGHT", L.enableInAHTooltip)
 
-local enableExpiredCheckButton = ahn.createButton("CheckButton", L.enableExpired, expiredCheckX, -135,
+local enableExpiredCheckButton = ahn.createButton("CheckButton", L.enableExpired, expiredCheckX, -110,
     function(self)
         AHNPreferences.enableExpired = self:GetChecked()
     end
 )
+
+local enableCrossCharacterExpiredCheckButton = ahn.createButton("CheckButton", L.enableCrossCharacterExpired, expiredCheckX, -135,
+    function(self)
+        AHNPreferences.enableCrossCharacterExpired = self:GetChecked()
+    end
+)
+ahn.createTooltip(enableCrossCharacterExpiredCheckButton, "ANCHOR_RIGHT", L.crossCharacterExpiredTooltip)
 
 local showGreetingCheckButton = ahn.createButton("CheckButton", L.showGreetingMessage, 27, -381,
     function(self)
@@ -102,6 +109,7 @@ function ahn.updateInterfaceOptions()
     enableInAHCheckButton:SetChecked(AHNPreferences.enableInAH)
     enableExpiredCheckButton:SetChecked(AHNPreferences.enableExpired)
     showGreetingCheckButton:SetChecked(AHNPreferences.showGreeting)
+    enableCrossCharacterExpiredCheckButton:SetChecked(AHNPreferences.enableCrossCharacterExpired)
     ahn.setInitialDropdownText(successfulSoundDropdown, ahn.successfulSounds)
     ahn.setInitialDropdownText(failedSoundDropdown, ahn.failedSounds)
     ahn.setInitialDropdownText(expiredSoundDropdown, ahn.expiredSounds)

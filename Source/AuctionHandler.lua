@@ -6,7 +6,7 @@ local wonAuction
 local outbidAuction
 local expiredAuction
 
-if ahn.isVanilla or ahn.isBurningCrusade then
+if ahn.isVanilla() then
     soldAuction = string.gsub(ERR_AUCTION_SOLD_S, "%%s", "(.+)")
     wonAuction = string.gsub(ERR_AUCTION_WON_S, "%%s", "(.+)")
     outbidAuction = string.gsub(ERR_AUCTION_OUTBID_S, "%%s", "(.+)")
@@ -16,6 +16,10 @@ else
     wonAuction = Enum.AuctionHouseNotification.AuctionWon
     outbidAuction = Enum.AuctionHouseNotification.AuctionOutbid
     expiredAuction = Enum.AuctionHouseNotification.AuctionExpired
+end
+
+function ahn.extractItemNameFromVanillaExpiredAuctionMessage(message)
+    return string.match(message, expiredAuction) or string.match(message, soldAuction)
 end
 
 function ahn.determineVanillaAuctionType(auctionType)
