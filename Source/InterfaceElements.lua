@@ -24,7 +24,7 @@ local testSoundsText = ahn.createText("GameFontNormalMed1", L.testSounds, titles
 local miscellaneousText = ahn.createText("GameFontNormalMed1", L.miscellaneous, titlesTextX, -356)
 
 ----------------------------------  CHECKBUTTONS  -------------------------------------
-local playSoundsCheckButton = ahn.createButton("CheckButton", L.playSounds, 25, -110,
+local playSoundsCheckButton = ahn.createButton("CheckButton", L.enableSounds, 25, -110,
     function(self)
         AHNPreferences.playSounds = self:GetChecked()
     end

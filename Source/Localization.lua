@@ -12,7 +12,7 @@ if locale == "enUS" then
     L.disabledMessage = "|cFFFFFF00"..L.title.."|r are |cFFF00000Disabled|r."
     L.subtitle = "Created by "..author.."\nVersion "..version
     L.soundPreferences = "Sound Preferences"
-    L.playSounds = "Play Sounds"
+    L.enableSounds = "Enable Sound Notifications"
     L.enableInAHText = "Enable in Auction House"
     L.enableInAHTooltip = "Enable or disable alerts for successful auctions\nwhen the auction house window is open"
     L.enableExpired = "Enable Own Expired Alerts"
@@ -41,7 +41,7 @@ if locale == "enUS" then
     L.soundChannelDialog = "Dialog"
     L.soundChannelTooltip = "The sound channel to be used by alerts"
     L.miscellaneous = "Miscellaneous"
-    L.showGreetingMessage = "Show Sound State On Login"
+    L.showGreetingMessage = "Show Sound State on Login"
     L.enableCrossCharacterExpired = "Enable Expired Alerts For Alts"
     L.crossCharacterExpiredTooltip = "Track auctions posted by your other characters and receive a notification when they expire"
     L.crossCharacterExpiredSingle = "%s's auction for %s reached its expiration time."
@@ -52,7 +52,7 @@ elseif locale == "esMX" or locale == "esES" then
     L.disabledMessage = "|cFFFFFF00"..L.title.."|r están |cFFF00000Deshabilitadas|r."
     L.subtitle = "Creado por "..author.."\nVersión "..version
     L.soundPreferences = "Preferencias de Sonido"
-    L.playSounds = "Reproducir Sonidos"
+    L.enableSounds = "Activar Notificaciones Sonoras"
     L.enableInAHText = "Habilitar en la Casa de Subastas"
     L.enableInAHTooltip = "Habilita o deshabilita las alertas para subastas exitosas\ncuando la ventana de la casa de subastas está abierta"
     L.enableExpired = "Activar Alertas de Expiración Propias"
@@ -92,7 +92,7 @@ elseif locale == "ptBR" then
     L.disabledMessage = "|cFFFFFF00"..L.title.."|r estão |cFFF00000Desativadas|r."
     L.subtitle = "Criado por "..author.."\nVersão "..version
     L.soundPreferences = "Preferências de Som"
-    L.playSounds = "Reproduzir Sons"
+    L.enableSounds = "Ativar Notificações Sonoras"
     L.enableInAHText = "Ativar na Casa de Leilões"
     L.enableInAHTooltip = "Ativa ou desativa alertas para leilões bem-sucedidos\nquando a janela da casa de leilões está aberta"
     L.enableExpired = "Ativar Alertas de Vencimento Próprios"
@@ -132,7 +132,7 @@ elseif locale == "deDE" then
     L.disabledMessage = "|cFFFFFF00"..L.title.."|r sind |cFFF00000Deaktiviert|r."
     L.subtitle = "Erstellt von "..author.."\nVersion "..version
     L.soundPreferences = "Soundeinstellungen"
-    L.playSounds = "Töne Abspielen"
+    L.enableSounds = "Tonbenachrichtigungen Aktivieren"
     L.enableInAHText = "Aktivieren im Auktionshaus"
     L.enableInAHTooltip = "Aktiviert oder deaktiviert Benachrichtigungen für erfolgreiche Auktionen\nwenn das Auktionshaus-Fenster geöffnet ist"
     L.enableExpired = "Eigene Ablaufbenachrichtigungen Aktivieren"
@@ -172,7 +172,7 @@ elseif locale == "frFR" then
     L.disabledMessage = "|cFFFFFF00"..L.title.."|r sont |cFFF00000Désactivées|r."
     L.subtitle = "Créé par "..author.."\nVersion "..version
     L.soundPreferences = "Préférences Sonores"
-    L.playSounds = "Jouer les Sons"
+    L.enableSounds = "Activer les Notifications Sonores"
     L.enableInAHText = "Activer dans l'Hôtel des Ventes"
     L.enableInAHTooltip = "Activer ou désactiver les alertes pour les ventes aux enchères réussies\nlorsque la fenêtre de l'hôtel des ventes est ouverte"
     L.enableExpired = "Activer ses Propres Alertes d'Expiration"
@@ -212,7 +212,7 @@ elseif locale == "itIT" then
     L.disabledMessage = "|cFFFFFF00"..L.title.."|r sono |cFFF00000Disabilitate|r."
     L.subtitle = "Creato da "..author.."\nVersion "..version
     L.soundPreferences = "Preferenze di Suono"
-    L.playSounds = "Riproduci Suoni"
+    L.enableSounds = "Attiva Notifiche Sonore"
     L.enableInAHText = "Attivare nella Casa d'Aste"
     L.enableInAHTooltip = "Abilitare o disabilitare gli avvisi per le aste andate a buon fine\nquando la finestra della casa d'aste è aperta"
     L.enableExpired = "Attivare i Propri Avvisi di Scadenza"
@@ -252,7 +252,7 @@ elseif locale == "ruRU" then
     L.disabledMessage = "|cFFFFFF00"..L.title.."|r |cFFF00000Отключены|r."
     L.subtitle = "Создано "..author.."\nВерсия "..version
     L.soundPreferences = "Настройки Звука"
-    L.playSounds = "Воспроизвести Звуки"
+    L.enableSounds = "Включить Звуковые Оповещения"
     L.enableInAHText = "Доступно в Aукционном Дом"
     L.enableInAHTooltip = "Включение и отключение оповещений об успешных аукционах\nпри открытом окне аукционного дом"
     L.enableExpired = "Включить собственные оповещения об истечении"
@@ -292,7 +292,7 @@ elseif locale == "koKR" then
     L.disabledMessage = "|cFFFFFF00"..L.title.."|r 이(가) |cFFF00000비활성화|r 되었습니다."
     L.subtitle = author.."에 의해 생성됨\n버전 "..version
     L.soundPreferences = "소리 설정"
-    L.playSounds = "소리 재생"
+    L.enableSounds = "소리 알림 활성화"
     L.enableInAHText = "경매장에서 사용 가능"
     L.enableInAHTooltip = "경매장 창이 열려 있을 때 성공적인 경매에 대한 알림을\n사용하거나 사용하지 않도록 설정합니다."
     L.enableExpired = "자신의 만료 알림 활성화"
@@ -332,7 +332,7 @@ elseif locale == "zhTW" then
     L.disabledMessage = "|cFFFFFF00"..L.title.."|r 已 |cFFF00000停用|r。"
     L.subtitle = "由"..author.."創建\n版本 "..version
     L.soundPreferences = "音效偏好設定"
-    L.playSounds = "播放音效"
+    L.enableSounds = "啟用音效提醒"
     L.enableInAHText = "在拍賣行啟用"
     L.enableInAHTooltip = "在拍賣行視窗開啟時\n啟用或停用成功拍賣的警示"
     L.enableExpired = "啟用自身到期提醒"
@@ -372,7 +372,7 @@ elseif locale == "zhCN" then
     L.disabledMessage = "|cFFFFFF00"..L.title.."|r 已 |cFFF00000禁用|r。"
     L.subtitle = "由"..author.."创建\n版本 "..version
     L.soundPreferences = "声音偏好设置"
-    L.playSounds = "播放声音"
+    L.enableSounds = "启用音效提醒"
     L.enableInAHText = "在拍卖行启用"
     L.enableInAHTooltip = "在拍卖行窗口打开时\n启用或禁用成功拍卖的警报"
     L.enableExpired = "启用自身到期提醒"
