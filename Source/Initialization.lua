@@ -16,6 +16,7 @@ local defaultPreferences = {
     showGreeting = true,
     enableExpired = true,
     enableCrossCharacterExpired = true,
+    showMessageWhenCrossCharacterExpiredIsDisabled = true,
     playSounds = true,
 }
 

@@ -191,10 +191,16 @@ local function notifyExpiredAuctions(expiredAuctions)
             else
                 message = string.format(L.crossCharacterExpiredSingle, coloredCharName, coloredItemName)
             end
-            print("|cFFFFFF00"..L.title.."|r: "..message)
-            if not soundPlayed and AHNPreferences.playSounds and AHNPreferences.enableCrossCharacterExpired then
-                ahn.playSound(AHNPreferences.chosenSounds.expired, "expired")
-                soundPlayed = true
+            if AHNPreferences.playSounds 
+            and AHNPreferences.enableCrossCharacterExpired then
+                if not soundPlayed then
+                    ahn.playSound(AHNPreferences.chosenSounds.expired, "expired")
+                    soundPlayed = true
+                end
+                print("|cFFFFFF00"..L.title.."|r: "..message)
+            elseif not AHNPreferences.enableCrossCharacterExpired
+            and AHNPreferences.showMessageWhenCrossCharacterExpiredIsDisabled then
+                print("|cFFFFFF00"..L.title.."|r: "..message)
             end
         end
     end

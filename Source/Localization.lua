@@ -44,6 +44,7 @@ if locale == "enUS" then
     L.showGreetingMessage = "Show Sound State on Login"
     L.enableCrossCharacterExpired = "Enable Expired Alerts For Alts"
     L.crossCharacterExpiredTooltip = "Track auctions posted by your other characters and receive a notification when they expire"
+    L.showMessageWhenCrossCharacterExpiredIsDisabled = 'Show Expiration Message When "'..L.enableCrossCharacterExpired..'" Is Disabled'
     L.crossCharacterExpiredSingle = "%s's auction for %s reached its expiration time."
     L.crossCharacterExpiredMultiple = "%s had %d auctions for %s reach their expiration time."
 
@@ -84,6 +85,7 @@ elseif locale == "esMX" or locale == "esES" then
     L.showGreetingMessage = "Mostrar Estado de Sonido al Iniciar Sesión"
     L.enableCrossCharacterExpired = "Activar Alertas de Expiración Para Alternos"
     L.crossCharacterExpiredTooltip = "Rastrea las subastas publicadas por tus otros personajes y recibe una notificación cuando expiren"
+    L.showMessageWhenCrossCharacterExpiredIsDisabled = 'Mostrar Mensaje de Expiración Cuando "'..L.enableCrossCharacterExpired..'" Esté Desactivado'
     L.crossCharacterExpiredSingle = "La subasta de %s para %s alcanzó su tiempo de expiración."
     L.crossCharacterExpiredMultiple = "%s tuvo %d subastas para %s que alcanzaron su tiempo de expiración."
 
@@ -121,9 +123,10 @@ elseif locale == "ptBR" then
     L.soundChannelDialog = "Diálogo"
     L.soundChannelTooltip = "O canal de som a ser usado pelas notificações"
     L.miscellaneous = "Diversos"
-    L.showGreetingMessage = "Mostrar Estado de Som ao Logar"
+    L.showGreetingMessage = "Exibir Estado de Som ao Logar"
     L.enableCrossCharacterExpired = "Ativar Alertas de Vencimento Para Alternativos"
     L.crossCharacterExpiredTooltip = "Rastreia leilões publicados pelos seus outros personagens e recebe uma notificação quando expirarem"
+    L.showMessageWhenCrossCharacterExpiredIsDisabled = 'Exibir Mensagem de Vencimento Quando "'..L.enableCrossCharacterExpired..'" Estiver Desativado'
     L.crossCharacterExpiredSingle = "O leilão de %s para %s atingiu seu tempo de expiração."
     L.crossCharacterExpiredMultiple = "%s teve %d leilões para %s atingirem seu tempo de expiração."
 
@@ -164,6 +167,7 @@ elseif locale == "deDE" then
     L.showGreetingMessage = "Klangzustand beim Einloggen Anzeigen"
     L.enableCrossCharacterExpired = "Ablaufbenachrichtigungen für Alts Aktivieren"
     L.crossCharacterExpiredTooltip = "Verfolgt Auktionen deiner anderen Charaktere und benachrichtigt dich, wenn sie ablaufen"
+    L.showMessageWhenCrossCharacterExpiredIsDisabled = 'Ablaufmeldung Anzeigen, wenn "'..L.enableCrossCharacterExpired..'" Deaktiviert Ist'
     L.crossCharacterExpiredSingle = "Die Auktion von %s für %s hat ihre Ablaufzeit erreicht."
     L.crossCharacterExpiredMultiple = "%s hatte %d Auktionen für %s, die ihre Ablaufzeit erreicht haben."
 
@@ -204,6 +208,7 @@ elseif locale == "frFR" then
     L.showGreetingMessage = "Afficher l'État du Son à la Connexion"
     L.enableCrossCharacterExpired = "Activer les Alertes d'Expiration pour les Alts"
     L.crossCharacterExpiredTooltip = "Suit les enchères publiées par vos autres personnages et vous avertit lorsqu'elles expirent"
+    L.showMessageWhenCrossCharacterExpiredIsDisabled = 'Afficher le Message d\'Expiration Lorsque "'..L.enableCrossCharacterExpired..'" Est Désactivé'
     L.crossCharacterExpiredSingle = "L'enchère de %s pour %s a atteint son délai d'expiration."
     L.crossCharacterExpiredMultiple = "%s avait %d enchères pour %s ayant atteint leur délai d'expiration."
 
@@ -244,6 +249,7 @@ elseif locale == "itIT" then
     L.showGreetingMessage = "Mostra Stato Audio all'Accesso"
     L.enableCrossCharacterExpired = "Attivare gli Avvisi di Scadenza per gli Alter"
     L.crossCharacterExpiredTooltip = "Tiene traccia delle aste pubblicate dai tuoi altri personaggi e ti avvisa quando scadono"
+    L.showMessageWhenCrossCharacterExpiredIsDisabled = 'Mostrare il Messaggio di Scadenza Quando "'..L.enableCrossCharacterExpired..'" È Disattivato'
     L.crossCharacterExpiredSingle = "L'asta di %s per %s ha raggiunto il suo tempo di scadenza."
     L.crossCharacterExpiredMultiple = "%s aveva %d aste per %s che hanno raggiunto il loro tempo di scadenza."
 
@@ -284,6 +290,7 @@ elseif locale == "ruRU" then
     L.showGreetingMessage = "Показать Состояние Звука при Входе"
     L.enableCrossCharacterExpired = "Включить оповещения об истечении для альтов"
     L.crossCharacterExpiredTooltip = "Отслеживает аукционы ваших других персонажей и уведомляет вас, когда они истекают"
+    L.showMessageWhenCrossCharacterExpiredIsDisabled = 'Показывать Сообщение об Истечении, Когда "'..L.enableCrossCharacterExpired..'" Отключено'
     L.crossCharacterExpiredSingle = "Аукцион %s для %s достиг времени истечения."
     L.crossCharacterExpiredMultiple = "У %s истекло %d аукцион(ов) для %s."
 
@@ -324,6 +331,7 @@ elseif locale == "koKR" then
     L.showGreetingMessage = "로그인 시 사운드 상태 표시"
     L.enableCrossCharacterExpired = "대체 캐릭터 만료 알림 활성화"
     L.crossCharacterExpiredTooltip = "다른 캐릭터가 등록한 경매를 추적하고 만료 시 알림을 받습니다"
+    L.showMessageWhenCrossCharacterExpiredIsDisabled = '"'..L.enableCrossCharacterExpired..'"이(가) 비활성화되어 있을 때 만료 메시지 표시'
     L.crossCharacterExpiredSingle = "%s의 %s 경매가 만료 시간에 도달했습니다."
     L.crossCharacterExpiredMultiple = "%s의 경매 %d개(%s)가 만료 시간에 도달했습니다."
 
@@ -364,6 +372,7 @@ elseif locale == "zhTW" then
     L.showGreetingMessage = "登入時顯示音效狀態"
     L.enableCrossCharacterExpired = "啟用其他角色到期提醒"
     L.crossCharacterExpiredTooltip = "追蹤您其他角色發布的拍賣，並在到期時接收通知"
+    L.showMessageWhenCrossCharacterExpiredIsDisabled = '當「'..L.enableCrossCharacterExpired..'」停用時顯示到期訊息'
     L.crossCharacterExpiredSingle = "%s 的 %s 拍賣已達到到期時間。"
     L.crossCharacterExpiredMultiple = "%s 有 %d 個 %s 拍賣已達到到期時間。"
 
@@ -404,6 +413,7 @@ elseif locale == "zhCN" then
     L.showGreetingMessage = "登录时显示声音状态"
     L.enableCrossCharacterExpired = "启用其他角色到期提醒"
     L.crossCharacterExpiredTooltip = "追踪您其他角色发布的拍卖，并在到期时接收通知"
+    L.showMessageWhenCrossCharacterExpiredIsDisabled = '当「'..L.enableCrossCharacterExpired..'」禁用时显示到期消息'
     L.crossCharacterExpiredSingle = "%s 的 %s 拍卖已到期。"
     L.crossCharacterExpiredMultiple = "%s 有 %d 个 %s 拍卖已到期。"
 end
