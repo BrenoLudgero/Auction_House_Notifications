@@ -6,6 +6,7 @@ local author = C_AddOns.GetAddOnMetadata(addonName, "Author")
 local version = C_AddOns.GetAddOnMetadata(addonName, "Version")
 
 L.title = C_AddOns.GetAddOnMetadata(addonName, "Title")
+L.chat = "Chat"
 
 if locale == "enUS" then
     L.enabledMessage = "|cFFFFFF00"..L.title.."|r are |c000FFF00Enabled|r."
@@ -40,7 +41,6 @@ if locale == "enUS" then
     L.soundChannelAmbience = "Ambience"
     L.soundChannelDialog = "Dialog"
     L.soundChannelTooltip = "The sound channel to be used by alerts"
-    L.miscellaneous = "Miscellaneous"
     L.showGreetingMessage = "Show Sound State on Login"
     L.enableCrossCharacterExpired = "Enable Expired Alerts For Alts"
     L.crossCharacterExpiredTooltip = "Track auctions posted by your other characters and receive a notification when they expire"
@@ -81,7 +81,6 @@ elseif locale == "esMX" or locale == "esES" then
     L.soundChannelAmbience = "Ambiente"
     L.soundChannelDialog = "Diálogo"
     L.soundChannelTooltip = "El canal de sonido que se utilizará para las alertas"
-    L.miscellaneous = "Misceláneo"
     L.showGreetingMessage = "Mostrar Estado de Sonido al Iniciar Sesión"
     L.enableCrossCharacterExpired = "Activar Alertas de Expiración Para Alternos"
     L.crossCharacterExpiredTooltip = "Rastrea las subastas publicadas por tus otros personajes y recibe una notificación cuando expiren"
@@ -122,7 +121,6 @@ elseif locale == "ptBR" then
     L.soundChannelAmbience = "Ambiente"
     L.soundChannelDialog = "Diálogo"
     L.soundChannelTooltip = "O canal de som a ser usado pelas notificações"
-    L.miscellaneous = "Diversos"
     L.showGreetingMessage = "Exibir Estado de Som ao Logar"
     L.enableCrossCharacterExpired = "Ativar Alertas de Vencimento Para Alternativos"
     L.crossCharacterExpiredTooltip = "Rastreia leilões publicados pelos seus outros personagens e recebe uma notificação quando expirarem"
@@ -163,7 +161,6 @@ elseif locale == "deDE" then
     L.soundChannelAmbience = "Umgebung"
     L.soundChannelDialog = "Dialog"
     L.soundChannelTooltip = "Der Soundkanal, der von Benachrichtigungen verwendet wird"
-    L.miscellaneous = "Sonstiges"
     L.showGreetingMessage = "Klangzustand beim Einloggen Anzeigen"
     L.enableCrossCharacterExpired = "Ablaufbenachrichtigungen für Alts Aktivieren"
     L.crossCharacterExpiredTooltip = "Verfolgt Auktionen deiner anderen Charaktere und benachrichtigt dich, wenn sie ablaufen"
@@ -204,7 +201,6 @@ elseif locale == "frFR" then
     L.soundChannelAmbience = "Ambiance"
     L.soundChannelDialog = "Dialogue"
     L.soundChannelTooltip = "Le canal sonore à utiliser pour les alertes"
-    L.miscellaneous = "Divers"
     L.showGreetingMessage = "Afficher l'État du Son à la Connexion"
     L.enableCrossCharacterExpired = "Activer les Alertes d'Expiration pour les Alts"
     L.crossCharacterExpiredTooltip = "Suit les enchères publiées par vos autres personnages et vous avertit lorsqu'elles expirent"
@@ -245,7 +241,6 @@ elseif locale == "itIT" then
     L.soundChannelAmbience = "Ambiente"
     L.soundChannelDialog = "Dialogo"
     L.soundChannelTooltip = "Il canale sonoro da utilizzare per gli avvisi"
-    L.miscellaneous = "Varie"
     L.showGreetingMessage = "Mostra Stato Audio all'Accesso"
     L.enableCrossCharacterExpired = "Attivare gli Avvisi di Scadenza per gli Alter"
     L.crossCharacterExpiredTooltip = "Tiene traccia delle aste pubblicate dai tuoi altri personaggi e ti avvisa quando scadono"
@@ -258,6 +253,7 @@ elseif locale == "ruRU" then
     L.disabledMessage = "|cFFFFFF00"..L.title.."|r |cFFF00000Отключены|r."
     L.subtitle = "Создано "..author.."\nВерсия "..version
     L.soundPreferences = "Настройки Звука"
+    L.chat = "Чат"
     L.enableSounds = "Включить Звуковые Оповещения"
     L.enableInAHText = "Доступно в Aукционном Дом"
     L.enableInAHTooltip = "Включение и отключение оповещений об успешных аукционах\nпри открытом окне аукционного дом"
@@ -286,7 +282,6 @@ elseif locale == "ruRU" then
     L.soundChannelAmbience = "Атмосфера"
     L.soundChannelDialog = "Диалог"
     L.soundChannelTooltip = "Звуковой канал который будет использоваться оповещениями"
-    L.miscellaneous = "Разное"
     L.showGreetingMessage = "Показать Состояние Звука при Входе"
     L.enableCrossCharacterExpired = "Включить оповещения об истечении для альтов"
     L.crossCharacterExpiredTooltip = "Отслеживает аукционы ваших других персонажей и уведомляет вас, когда они истекают"
@@ -299,6 +294,7 @@ elseif locale == "koKR" then
     L.disabledMessage = "|cFFFFFF00"..L.title.."|r 이(가) |cFFF00000비활성화|r 되었습니다."
     L.subtitle = author.."에 의해 생성됨\n버전 "..version
     L.soundPreferences = "소리 설정"
+    L.chat = "채팅"
     L.enableSounds = "소리 알림 활성화"
     L.enableInAHText = "경매장에서 사용 가능"
     L.enableInAHTooltip = "경매장 창이 열려 있을 때 성공적인 경매에 대한 알림을\n사용하거나 사용하지 않도록 설정합니다."
@@ -327,7 +323,6 @@ elseif locale == "koKR" then
     L.soundChannelAmbience = "환경음"
     L.soundChannelDialog = "대화음"
     L.soundChannelTooltip = "알림에 사용할 음향 채널"
-    L.miscellaneous = "기타"
     L.showGreetingMessage = "로그인 시 사운드 상태 표시"
     L.enableCrossCharacterExpired = "대체 캐릭터 만료 알림 활성화"
     L.crossCharacterExpiredTooltip = "다른 캐릭터가 등록한 경매를 추적하고 만료 시 알림을 받습니다"
@@ -340,6 +335,7 @@ elseif locale == "zhTW" then
     L.disabledMessage = "|cFFFFFF00"..L.title.."|r 已 |cFFF00000停用|r。"
     L.subtitle = "由"..author.."創建\n版本 "..version
     L.soundPreferences = "音效偏好設定"
+    L.chat = "聊天"
     L.enableSounds = "啟用音效提醒"
     L.enableInAHText = "在拍賣行啟用"
     L.enableInAHTooltip = "在拍賣行視窗開啟時\n啟用或停用成功拍賣的警示"
@@ -368,7 +364,6 @@ elseif locale == "zhTW" then
     L.soundChannelAmbience = "環境聲音"
     L.soundChannelDialog = "對話"
     L.soundChannelTooltip = "警示所使用的音效頻道"
-    L.miscellaneous = "其他"
     L.showGreetingMessage = "登入時顯示音效狀態"
     L.enableCrossCharacterExpired = "啟用其他角色到期提醒"
     L.crossCharacterExpiredTooltip = "追蹤您其他角色發布的拍賣，並在到期時接收通知"
@@ -381,6 +376,7 @@ elseif locale == "zhCN" then
     L.disabledMessage = "|cFFFFFF00"..L.title.."|r 已 |cFFF00000禁用|r。"
     L.subtitle = "由"..author.."创建\n版本 "..version
     L.soundPreferences = "声音偏好设置"
+    L.chat = "聊天"
     L.enableSounds = "启用音效提醒"
     L.enableInAHText = "在拍卖行启用"
     L.enableInAHTooltip = "在拍卖行窗口打开时\n启用或禁用成功拍卖的警报"
@@ -409,7 +405,6 @@ elseif locale == "zhCN" then
     L.soundChannelAmbience = "环境声音"
     L.soundChannelDialog = "对话"
     L.soundChannelTooltip = "用于警报的声音通道"
-    L.miscellaneous = "杂项"
     L.showGreetingMessage = "登录时显示声音状态"
     L.enableCrossCharacterExpired = "启用其他角色到期提醒"
     L.crossCharacterExpiredTooltip = "追踪您其他角色发布的拍卖，并在到期时接收通知"

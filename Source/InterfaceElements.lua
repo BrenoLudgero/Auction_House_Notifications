@@ -21,7 +21,7 @@ local titleText = ahn.createText("GameFontNormalLarge", L.title, titlesTextX, -1
 local subtitleText = ahn.createText("GameFontHighlight", L.subtitle, titlesTextX, -35)
 local soundPreferencesText = ahn.createText("GameFontNormalMed1", L.soundPreferences, titlesTextX, -85)
 local testSoundsText = ahn.createText("GameFontNormalMed1", L.testSounds, titlesTextX, -270)
-local miscellaneousText = ahn.createText("GameFontNormalMed1", L.miscellaneous, titlesTextX, -356)
+local chatText = ahn.createText("GameFontNormalMed1", L.chat, titlesTextX, -356)
 
 ----------------------------------  CHECKBUTTONS  -------------------------------------
 local playSoundsCheckButton = ahn.createButton("CheckButton", L.enableSounds, 25, -110,
