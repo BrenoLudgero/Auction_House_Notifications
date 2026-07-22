@@ -177,7 +177,6 @@ local function notifyExpiredAuctions(expiredAuctions)
     end
 
     local charKey = getCharacterKey()
-    local soundPlayed = false
     for _, key in ipairs(order) do
         local group = groups[key]
         local auction = group.auction
@@ -193,10 +192,7 @@ local function notifyExpiredAuctions(expiredAuctions)
             end
             if AHNPreferences.playSounds 
             and AHNPreferences.enableCrossCharacterExpired then
-                if not soundPlayed then
-                    ahn.playSound(AHNPreferences.chosenSounds.expired, "expired")
-                    soundPlayed = true
-                end
+                ahn.playSound(AHNPreferences.chosenSounds.expired, "expired")
                 print("|cFFFFFF00"..L.title.."|r: "..message)
             elseif not AHNPreferences.enableCrossCharacterExpired
             and AHNPreferences.showMessageWhenCrossCharacterExpiredIsDisabled then
@@ -206,7 +202,7 @@ local function notifyExpiredAuctions(expiredAuctions)
     end
 end
 
-function ahn.scanExpiredTrackedAuctions()
+local function scanExpiredTrackedAuctions()
     local currentTime = time()
     local expiredAuctions = {}
     local activeAuctions = {}
@@ -235,7 +231,7 @@ function ahn.startAuctionTracker()
         end
     end
     C_Timer.NewTicker(auctionTrackerTickerSeconds, function()
-        ahn.scanExpiredTrackedAuctions()
+        scanExpiredTrackedAuctions()
     end)
 end
 
