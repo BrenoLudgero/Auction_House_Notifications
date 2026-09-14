@@ -29,65 +29,56 @@ end
 
 -- Uses itemId+count+minBid+buyoutPrice as a pseudo-ID since Classic 
 -- has no per-auction unique identifier like the modern auctionID
-local function buildVanillaAuctions(numAuctions)
+local function getVanillaActiveAuctions(numAuctions)
     local auctions = {}
     for i = 1, numAuctions do
-        local count, minBid, buyoutPrice, saleStatus, bidAmount, itemId = getClassicAuctionInfo(i)
+        local count, minBid, buyoutPrice, saleStatus, bidAmount, itemID = getClassicAuctionInfo(i)
         local auctionIsActive = saleStatus == 0
-        local hasBid = bidAmount and bidAmount > 0
+        local auctionHasBid = bidAmount and bidAmount > 0
         local timeLeft = GetAuctionItemTimeLeft("owner", i)
-        if itemId and auctionIsActive and not hasBid then
-            local auctionID = itemId.."_"..(count or 0).."_"..(minBid or 0).."_"..(buyoutPrice or 0)
-            auctions[auctionID] = { itemID = itemId, timeLeft = timeLeft }
+        if itemID and itemID ~= 0 
+        and timeLeft and timeLeft ~= 0 
+        and auctionIsActive 
+        and not auctionHasBid then
+            local auctionID = itemID.."_"..(count or 0).."_"..(minBid or 0).."_"..(buyoutPrice or 0)
+            auctions[auctionID] = { itemID = itemID, timeLeft = classicMaxAuctionTimes[timeLeft] }
         end
     end
     return auctions
 end
 
 -- Builds a lookup of every auction ID currently active on the server (modern API)
-local function buildModernAuctions(numAuctions)
+local function getModernActiveAuctions(numAuctions)
     local auctions = {}
     for i = 1, numAuctions do
         local info = C_AuctionHouse.GetOwnedAuctionInfo(i)
-        local hasBid = info and info.bidAmount and info.bidAmount > 0
-        if info and info.status == Enum.AuctionStatus.Active and not hasBid then
-            auctions[info.auctionID] = info
+        if info then
+            local itemID = info.itemKey and info.itemKey.itemID
+            local auctionIsActive = info.status == Enum.AuctionStatus.Active
+            local auctionHasBid = info.bidAmount and info.bidAmount > 0
+            local timeLeft = info.timeLeftSeconds
+            if itemID and itemID ~= 0 
+            and timeLeft and timeLeft ~= 0 
+            and auctionIsActive
+            and not auctionHasBid then
+                auctions[info.auctionID] = { itemID = itemID, timeLeft = timeLeft }
+            end
         end
     end
     return auctions
 end
 
-local function trackNewVanillaAuction(currentTime, auctions)
+local function trackNewActiveAuctions(currentTime, auctions)
     for auctionID, info in pairs(auctions) do
         if not knownAuctionIDs[auctionID] then
-            local maxSeconds = classicMaxAuctionTimes[info.timeLeft]
             table.insert(AHNSavedData.trackedAuctions, {
                 auctionID = auctionID,
                 charKey   = currentCharacterKey,
                 character = currentCharacterName,
                 itemID    = info.itemID,
-                expiresAt = currentTime + maxSeconds,
+                expiresAt = currentTime + info.timeLeft,
             })
             knownAuctionIDs[auctionID] = true
-        end
-    end
-end
-
-local function trackNewModernAuction(currentTime, auctions)
-    for auctionID, info in pairs(auctions) do
-        if not knownAuctionIDs[auctionID] then
-            local itemID = info.itemKey and info.itemKey.itemID
-            local timeLeft = info.timeLeftSeconds
-            if itemID then
-                table.insert(AHNSavedData.trackedAuctions, {
-                    auctionID = auctionID,
-                    charKey   = currentCharacterKey,
-                    character = currentCharacterName,
-                    itemID    = itemID,
-                    expiresAt = currentTime + timeLeft,
-                })
-                knownAuctionIDs[auctionID] = true
-            end
         end
     end
 end
@@ -108,19 +99,21 @@ end
 
 function ahn.scanAndTrackNewAuctions()
     local currentTime = time()
+    local activeAuctions
     if ahn.isVanilla() then
         local numAuctions = GetNumAuctionItems("owner")
         if numAuctions == 0 then
             return
         end
-        trackNewVanillaAuction(currentTime, buildVanillaAuctions(numAuctions))
+        activeAuctions = getVanillaActiveAuctions(numAuctions)
     else
         local numAuctions = C_AuctionHouse.GetNumOwnedAuctions()
         if numAuctions == 0 then
             return
         end
-        trackNewModernAuction(currentTime, buildModernAuctions(numAuctions))
+        activeAuctions = getModernActiveAuctions(numAuctions)
     end
+    trackNewActiveAuctions(currentTime, activeAuctions)
 end
 
 function ahn.sweepRemovedAuctions()
@@ -129,13 +122,13 @@ function ahn.sweepRemovedAuctions()
         if numAuctions == 0 then
             return
         end
-        sweepAuctions(buildVanillaAuctions(numAuctions))
+        sweepAuctions(getVanillaActiveAuctions(numAuctions))
     else
         local numAuctions = C_AuctionHouse.GetNumOwnedAuctions()
         if numAuctions == 0 then
             return
         end
-        sweepAuctions(buildModernAuctions(numAuctions))
+        sweepAuctions(getModernActiveAuctions(numAuctions))
     end
 end
 
