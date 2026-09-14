@@ -2,6 +2,8 @@ local _, ahn = ...
 local L = ahn.L
 
 local currentCharacterName = UnitName("player")
+local currentRealmName = GetRealmName()
+local currentCharacterKey = currentCharacterName.."-"..currentRealmName
 local auctionTrackerTickerSeconds = 5
 local maxTrackedAuctionAge = 30 * 86400 -- 30 days
 local classicMaxAuctionTimes = {
@@ -14,10 +16,6 @@ local classicMaxAuctionTimes = {
 -- Session-only set of auctionIDs already in AHNSavedData; prevents re-adding on
 -- every OWNED_AUCTIONS_UPDATED without persisting a redundant lookup structure
 local knownAuctionIDs = {}
-
-local function getCharacterKey()
-    return currentCharacterName.."-"..GetRealmName()
-end
 
 local function getItemName(itemID)
     return C_Item.GetItemInfo(itemID) or "Item #"..tostring(itemID)
@@ -59,13 +57,13 @@ local function buildModernAuctions(numAuctions)
     return auctions
 end
 
-local function trackNewVanillaAuction(currentTime, charKey, auctions)
+local function trackNewVanillaAuction(currentTime, auctions)
     for auctionID, info in pairs(auctions) do
         if not knownAuctionIDs[auctionID] then
             local maxSeconds = classicMaxAuctionTimes[info.timeLeft]
             table.insert(AHNSavedData.trackedAuctions, {
                 auctionID = auctionID,
-                charKey   = charKey,
+                charKey   = currentCharacterKey,
                 character = currentCharacterName,
                 itemID    = info.itemID,
                 expiresAt = currentTime + maxSeconds,
@@ -75,7 +73,7 @@ local function trackNewVanillaAuction(currentTime, charKey, auctions)
     end
 end
 
-local function trackNewModernAuction(currentTime, charKey, auctions)
+local function trackNewModernAuction(currentTime, auctions)
     for auctionID, info in pairs(auctions) do
         if not knownAuctionIDs[auctionID] then
             local itemID = info.itemKey and info.itemKey.itemID
@@ -83,7 +81,7 @@ local function trackNewModernAuction(currentTime, charKey, auctions)
             if itemID then
                 table.insert(AHNSavedData.trackedAuctions, {
                     auctionID = auctionID,
-                    charKey   = charKey,
+                    charKey   = currentCharacterKey,
                     character = currentCharacterName,
                     itemID    = itemID,
                     expiresAt = currentTime + timeLeft,
@@ -95,11 +93,11 @@ local function trackNewModernAuction(currentTime, charKey, auctions)
 end
 
 local function sweepAuctions(activeAuctions)
-    local charKey = getCharacterKey()
     local auctionsToKeep = {}
     for _, auction in ipairs(AHNSavedData.trackedAuctions) do
         local auctionID = auction.auctionID
-        if auction.charKey == charKey and not activeAuctions[auctionID] then
+        if auction.charKey == currentCharacterKey 
+        and not activeAuctions[auctionID] then
             knownAuctionIDs[auctionID] = nil
         else
             table.insert(auctionsToKeep, auction)
@@ -110,19 +108,18 @@ end
 
 function ahn.scanAndTrackNewAuctions()
     local currentTime = time()
-    local charKey = getCharacterKey()
     if ahn.isVanilla() then
         local numAuctions = GetNumAuctionItems("owner")
         if numAuctions == 0 then
             return
         end
-        trackNewVanillaAuction(currentTime, charKey, buildVanillaAuctions(numAuctions))
+        trackNewVanillaAuction(currentTime, buildVanillaAuctions(numAuctions))
     else
         local numAuctions = C_AuctionHouse.GetNumOwnedAuctions()
         if numAuctions == 0 then
             return
         end
-        trackNewModernAuction(currentTime, charKey, buildModernAuctions(numAuctions))
+        trackNewModernAuction(currentTime, buildModernAuctions(numAuctions))
     end
 end
 
@@ -154,12 +151,23 @@ function ahn.handleVanillaExpiredAuction(message)
     -- AH is closed: can't query the live list, so mark matching auctions with
     -- expiresAt=0 so the next ticker pass silently drops them (no false notification
     -- fires because currentTime - 0 > maxTrackedAuctionAge)
-    local charKey = getCharacterKey()
     for _, auction in ipairs(AHNSavedData.trackedAuctions) do
-        if auction.charKey == charKey and getItemName(auction.itemID) == itemName then
+        if auction.charKey == currentCharacterKey 
+        and getItemName(auction.itemID) == itemName then
             auction.expiresAt = 0
             knownAuctionIDs[auction.auctionID] = nil
         end
+    end
+end
+
+local function getExpiredAuctionMessage(auctionGroup, auction)
+    local itemName = getItemName(auction.itemID)
+    local coloredItemName = "|cFFFEE15C"..itemName.."|r"
+    local coloredCharName = "|cFFFF8000"..auction.character.."|r"
+    if auctionGroup.count > 1 then
+        return string.format(L.crossCharacterExpiredMultiple, coloredCharName, auctionGroup.count, coloredItemName)
+    else
+        return string.format(L.crossCharacterExpiredSingle, coloredCharName, coloredItemName)
     end
 end
 
@@ -176,20 +184,11 @@ local function notifyExpiredAuctions(expiredAuctions)
         groups[key].count = groups[key].count + 1
     end
 
-    local charKey = getCharacterKey()
     for _, key in ipairs(order) do
         local group = groups[key]
         local auction = group.auction
-        if auction.charKey ~= charKey then
-            local itemName = getItemName(auction.itemID)
-            local coloredItemName = "|cFFFEE15C"..itemName.."|r"
-            local coloredCharName = "|cFFFF8000"..auction.character.."|r"
-            local message
-            if group.count > 1 then
-                message = string.format(L.crossCharacterExpiredMultiple, coloredCharName, group.count, coloredItemName)
-            else
-                message = string.format(L.crossCharacterExpiredSingle, coloredCharName, coloredItemName)
-            end
+        if auction.charKey ~= currentCharacterKey then
+            local message = getExpiredAuctionMessage(group, auction)
             if AHNPreferences.playSounds 
             and AHNPreferences.enableCrossCharacterExpired then
                 ahn.playSound(AHNPreferences.chosenSounds.expired, "expired")

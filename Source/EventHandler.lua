@@ -22,7 +22,7 @@ function ahn.handleAuctionUpdates(event, type)
     if event == "CHAT_MSG_SYSTEM" then
         auctionType = ahn.determineVanillaAuctionType(type)
     elseif event == "AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION" then
-        auctionType = ahn.determineNonVanillaAuctionType(type)
+        auctionType = ahn.determineModernAuctionType(type)
     elseif event == "AUCTION_HOUSE_PURCHASE_COMPLETED" then
         auctionType = "successful"
     end

@@ -33,7 +33,7 @@ function ahn.determineVanillaAuctionType(auctionType)
     end
 end
 
-function ahn.determineNonVanillaAuctionType(auctionType)
+function ahn.determineModernAuctionType(auctionType)
     if auctionType == soldAuction 
     or auctionType == wonAuction then
         return "successful"
